@@ -74,10 +74,10 @@ def runSaucer():
     print("RUNNING SAUCE\n")
 
     # Run corresponding saucer pumps
-    sauce.pumpProgram()
-    motors.spinFunc(25, sauce_spin_steps)
-    sauce.stopPumping()
-    motors.stopSpinning()
+    pumpProgram()
+    spinFunc(25, sauce_spin_steps)
+    stopPumping()
+    stopSpinning()
 
 #Functions for starting and stopping spin
 def spinProgram(speed):
@@ -165,7 +165,7 @@ sevenButton.place(x=50, y=5)
 
 # Function buttons
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stopPumping, height = 2, width = 6)
-stopButton.place(x=450, y=210)
+stopButton.place(x=300, y=160)
 
 # Other screen buttons
 settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: screens.settings(screen), height = 1, width = 4)
