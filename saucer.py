@@ -71,11 +71,8 @@ def setSize(new_size):
 #************************************SAUCER FUNCTIONS***************************************
 #Function for running saucer
 def runSaucer():
-    print("RUNNING LINE\n")
+    print("RUNNING SAUCE\n")
 
-    # Move horizontally to sauce
-    motors.inFunc(25, initial_steps)
-    
     # Run corresponding saucer pumps
     sauce.pumpProgram()
     motors.spinFunc(25, sauce_spin_steps)
