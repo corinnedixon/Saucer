@@ -81,15 +81,15 @@ def runSaucer():
 
 #Functions for starting and stopping spin
 def spinProgram(speed):
-    global spinning  #create global
-    spinning = True
-
     # Create new thread
     spin = threading.Thread(target=spinFunc, args=(speed,1,))
     # Start new thread
     spin.start()
 
 def spinFunc(speed, steps):
+  global spinning  #create global
+  spinning = True
+  
   spin_delay = (100-speed)/50000
   while spinning and steps > 0:
     if spinning == False:
@@ -108,9 +108,6 @@ def stopSpinning():
 
 #Functions for starting and stopping sauce
 def pumpProgram():
-    global pumping  #create global
-    pumping = True
-
     # Create new threads
     pump1 = threading.Thread(target=pumpFunc, args = (S1_STEP, s1_speed,))
     pump2 = threading.Thread(target=pumpFunc, args = (S2_STEP, s2_speed,))
@@ -124,6 +121,9 @@ def pumpProgram():
     pump4.start()
     
 def pumpFunc(motor_pin, speed):
+  global pumping  #create global
+  pumping = True
+    
   while pumping:
     if pumping == False:
       break
@@ -171,7 +171,7 @@ stopButton.place(x=300, y=160)
 settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: screens.settings(screen), height = 1, width = 4)
 settingsButton.place(x=50, y=300)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: lambda: screens.help(screen), height = 1, width = 4)
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: screens.help(screen), height = 1, width = 4)
 helpButton.place(x=500, y=300)
 
 mainloop()
