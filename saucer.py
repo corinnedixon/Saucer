@@ -172,11 +172,11 @@ def settings(screen):
     
     # Sauce amount buttons
     light  = Button(top, text = "Light", font = subFont, fg="black", bg = "white", command = lambda: setAmount("light"), height = 2, width = 6)
-    light.place(x=50, y=100)
+    light.place(x=60, y=30)
     normal  = Button(top, text = "Normal", font = subFont, fg="black", bg = "white", command = lambda: setAmount("normal"), height = 2, width = 6)
-    normal.place(x=300, y=100)
+    normal.place(x=310, y=30)
     extra  = Button(top, text = "Extra", font = subFont, fg="black", bg = "white", command = lambda: setAmount("extra"), height = 2, width = 6)
-    extra.place(x=550, y=100)
+    extra.place(x=560, y=30)
     
     # Action buttons
     quit  = Button(top, text = "Quit", font = subFont, fg="black", bg = "white", command = screen.destroy, height = 2, width = 6)
@@ -309,13 +309,13 @@ sevenButton.place(x=50, y=5)
 
 # Function buttons
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stopPumping, height = 2, width = 6)
-stopButton.place(x=300, y=140)
+stopButton.place(x=280, y=160)
 
 # Other screen buttons
-settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 5)
+settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 6)
 settingsButton.place(x=50, y=380)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 5)
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 6)
 helpButton.place(x=550, y=380)
 
 mainloop()
