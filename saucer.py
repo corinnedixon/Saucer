@@ -212,7 +212,7 @@ def sos(top):
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
-    b1  = Button(sosMenu, text = a1, font = "NO", fg="black", bg = "white", height = 1, width = 2)
+    b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", height = 1, width = 2)
     b1.place(x=325, y=20)
     
     q2 = Text(sosMenu, font=questionFont, height=1, width=35)
