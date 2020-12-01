@@ -191,9 +191,8 @@ def settings(screen):
 #*****************************************HELP MENU*****************************************
 
 # Function for sending sos menu data to Firebase
-def done(sosMenu):
+def done():
     print("Sending data to Firebase")
-    sosMenu.destroy
 
 # Function for sos menu
 def sos(top):
@@ -201,7 +200,6 @@ def sos(top):
     sosMenu = Toplevel()
     sosMenu.title("Full Line Help Menu")
     sosMenu.geometry('800x480')
-    top.overrideredirect(0)
     sosMenu.overrideredirect(1)
     
     # Fonts
@@ -219,7 +217,7 @@ def sos(top):
     q1.place(x=25, y=20)
     
     b1  = Button(sosMenu, text = a1, font = answerFont, fg="black", bg = "white", height = 1, width = 2)
-    b1.place(x=20, y=275)
+    b1.place(x=275, y=20)
     
     q2 = Text(sosMenu, font=questionFont, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
@@ -270,8 +268,10 @@ def sos(top):
     q12.place(x=25, y=380)
     
     # Back button
-    back  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: done(sosMenu), height = 2, width = 6)
-    back.place(x=600, y=350)
+    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: done(sosMenu), height = 2, width = 4)
+    done.place(x=550, y=350)
+    quit  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
+    done.place(x=600, y=350)
 
     print("SOS\n")
 
@@ -281,7 +281,6 @@ def help(screen):
     top = Toplevel()
     top.title("Full Line Help Menu")
     top.geometry('800x480')
-    screen.overrideredirect(0)
     top.overrideredirect(1)
     
     # Font
