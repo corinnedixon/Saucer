@@ -200,8 +200,8 @@ def change(button):
 # Function for sending sos menu data to Firebase
 def send(answers):
     str = "Answers:"
-    for ans in answers:
-        str = str + " " + ans
+    for button in answers:
+        str = str + " " + button['text']
     print(str)
     print("Sending data to Firebase")
 
