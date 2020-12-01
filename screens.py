@@ -135,7 +135,7 @@ def help(screen):
     subFont = font.Font(family='Helvetica', size=30, weight='normal')
     
     # Text
-    txt = Text(top, font = subFont, height=1, width=15)
+    txt = Text(top, font = subFont, height=1, width=25)
     txt.insert(INSERT, "Welcome to the help menu!")
     txt.place(x=25,y=25)
     
