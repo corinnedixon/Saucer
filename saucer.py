@@ -219,55 +219,91 @@ def sos(top):
     q1.place(x=25, y=20)
     
     b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b1), height = 1, width = 2)
-    b1.place(x=375, y=20)
+    b1.place(x=400, y=20)
     
     q2 = Text(sosMenu, font=questionFont, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
     q2.place(x=25, y=50)
     
+    b2  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b2), height = 1, width = 2)
+    b2.place(x=400, y=50)
+    
     q3 = Text(sosMenu, font=questionFont, height=1, width=35)
     q3.insert(INSERT, "Is it saucing the 10 Inch Pizza?")
     q3.place(x=25, y=80)
+    
+    b3 = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b3), height = 1, width = 2)
+    b3.place(x=400, y=80)
     
     q4 = Text(sosMenu, font=questionFont, height=1, width=35)
     q4.insert(INSERT, "Is it saucing the 7 Inch Pizza?")
     q4.place(x=25, y=110)
     
+    b4  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b4), height = 1, width = 2)
+    b4.place(x=400, y=110)
+    
     q5 = Text(sosMenu, font=questionFont, height=1, width=35)
     q5.insert(INSERT, "Do intake tubes have air bubbles?")
     q5.place(x=25, y=140)
+    
+    b5  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b5), height = 1, width = 2)
+    b5.place(x=400, y=140)
     
     q6 = Text(sosMenu, font=questionFont, height=1, width=35)
     q6.insert(INSERT, "Is the turntable motor shaft spinning?")
     q6.place(x=25, y=170)
     
+    b6  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b6), height = 1, width = 2)
+    b6.place(x=400, y=170)
+    
     q7 = Text(sosMenu, font=questionFont, height=1, width=35)
     q7.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q7.place(x=25, y=200)
     
-    q5 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q5.insert(INSERT, "Do intake tubes have air bubbles?")
-    q5.place(x=25, y=230)
+    b7  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b7), height = 1, width = 2)
+    b7.place(x=400, y=200)
     
     q8 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q8.insert(INSERT, "Is the turntable motor shaft spinning?")
-    q8.place(x=25, y=260)
+    q8.insert(INSERT, "Do intake tubes have air bubbles?")
+    q8.place(x=25, y=230)
+    
+    b8  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b8), height = 1, width = 2)
+    b8.place(x=400, y=230)
     
     q9 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q9.insert(INSERT, "Is the screen functioning properly?")
-    q9.place(x=25, y=290)
+    q9.insert(INSERT, "Is the turntable motor shaft spinning?")
+    q9.place(x=25, y=260)
+    
+    b9  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b9), height = 1, width = 2)
+    b9.place(x=400, y=260)
     
     q10 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q10.insert(INSERT, "Can you hear any grinding noise?")
-    q10.place(x=25, y=320)
+    q10.insert(INSERT, "Is the screen functioning properly?")
+    q10.place(x=25, y=290)
+    
+    b10  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b10), height = 1, width = 2)
+    b10.place(x=400, y=290)
     
     q11 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q11.insert(INSERT, "Can you hear any high pitched noise?")
-    q11.place(x=25, y=350)
+    q11.insert(INSERT, "Can you hear any grinding noise?")
+    q11.place(x=25, y=320)
+    
+    b11  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b11), height = 1, width = 2)
+    b11.place(x=400, y=320)
     
     q12 = Text(sosMenu, font=questionFont, height=1, width=35)
-    q12.insert(INSERT, "Did this problem just start?")
-    q12.place(x=25, y=380)
+    q12.insert(INSERT, "Can you hear any high pitched noise?")
+    q12.place(x=25, y=350)
+    
+    b12  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b12), height = 1, width = 2)
+    b12.place(x=400, y=350)
+    
+    q13 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q13.insert(INSERT, "Did this problem just start?")
+    q13.place(x=25, y=380)
+    
+    b13  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b13), height = 1, width = 2)
+    b13.place(x=400, y=380)
     
     # Back button
     done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = send, height = 2, width = 4)
