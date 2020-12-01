@@ -198,7 +198,7 @@ def change(button):
         button['text'] = "NO"
 
 # Function for sending sos menu data to Firebase
-def done():
+def send():
     print("Sending data to Firebase")
 
 # Function for sos menu
@@ -271,7 +271,7 @@ def sos(top):
     q12.place(x=25, y=380)
     
     # Back button
-    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = done, height = 2, width = 4)
+    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = send, height = 2, width = 4)
     done.place(x=550, y=350)
     quit  = Button(sosMenu, text = "Quit", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
     quit.place(x=600, y=350)
