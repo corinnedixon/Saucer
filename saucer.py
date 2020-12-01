@@ -70,6 +70,15 @@ def setSize(new_size):
         runSaucer()
 
 #************************************SAUCER FUNCTIONS***************************************
+
+#Function for setting pump speeds
+def runSaucer(new_speed):
+    global s1_speed, s2_speed, s3_speed, s4_speed
+    s1_speed = new_speed
+    s2_speed = new_speed
+    s3_speed = new_speed
+    s4_speed = new_speed
+
 #Function for running saucer
 def runSaucer():
     print("SPEED: " + str(s1_speed))
