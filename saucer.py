@@ -190,6 +190,13 @@ def settings(screen):
 
 #*****************************************HELP MENU*****************************************
 
+# Function for changing button text based on answer
+def change(button):
+    if button['text'] == "NO":
+        button['text'] = "YES"
+    else:
+        button['text'] = "NO"
+
 # Function for sending sos menu data to Firebase
 def done():
     print("Sending data to Firebase")
@@ -212,8 +219,8 @@ def sos(top):
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
-    b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", height = 1, width = 2)
-    b1.place(x=325, y=20)
+    b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b1), height = 1, width = 2)
+    b1.place(x=375, y=20)
     
     q2 = Text(sosMenu, font=questionFont, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
@@ -264,9 +271,9 @@ def sos(top):
     q12.place(x=25, y=380)
     
     # Back button
-    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: done(sosMenu), height = 2, width = 4)
+    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = done, height = 2, width = 4)
     done.place(x=550, y=350)
-    quit  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
+    quit  = Button(sosMenu, text = "Quit", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
     quit.place(x=600, y=350)
 
     print("SOS\n")
