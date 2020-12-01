@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.font as font
+import saucer
 
 #*************************************HELPER FUNCTIONS**************************************
 
@@ -77,22 +78,12 @@ def sos(top):
     
     
 def setAmount(amt):
-    global s1_speed, s2_speed, s3_speed, s4_speed
     if amt == "light":
-        s1_speed = 25
-        s2_speed = 25
-        s3_speed = 25
-        s4_speed = 25
+        saucer.setSpeed(25)
     elif amt == "normal":
-        s1_speed = 50
-        s2_speed = 50
-        s3_speed = 50
-        s4_speed = 50
+        saucer.setSpeed(50)
     elif amt == "extra":
-        s1_speed = 75
-        s2_speed = 75
-        s3_speed = 75
-        s4_speed = 75
+        saucer.setSpeed(75)
 
 #**************************************SETTINGS WINDOW**************************************
 
