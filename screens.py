@@ -3,7 +3,7 @@ import tkinter.font as font
 
 #*************************************HELPER FUNCTIONS**************************************
 
-def sos():
+def sos(top):
     # Create window for help menu
     sosMenu = Toplevel()
     sosMenu.title("Full Line Help Menu")
@@ -139,7 +139,7 @@ def help(screen):
     txt.place(x=25,y=25)
     
     # Action buttons
-    quit  = Button(top, text = "SOS", font = subFont, fg="black", bg = "white", command = sos, height = 2, width = 6)
+    quit  = Button(top, text = "SOS", font = subFont, fg="black", bg = "white", command = lambda: sos(top), height = 2, width = 6)
     quit.place(x=100, y=350)
     back  = Button(top, text = "Back", font = subFont, fg="black", bg = "white", command = top.destroy, height = 2, width = 6)
     back.place(x=550, y=350)
