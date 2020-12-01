@@ -10,10 +10,11 @@ import screens
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Motor speed
-s1_speed = 25 # Sauce stepper motor 1 speed
-s2_speed = 25 # Sauce stepper motor 2 speed
-s3_speed = 25 # Sauce stepper motor 3 speed
-s4_speed = 25 # Sauce stepper motor 4 speed
+global s1_speed, s2_speed, s3_speed, s4_speed
+s1_speed = 50 # Sauce stepper motor 1 speed (default 50)
+s2_speed = 50 # Sauce stepper motor 2 speed
+s3_speed = 50 # Sauce stepper motor 3 speed
+s4_speed = 50 # Sauce stepper motor 4 speed
 
 # Size / Steps
 global size
@@ -71,6 +72,7 @@ def setSize(new_size):
 #************************************SAUCER FUNCTIONS***************************************
 #Function for running saucer
 def runSaucer():
+    print("SPEED: " + str(s1_speed))
     print("RUNNING SAUCE\n")
 
     # Run corresponding saucer pumps
