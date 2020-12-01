@@ -201,61 +201,61 @@ def sos(top):
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
-    q1 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q1 = Text(sosMenu, font=questionFont, height=1, width=40)
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
-    q2 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q2 = Text(sosMenu, font=questionFont, height=1, width=40)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
     q2.place(x=25, y=50)
     
-    q3 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q3 = Text(sosMenu, font=questionFont, height=1, width=40)
     q3.insert(INSERT, "Is it saucing the 10 Inch Pizza?")
     q3.place(x=25, y=80)
     
-    q4 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q4 = Text(sosMenu, font=questionFont, height=1, width=40)
     q4.insert(INSERT, "Is it saucing the 7 Inch Pizza?")
     q4.place(x=25, y=110)
     
-    q5 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q5 = Text(sosMenu, font=questionFont, height=1, width=40)
     q5.insert(INSERT, "Do intake tubes have air bubbles?")
     q5.place(x=25, y=140)
     
-    q6 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q6 = Text(sosMenu, font=questionFont, height=1, width=40)
     q6.insert(INSERT, "Is the turntable motor shaft spinning?")
     q6.place(x=25, y=170)
     
-    q7 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q7 = Text(sosMenu, font=questionFont, height=1, width=40)
     q7.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q7.place(x=25, y=200)
     
-    q5 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q5 = Text(sosMenu, font=questionFont, height=1, width=40)
     q5.insert(INSERT, "Do intake tubes have air bubbles?")
     q5.place(x=25, y=230)
     
-    q8 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q8 = Text(sosMenu, font=questionFont, height=1, width=40)
     q8.insert(INSERT, "Is the turntable motor shaft spinning?")
     q8.place(x=25, y=260)
     
-    q9 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q9 = Text(sosMenu, font=questionFont, height=1, width=40)
     q9.insert(INSERT, "Is the screen functioning properly?")
     q9.place(x=25, y=290)
     
-    q10 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q10 = Text(sosMenu, font=questionFont, height=1, width=40)
     q10.insert(INSERT, "Can you hear any grinding noise?")
     q10.place(x=25, y=320)
     
-    q11 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q11 = Text(sosMenu, font=questionFont, height=1, width=40)
     q11.insert(INSERT, "Can you hear any high pitched noise?")
     q11.place(x=25, y=350)
     
-    q12 = Text(sosMenu, font=questionFont, height=1, width=60)
+    q12 = Text(sosMenu, font=questionFont, height=1, width=40)
     q12.insert(INSERT, "Did this problem just start?")
     q12.place(x=25, y=380)
     
     # Back button
     back  = Button(sosMenu, text = "Back", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 6)
-    back.place(x=550, y=350)
+    back.place(x=575, y=350)
 
     print("SOS\n")
 
@@ -272,7 +272,7 @@ def help(screen):
     subFont = font.Font(family='Helvetica', size=30, weight='normal')
     
     # Text
-    txt = Text(top, font = subFont, height=1, width=20)
+    txt = Text(top, font = subFont, height=1, width=22)
     txt.insert(INSERT, "Welcome to the help menu!")
     txt.place(x=25,y=25)
     
@@ -309,13 +309,13 @@ sevenButton.place(x=50, y=5)
 
 # Function buttons
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stopPumping, height = 2, width = 6)
-stopButton.place(x=300, y=160)
+stopButton.place(x=300, y=140)
 
 # Other screen buttons
-settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 4)
+settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 5)
 settingsButton.place(x=50, y=380)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 4)
-helpButton.place(x=500, y=380)
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 5)
+helpButton.place(x=550, y=380)
 
 mainloop()
