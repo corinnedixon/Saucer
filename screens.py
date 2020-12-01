@@ -71,12 +71,12 @@ def setAmount(amt):
         s2_speed = 25
         s3_speed = 25
         s4_speed = 25
-    else if amt == "normal":
+    elif amt == "normal":
         s1_speed = 50
         s2_speed = 50
         s3_speed = 50
         s4_speed = 50
-    else if amt == "extra":
+    elif amt == "extra":
         s1_speed = 75
         s2_speed = 75
         s3_speed = 75
