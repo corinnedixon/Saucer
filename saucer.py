@@ -207,17 +207,13 @@ def sos(top):
     answerFont = font.Font(family='Helvetica', size=20, weight='normal')
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
-    # String vars for answers
-    a1 = StringVar()
-    a1.set("NO")
-    
     # Questions
     q1 = Text(sosMenu, font=questionFont, height=1, width=35)
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
-    b1  = Button(sosMenu, text = a1, font = answerFont, fg="black", bg = "white", height = 1, width = 2)
-    b1.place(x=275, y=20)
+    b1  = Button(sosMenu, text = a1, font = "NO", fg="black", bg = "white", height = 1, width = 2)
+    b1.place(x=325, y=20)
     
     q2 = Text(sosMenu, font=questionFont, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
@@ -271,7 +267,7 @@ def sos(top):
     done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: done(sosMenu), height = 2, width = 4)
     done.place(x=550, y=350)
     quit  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
-    done.place(x=600, y=350)
+    quit.place(x=600, y=350)
 
     print("SOS\n")
 
