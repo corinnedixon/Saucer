@@ -5,7 +5,6 @@ import time
 import sys
 import datetime
 import threading
-import screens
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -70,14 +69,6 @@ def setSize(new_size):
         runSaucer()
 
 #************************************SAUCER FUNCTIONS***************************************
-
-#Function for setting pump speeds
-def runSaucer(new_speed):
-    global s1_speed, s2_speed, s3_speed, s4_speed
-    s1_speed = new_speed
-    s2_speed = new_speed
-    s3_speed = new_speed
-    s4_speed = new_speed
 
 #Function for running saucer
 def runSaucer():
@@ -149,6 +140,148 @@ def stopPumping():
   global pumping
   pumping = False
 
+#**************************************SETTINGS WINDOW**************************************
+
+# Functions for setting pump speeds based on sauce amount
+def setSpeed(new_speed):
+    global s1_speed, s2_speed, s3_speed, s4_speed
+    s1_speed = new_speed
+    s2_speed = new_speed
+    s3_speed = new_speed
+    s4_speed = new_speed
+
+def setAmount(amt):
+    if amt == "light":
+        setSpeed(25)
+    elif amt == "normal":
+        setSpeed(50)
+    elif amt == "extra":
+        setSpeed(75)
+
+# Function for actual settings window
+def settings(screen):
+    # Create window for settings
+    top = Toplevel()
+    top.title("Full Line Settings")
+    top.geometry('800x480')
+    screen.overrideredirect(0)
+    top.overrideredirect(1)
+    
+    # Font
+    subFont = font.Font(family='Helvetica', size=30, weight='normal')
+    
+    # Sauce amount buttons
+    light  = Button(top, text = "Light", font = subFont, fg="black", bg = "white", command = lambda: setAmount("light"), height = 2, width = 6)
+    light.place(x=50, y=100)
+    normal  = Button(top, text = "Normal", font = subFont, fg="black", bg = "white", command = lambda: setAmount("normal"), height = 2, width = 6)
+    normal.place(x=300, y=100)
+    extra  = Button(top, text = "Extra", font = subFont, fg="black", bg = "white", command = lambda: setAmount("extra"), height = 2, width = 6)
+    extra.place(x=550, y=100)
+    
+    # Action buttons
+    quit  = Button(top, text = "Quit", font = subFont, fg="black", bg = "white", command = screen.destroy, height = 2, width = 6)
+    quit.place(x=100, y=350)
+    back  = Button(top, text = "Back", font = subFont, fg="black", bg = "white", command = top.destroy, height = 2, width = 6)
+    back.place(x=550, y=350)
+
+#*****************************************HELP MENU*****************************************
+
+# Function for sos menu
+def sos(top):
+    # Create window for help menu
+    sosMenu = Toplevel()
+    sosMenu.title("Full Line Help Menu")
+    sosMenu.geometry('800x480')
+    top.overrideredirect(0)
+    sosMenu.overrideredirect(1)
+    
+    # Fonts
+    subFont = font.Font(family='Helvetica', size=30, weight='normal')
+    answerFont = font.Font(family='Helvetica', size=30, weight='normal')
+    questionFont = font.Font(family='Helvetica', size=14, weight='normal')
+    
+    # Questions
+    q1 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
+    q1.place(x=25, y=20)
+    
+    q2 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
+    q2.place(x=25, y=50)
+    
+    q3 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q3.insert(INSERT, "Is it saucing the 10 Inch Pizza?")
+    q3.place(x=25, y=80)
+    
+    q4 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q4.insert(INSERT, "Is it saucing the 7 Inch Pizza?")
+    q4.place(x=25, y=110)
+    
+    q5 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q5.insert(INSERT, "Do intake tubes have air bubbles?")
+    q5.place(x=25, y=140)
+    
+    q6 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q6.insert(INSERT, "Is the turntable motor shaft spinning?")
+    q6.place(x=25, y=170)
+    
+    q7 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q7.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
+    q7.place(x=25, y=200)
+    
+    q5 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q5.insert(INSERT, "Do intake tubes have air bubbles?")
+    q5.place(x=25, y=230)
+    
+    q8 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q8.insert(INSERT, "Is the turntable motor shaft spinning?")
+    q8.place(x=25, y=260)
+    
+    q9 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q9.insert(INSERT, "Is the screen functioning properly?")
+    q9.place(x=25, y=290)
+    
+    q10 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q10.insert(INSERT, "Can you hear any grinding noise?")
+    q10.place(x=25, y=320)
+    
+    q11 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q11.insert(INSERT, "Can you hear any high pitched noise?")
+    q11.place(x=25, y=350)
+    
+    q12 = Text(sosMenu, font=questionFont, height=1, width=100)
+    q12.insert(INSERT, "Did this problem just start?")
+    q12.place(x=25, y=380)
+    
+    # Back button
+    back  = Button(sosMenu, text = "Back", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 6)
+    back.place(x=550, y=350)
+
+    print("SOS\n")
+
+# Function for help menu
+def help(screen):
+    # Create window for help menu
+    top = Toplevel()
+    top.title("Full Line Help Menu")
+    top.geometry('800x480')
+    screen.overrideredirect(0)
+    top.overrideredirect(1)
+    
+    # Font
+    subFont = font.Font(family='Helvetica', size=30, weight='normal')
+    
+    # Text
+    txt = Text(top, font = subFont, height=1, width=25)
+    txt.insert(INSERT, "Welcome to the help menu!")
+    txt.place(x=25,y=25)
+    
+    # Action buttons
+    quit  = Button(top, text = "SOS", font = subFont, fg="black", bg = "white", command = lambda: sos(top), height = 2, width = 6)
+    quit.place(x=100, y=350)
+    back  = Button(top, text = "Back", font = subFont, fg="black", bg = "white", command = top.destroy, height = 2, width = 6)
+    back.place(x=550, y=350)
+    
 #**************************************TKINTER SET UP***************************************
 
 # TK screen set up
@@ -179,10 +312,10 @@ stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", comm
 stopButton.place(x=300, y=160)
 
 # Other screen buttons
-settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: screens.settings(screen), height = 1, width = 4)
+settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 4)
 settingsButton.place(x=50, y=300)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: screens.help(screen), height = 1, width = 4)
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 4)
 helpButton.place(x=500, y=300)
 
 mainloop()
