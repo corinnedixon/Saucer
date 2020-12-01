@@ -78,7 +78,7 @@ def stopSpinning():
   os.system("STEPPER_STOP,TURNTABLE'\n'")
 
 #Functions for starting and stopping sauce
-def pumpProgram():
+def pumpProgram(size):
     # Start pumping infinitely based on size
     os.system("STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'")
     if size >= 10:
