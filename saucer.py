@@ -211,7 +211,6 @@ def sos(top):
     
     # Fonts
     subFont = font.Font(family='Helvetica', size=30, weight='normal')
-    answerFont = font.Font(family='Helvetica', size=20, weight='normal')
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
@@ -272,9 +271,9 @@ def sos(top):
     
     # Back button
     done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = send, height = 2, width = 4)
-    done.place(x=550, y=350)
+    done.place(x=500, y=350)
     quit  = Button(sosMenu, text = "Quit", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
-    quit.place(x=600, y=350)
+    quit.place(x=650, y=350)
 
     print("SOS\n")
 
