@@ -198,7 +198,11 @@ def change(button):
         button['text'] = "NO"
 
 # Function for sending sos menu data to Firebase
-def send():
+def send(answers):
+    str = "Answers:"
+    for ans in answers:
+        str = str + " " + ans
+    print(str)
     print("Sending data to Firebase")
 
 # Function for sos menu
@@ -305,8 +309,10 @@ def sos(top):
     b13  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b13), height = 1, width = 2)
     b13.place(x=400, y=380)
     
+    answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13]
+    
     # Back button
-    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = send, height = 2, width = 4)
+    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: send(answers), height = 2, width = 4)
     done.place(x=500, y=350)
     quit  = Button(sosMenu, text = "Quit", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
     quit.place(x=650, y=350)
