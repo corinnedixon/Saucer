@@ -1,6 +1,5 @@
 from tkinter import *
 import tkinter.font as font
-import saucer
 
 #*************************************HELPER FUNCTIONS**************************************
 
@@ -9,7 +8,6 @@ def sos(top):
     sosMenu = Toplevel()
     sosMenu.title("Full Line Help Menu")
     sosMenu.geometry('800x480')
-    top.overrideredirect(0)
     sosMenu.overrideredirect(1)
     
     # Fonts
@@ -79,11 +77,11 @@ def sos(top):
     
 def setAmount(amt):
     if amt == "light":
-        saucer.setSpeed(25)
+        # 25
     elif amt == "normal":
-        saucer.setSpeed(50)
+        # 50
     elif amt == "extra":
-        saucer.setSpeed(75)
+        # 75
 
 #**************************************SETTINGS WINDOW**************************************
 
@@ -92,7 +90,6 @@ def settings(screen):
     top = Toplevel()
     top.title("Full Line Settings")
     top.geometry('800x480')
-    screen.overrideredirect(0)
     top.overrideredirect(1)
     
     # Font
@@ -119,7 +116,6 @@ def help(screen):
     top = Toplevel()
     top.title("Full Line Help Menu")
     top.geometry('800x480')
-    screen.overrideredirect(0)
     top.overrideredirect(1)
     
     # Font
