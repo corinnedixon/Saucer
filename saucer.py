@@ -166,7 +166,7 @@ def setAmount(amt):
 def settings(screen):
     # Create window for settings
     top = Toplevel()
-    top.title("Full Line Settings")
+    top.title("Saucer Settings")
     top.geometry('800x480')
     screen.overrideredirect(0)
     top.overrideredirect(1)
@@ -209,7 +209,7 @@ def send(answers):
 def sos(top):
     # Create window for help menu
     sosMenu = Toplevel()
-    sosMenu.title("Full Line Help Menu")
+    sosMenu.title("Saucer Help Menu")
     sosMenu.geometry('800x480')
     sosMenu.overrideredirect(1)
     
