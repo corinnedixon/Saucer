@@ -41,12 +41,17 @@ if(hasInternet):
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
+# Light, normal, extra sauce speeds
+lt = 25
+med = 50
+ext = 75
+
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
-s1_speed = 50 # Sauce stepper motor 1 speed (default 50)
-s2_speed = 50 # Sauce stepper motor 2 speed
-s3_speed = 50 # Sauce stepper motor 3 speed
-s4_speed = 50 # Sauce stepper motor 4 speed
+s1_speed = med # Sauce stepper motor 1 speed (default to normal / medium)
+s2_speed = med # Sauce stepper motor 2 speed
+s3_speed = med # Sauce stepper motor 3 speed
+s4_speed = med # Sauce stepper motor 4 speed
 
 # Size / Steps
 global size
@@ -189,11 +194,11 @@ def setSpeed(new_speed):
 
 def setAmount(amt):
     if amt == "light":
-        setSpeed(25)
+        setSpeed(lt)
     elif amt == "normal":
-        setSpeed(50)
+        setSpeed(med)
     elif amt == "extra":
-        setSpeed(75)
+        setSpeed(ext)
 
 # Function for actual settings window
 def settings(screen):
