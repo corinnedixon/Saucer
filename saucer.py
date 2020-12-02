@@ -5,6 +5,38 @@ import time
 import sys
 import datetime
 import threading
+import pyfireconnect
+import urllib.request
+
+#**************************************FIREBASE SET UP**************************************
+
+#Check for internet connection
+def checkInternet():
+  internet = True
+  try:
+    urllib.request.urlopen('https://smart-saucer.firebaseio.com/')
+  except:
+    internet = False
+  return internet
+
+time.sleep(10)
+hasInternet = checkInternet()
+
+#Set timezone
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
+
+#pyfire set up if internet is connected
+if(hasInternet):
+  config = {
+    #"apiKey" : "AIzaSyCwL-B0X1dx9canmLWcctpvrzqB64hub8s",
+    "authDomain" : "smart-saucer.firebaseapp.com",
+    "databaseURL" : "https://smart-saucer.firebaseio.com/",
+    "storageBucket" : "smart-saucer.appspot.com"
+  }
+
+  firebase = pyfireconnect.initialize(config)
+  db = firebase.database()
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -202,6 +234,8 @@ def send(answers):
     str = "Answers:"
     for button in answers:
         str = str + " " + button['text']
+    if(hasInternet):
+      db.push(str)
     print(str)
     print("Sending data to Firebase")
 
