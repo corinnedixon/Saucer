@@ -30,7 +30,7 @@ time.tzset()
 #pyfire set up if internet is connected
 if(hasInternet):
   config = {
-    #"apiKey" : "AIzaSyCwL-B0X1dx9canmLWcctpvrzqB64hub8s",
+    "apiKey" : "AIzaSyBq-3aOFMlc-9IcSV-X2ZvrIceH5Uvz-U4",
     "authDomain" : "smart-saucer.firebaseapp.com",
     "databaseURL" : "https://smart-saucer.firebaseio.com/",
     "storageBucket" : "smart-saucer.appspot.com"
