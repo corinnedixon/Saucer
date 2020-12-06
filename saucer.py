@@ -392,7 +392,7 @@ def moreScreen():
 
     helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray40", fg = "white", command = help, height = 1, width = 8)
     helpButton.place(x=280, y=350)
-        back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 8)
+    back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 8)
     back.place(x=550, y=350)
 
 #**************************************TKINTER SET UP***************************************
