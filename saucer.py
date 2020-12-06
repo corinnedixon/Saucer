@@ -387,13 +387,13 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=35, weight='normal')
     
     # Other screen buttons
-    back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 8)
-    back.place(x=20, y=350)
     settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray40", fg = "white", command = settings, height = 1, width = 8)
-    settingsButton.place(x=280, y=350)
+    settingsButton.place(x=20, y=350)
 
     helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray40", fg = "white", command = help, height = 1, width = 8)
-    helpButton.place(x=550, y=350)
+    helpButton.place(x=280, y=350)
+        back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 8)
+    back.place(x=550, y=350)
 
 #**************************************TKINTER SET UP***************************************
 
@@ -424,13 +424,13 @@ sevenButton.place(x=25, y=25)
 
 # Donatos Image
 path = "Saucer/donatos.png"
-img = ImageTk.PhotoImage(Image.open(path).resize((125,60), Image.ANTIALIAS))
+img = ImageTk.PhotoImage(Image.open(path).resize((120,50), Image.ANTIALIAS))
 logo = Label(screen, image = img)
 logo.place(x=25, y=190)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red", fg = "white", command = stopPumping, height = 1, width = 12)
-stopButton.place(x=150, y=190)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red", fg = "white", command = stopPumping, height = 1, width = 11)
+stopButton.place(x=160, y=190)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray40", fg = "white", command = clean, height = 2, width = 6)
 cleanButton.place(x=25, y=320)
