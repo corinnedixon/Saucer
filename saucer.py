@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.font as font
+from PIL import Image,  ImageTk
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -182,6 +183,16 @@ def stopPumping():
   global pumping
   pumping = False
 
+#**************************************CLEAN AND PRIME**************************************
+
+# Function to clean
+def clean():
+    print("Cleaning\n")
+
+# Function to prime
+def prime():
+        print("Priming\n")
+
 #**************************************SETTINGS WINDOW**************************************
 
 # Functions for setting pump speeds based on sauce amount
@@ -201,29 +212,29 @@ def setAmount(amt):
         setSpeed(ext)
 
 # Function for actual settings window
-def settings(screen):
+def settings():
     # Create window for settings
     top = Toplevel()
     top.title("Saucer Settings")
     top.geometry('800x480')
-    screen.overrideredirect(0)
+    top.configure(bg="gray30")
     top.overrideredirect(1)
     
     # Font
-    subFont = font.Font(family='Helvetica', size=30, weight='normal')
-    
+    otherFont = font.Font(family='Helvetica', size=40, weight='normal')
+
     # Sauce amount buttons
-    light  = Button(top, text = "Light", font = subFont, fg="black", bg = "white", command = lambda: setAmount("light"), height = 2, width = 6)
+    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("light"), height = 2, width = 6)
     light.place(x=60, y=30)
-    normal  = Button(top, text = "Normal", font = subFont, fg="black", bg = "white", command = lambda: setAmount("normal"), height = 2, width = 6)
+    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("normal"), height = 2, width = 6)
     normal.place(x=310, y=30)
-    extra  = Button(top, text = "Extra", font = subFont, fg="black", bg = "white", command = lambda: setAmount("extra"), height = 2, width = 6)
+    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("extra"), height = 2, width = 6)
     extra.place(x=560, y=30)
     
     # Action buttons
-    quit  = Button(top, text = "Quit", font = subFont, fg="black", bg = "white", command = screen.destroy, height = 2, width = 6)
+    quit  = Button(top, text = "QUIT", font = otherFont, bg = "gray40", fg = "white", command = screen.destroy, height = 2, width = 6)
     quit.place(x=100, y=350)
-    back  = Button(top, text = "Back", font = subFont, fg="black", bg = "white", command = top.destroy, height = 2, width = 6)
+    back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = top.destroy, height = 2, width = 6)
     back.place(x=550, y=350)
 
 #*****************************************HELP MENU*****************************************
@@ -246,15 +257,16 @@ def send(answers):
     print("Sending data to Firebase")
 
 # Function for sos menu
-def sos(top):
+def sos():
     # Create window for help menu
     sosMenu = Toplevel()
     sosMenu.title("Saucer Help Menu")
     sosMenu.geometry('800x480')
+    sosMenu.configure(bg="gray30")
     sosMenu.overrideredirect(1)
     
     # Fonts
-    subFont = font.Font(family='Helvetica', size=30, weight='normal')
+    otherFont = font.Font(family='Helvetica', size=40, weight='normal')
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
@@ -331,69 +343,102 @@ def sos(top):
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "Done", font = subFont, fg="black", bg = "white", command = lambda: send(answers), height = 2, width = 4)
+    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray40", fg = "white", command = lambda: send(answers), height = 2, width = 4)
     done.place(x=500, y=350)
-    quit  = Button(sosMenu, text = "Quit", font = subFont, fg="black", bg = "white", command = sosMenu.destroy, height = 2, width = 4)
-    quit.place(x=650, y=350)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray40", fg = "white"", command = sosMenu.destroy, height = 2, width = 4)
+    back.place(x=650, y=350)
 
     print("SOS\n")
 
 # Function for help menu
-def help(screen):
+def help():
     # Create window for help menu
     top = Toplevel()
-    top.title("Full Line Help Menu")
+    top.title("Saucer Help Menu")
     top.geometry('800x480')
+    top.configure(bg="gray30")
     top.overrideredirect(1)
     
     # Font
-    subFont = font.Font(family='Helvetica', size=30, weight='normal')
+    otherFont = font.Font(family='Helvetica', size=40, weight='normal')
     
     # Text
-    txt = Text(top, font = subFont, height=1, width=22)
+    txt = Text(top, font = otherFont, height=1, width=22)
     txt.insert(INSERT, "Welcome to the help menu!")
     txt.place(x=25,y=25)
     
     # Action buttons
-    quit  = Button(top, text = "SOS", font = subFont, fg="black", bg = "white", command = lambda: sos(top), height = 2, width = 6)
-    quit.place(x=100, y=350)
-    back  = Button(top, text = "Back", font = subFont, fg="black", bg = "white", command = top.destroy, height = 2, width = 6)
+    sos  = Button(top, text = "SOS", font = otherFont, bg = "gray40", fg = "white", command = lambda: sos(top), height = 2, width = 6)
+    sos.place(x=100, y=350)
+    back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = top.destroy, height = 2, width = 6)
     back.place(x=550, y=350)
+
+#***********************************OTHER SCREEN SET UP*************************************
+
+def moreScreen():
+    # Create window for more menu
+    other = Toplevel()
+    other.title("More Buttons")
+    other.geometry('800x480')
+    other.configure(bg="gray30")
+    other.overrideredirect(1)
     
+    # Fonts for screen
+    otherFont = font.Font(family='Helvetica', size=40, weight='normal')
+    
+    # Other screen buttons
+    back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 2, width = 6)
+    back.place(x=50, y=350)
+    settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray40", fg = "white", command = settings, height = 1, width = 6)
+    settingsButton.place(x=250, y=350)
+
+    helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray40", fg = "white", command = help, height = 1, width = 6)
+    helpButton.place(x=500, y=350)
+
 #**************************************TKINTER SET UP***************************************
 
 # TK screen set up
 screen = Tk()
 screen.overrideredirect(1)
 screen.geometry('800x480')
+screen.configure(bg="gray30")
 screen.title("Sm^rt Saucer")
 
 # Fonts for screen
-myFont = font.Font(family='Helvetica', size=36, weight='bold')
-myFontLarge = font.Font(family='Helvetica', size=50, weight='bold')
+sizeFont = font.Font(family='Helvetica', size=64, weight='bold')
+stopFont = font.Font(family='Helvetica', size=50, weight='bold')
+otherFont = font.Font(family='Helvetica', size=40, weight='normal')
 
 # Size buttons
-fourteenButton  = Button(screen, text = "14 in.", font = myFont, bg = "white", command = lambda: setSize(14), height = 2 , width = 4)
-fourteenButton.place(x=575, y=5)
+fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
+fourteenButton.place(x=605, y=5)
 
-twelveButton  = Button(screen, text = "12 in.", font = myFont, bg = "white", command = lambda: setSize(12), height = 2 , width = 4)
-twelveButton.place(x=400, y=5)
+twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
+twelveButton.place(x=405, y=5)
 
-tenButton  = Button(screen, text = "10 in.", font = myFont, bg = "white", command = lambda: setSize(10), height = 2 , width = 4)
-tenButton.place(x=225, y=5)
+tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
+tenButton.place(x=205, y=5)
 
-sevenButton  = Button(screen, text = "7 in.", font = myFont, bg = "white", command = lambda: setSize(7), height = 2 , width = 4)
-sevenButton.place(x=50, y=5)
+sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
+sevenButton.place(x=5, y=5)
 
-# Function buttons
-stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stopPumping, height = 2, width = 6)
+# Donatos Image
+path = "Donatos.jpg"
+img = ImageTk.PhotoImage(Image.open(path))
+logo = Label(window, image = img)
+logo.place(x=25, y=180)
+
+# Function button
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red", fg = "white", command = stopPumping, height = 2, width = 8)
 stopButton.place(x=280, y=160)
 
-# Other screen buttons
-settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 6)
-settingsButton.place(x=50, y=380)
+cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray40", fg = "white", command = clean, height = 2, width = 6)
+cleanButton.place(x=5, y=320)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 6)
-helpButton.place(x=550, y=380)
+primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray40", fg = "white", command = prime, height = 2, width = 6)
+primeButton.place(x=250, y=320)
+
+moreButton  = Button(screen, text = "...", font = otherFont, bg = "gray40", fg = "white", command = moreScreen, height = 2, width = 6)
+moreButton.place(x=500, y=320)
 
 mainloop()
