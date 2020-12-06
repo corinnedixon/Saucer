@@ -224,16 +224,16 @@ def settings():
     otherFont = font.Font(family='Helvetica', size=35, weight='normal')
 
     # Sauce amount buttons
-    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("light"), height = 2, width = 6)
+    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("light"), height = 2, width = 7)
     light.place(x=30, y=30)
-    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("normal"), height = 2, width = 6)
+    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("normal"), height = 2, width = 7)
     normal.place(x=290, y=30)
-    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("extra"), height = 2, width = 6)
+    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("extra"), height = 2, width = 7)
     extra.place(x=560, y=30)
     
     # Action buttons
     quit  = Button(top, text = "QUIT", font = otherFont, bg = "gray40", fg = "white", command = screen.destroy, height = 2, width = 6)
-    quit.place(x=100, y=310)
+    quit.place(x=75, y=310)
     back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = top.destroy, height = 2, width = 6)
     back.place(x=550, y=310)
 
@@ -369,9 +369,9 @@ def help():
     
     # Action buttons
     sosButton  = Button(top, text = "SOS", font = otherFont, bg = "gray40", fg = "white", command = sos, height = 2, width = 6)
-    sosButton.place(x=100, y=350)
+    sosButton.place(x=100, y=320)
     back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = top.destroy, height = 2, width = 6)
-    back.place(x=550, y=350)
+    back.place(x=510, y=320)
 
 #***********************************OTHER SCREEN SET UP*************************************
 
@@ -387,13 +387,13 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=35, weight='normal')
     
     # Other screen buttons
-    back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 7)
+    back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 1, width = 8)
     back.place(x=20, y=350)
-    settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray40", fg = "white", command = settings, height = 1, width = 7)
-    settingsButton.place(x=270, y=350)
+    settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray40", fg = "white", command = settings, height = 1, width = 8)
+    settingsButton.place(x=280, y=350)
 
-    helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray40", fg = "white", command = help, height = 1, width = 7)
-    helpButton.place(x=530, y=350)
+    helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray40", fg = "white", command = help, height = 1, width = 8)
+    helpButton.place(x=550, y=350)
 
 #**************************************TKINTER SET UP***************************************
 
@@ -411,26 +411,26 @@ otherFont = font.Font(family='Helvetica', size=40, weight='normal')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 1 , width = 3)
-fourteenButton.place(x=625, y=25)
+fourteenButton.place(x=610, y=25)
 
 twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 1 , width = 3)
-twelveButton.place(x=425, y=25)
+twelveButton.place(x=415, y=25)
 
 tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 1 , width = 3)
-tenButton.place(x=225, y=25)
+tenButton.place(x=220, y=25)
 
 sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 1 , width = 3)
 sevenButton.place(x=25, y=25)
 
 # Donatos Image
 path = "Saucer/donatos.png"
-img = ImageTk.PhotoImage(Image.open(path).resize((150,75), Image.ANTIALIAS))
+img = ImageTk.PhotoImage(Image.open(path).resize((125,60), Image.ANTIALIAS))
 logo = Label(screen, image = img)
-logo.place(x=25, y=180)
+logo.place(x=25, y=190)
 
 # Function button
 stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red", fg = "white", command = stopPumping, height = 1, width = 12)
-stopButton.place(x=100, y=160)
+stopButton.place(x=150, y=190)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray40", fg = "white", command = clean, height = 2, width = 6)
 cleanButton.place(x=25, y=320)
