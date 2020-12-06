@@ -425,12 +425,12 @@ sevenButton.place(x=25, y=25)
 # Donatos Image
 path = "Saucer/donatos.png"
 img = ImageTk.PhotoImage(Image.open(path).resize((120,50), Image.ANTIALIAS))
-logo = Label(screen, image = img)
-logo.place(x=25, y=190)
+logo = Label(screen, image = img, bg="gray30")
+logo.place(x=15, y=190)
 
 # Function button
 stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red", fg = "white", command = stopPumping, height = 1, width = 11)
-stopButton.place(x=160, y=190)
+stopButton.place(x=170, y=190)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray40", fg = "white", command = clean, height = 2, width = 6)
 cleanButton.place(x=25, y=320)
