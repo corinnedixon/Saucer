@@ -387,7 +387,7 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=40, weight='normal')
     
     # Other screen buttons
-    back  = Button(top, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 2, width = 6)
+    back  = Button(other, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = other.destroy, height = 2, width = 6)
     back.place(x=50, y=350)
     settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray40", fg = "white", command = settings, height = 1, width = 6)
     settingsButton.place(x=250, y=350)
@@ -424,7 +424,7 @@ sevenButton.place(x=5, y=5)
 
 # Donatos Image
 path = "Saucer/donatos.png"
-img = ImageTk.PhotoImage(Image.open(path))
+img = ImageTk.PhotoImage(Image.open(path), size=(50,50))
 logo = Label(screen, image = img)
 logo.place(x=25, y=180)
 
