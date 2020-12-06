@@ -345,7 +345,7 @@ def sos():
     # Back button
     done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray40", fg = "white", command = lambda: send(answers), height = 2, width = 4)
     done.place(x=500, y=350)
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray40", fg = "white"", command = sosMenu.destroy, height = 2, width = 4)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray40", fg = "white", command = sosMenu.destroy, height = 2, width = 4)
     back.place(x=650, y=350)
 
     print("SOS\n")
