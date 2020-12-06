@@ -424,8 +424,7 @@ sevenButton.place(x=5, y=5)
 
 # Donatos Image
 path = "Saucer/donatos.png"
-img = ImageTk.PhotoImage(Image.open(path))
-img = img.resize((50, 25), Image.ANTIALIAS)
+img = ImageTk.PhotoImage(Image.open(path).resize((50,25), Image.ANTIALIAS))
 logo = Label(screen, image = img)
 logo.place(x=25, y=180)
 
