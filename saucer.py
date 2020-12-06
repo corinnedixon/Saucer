@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.font as font
-from PIL import Image,  ImageTk
+from PIL import Image, ImageTk
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -423,7 +423,7 @@ sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", 
 sevenButton.place(x=5, y=5)
 
 # Donatos Image
-path = "Donatos.jpg"
+path = "Donatos.png"
 img = ImageTk.PhotoImage(Image.open(path))
 logo = Label(window, image = img)
 logo.place(x=25, y=180)
