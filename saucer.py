@@ -442,22 +442,22 @@ logo = Label(screen, image = img, bg="gray20")
 logo.place(x=35, y=250)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 10)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red3", fg = "white", command = stopPumping, height = 1, width = 9)
 stopButton.place(x=190, y=230)
 
-moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 2, width = 4)
+moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 1, width = 4)
 moreButton.place(x=600, y=230)
 
-cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray20", fg = "white", command = clean, height = 1, width = 8)
+cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray20", fg = "white", command = clean, height = 2, width = 10)
 cleanButton.place(x=25, y=380)
 
-primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 8)
-primeButton.place(x=565, y=380)
+primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 10)
+primeButton.place(x=575, y=380)
 
 extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
-extra.place(x=200, y=380)
+extra.place(x=250, y=380)
 
 light  = Button(screen, text = "LIGHT\nSAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
-light.place(x=300, y=380)
+light.place(x=375, y=380)
 
 mainloop()
