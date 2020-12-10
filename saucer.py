@@ -213,13 +213,13 @@ def setColor(color):
 
 def setAmount(amt):
     global amount
-    if amt == amount or amt == "normal":
+    if amt == amount or amt == med:
         amount = med
         setColor("lime green")
-    elif amt == "light":
+    elif amt == ext:
         amount = lt
         setColor("orange")
-    elif amt == "extra":
+    elif amt == ext:
         amount = ext
         setColor("DarkOrange1")
     setSpeed()
@@ -237,11 +237,11 @@ def settings():
     otherFont = font.Font(family='Helvetica', size=35, weight='normal')
 
     # Sauce amount buttons
-    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("light"), height = 2, width = 7)
+    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount(lt), height = 2, width = 7)
     light.place(x=30, y=30)
-    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("normal"), height = 2, width = 7)
+    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount(med), height = 2, width = 7)
     normal.place(x=290, y=30)
-    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount("extra"), height = 2, width = 7)
+    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray40", fg = "white", command = lambda: setAmount(ext), height = 2, width = 7)
     extra.place(x=560, y=30)
     
     # Action buttons
