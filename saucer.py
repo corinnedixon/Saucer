@@ -122,6 +122,9 @@ def runSaucer():
     spinFunc(25, sauce_spin_steps)
     stopPumping()
     stopSpinning()
+    
+    # Set amount to default
+    setAmount(med)
 
 #Functions for starting and stopping spin
 def spinProgram(speed):
@@ -195,7 +198,7 @@ def clean():
 def prime():
         print("Priming\n")
 
-#**************************************SETTINGS WINDOW**************************************
+#*************************************CHANGE SAUCE AMT**************************************
 
 # Functions for setting pump speeds based on sauce amount
 def setSpeed():
@@ -221,34 +224,8 @@ def setAmount(amt):
         setColor("orange")
     elif amt == ext:
         amount = ext
-        setColor("DarkOrange1")
+        setColor("DarkOrange2")
     setSpeed()
-
-# Function for actual settings window
-def settings():
-    # Create window for settings
-    top = Toplevel()
-    top.title("Saucer Settings")
-    top.geometry('800x480')
-    top.configure(bg="gray20")
-    top.overrideredirect(1)
-    
-    # Font
-    otherFont = font.Font(family='Helvetica', size=35, weight='normal')
-
-    # Sauce amount buttons
-    light  = Button(top, text = "LIGHT", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 7)
-    light.place(x=30, y=30)
-    normal  = Button(top, text = "NORMAL", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(med), height = 2, width = 7)
-    normal.place(x=290, y=30)
-    extra  = Button(top, text = "EXTRA", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 7)
-    extra.place(x=560, y=30)
-    
-    # Action buttons
-    quit  = Button(top, text = "QUIT", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 6)
-    quit.place(x=75, y=310)
-    back  = Button(top, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = top.destroy, height = 2, width = 6)
-    back.place(x=550, y=310)
 
 #*****************************************HELP MENU*****************************************
 
@@ -388,6 +365,8 @@ def help():
 
 #***********************************OTHER SCREEN SET UP*************************************
 
+# THIS NEEDS UPDATED
+
 def moreScreen():
     # Create window for more menu
     other = Toplevel()
@@ -400,9 +379,6 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=35, weight='normal')
     
     # Other screen buttons
-    settingsButton  = Button(other, text = "SETTINGS", font = otherFont, bg = "gray20", fg = "white", command = settings, height = 1, width = 8)
-    settingsButton.place(x=20, y=350)
-
     helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray20", fg = "white", command = help, height = 1, width = 8)
     helpButton.place(x=280, y=350)
     back  = Button(other, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = other.destroy, height = 1, width = 8)
