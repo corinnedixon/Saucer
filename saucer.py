@@ -418,22 +418,22 @@ screen.configure(bg="gray20")
 screen.title("Sm^rt Saucer")
 
 # Fonts for screen
-sizeFont = font.Font(family='Helvetica', size=64, weight='bold')
+sizeFont = font.Font(family='Helvetica', size=60, weight='bold')
 stopFont = font.Font(family='Helvetica', size=50, weight='bold')
 otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
-fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 1 , width = 3)
+fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "green3", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
 fourteenButton.place(x=610, y=25)
 
-twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 1 , width = 3)
+twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "green3", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
 twelveButton.place(x=415, y=25)
 
-tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 1 , width = 3)
+tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "green3", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
 tenButton.place(x=220, y=25)
 
-sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 1 , width = 3)
-sevenButton.place(x=25, y=25)
+sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "green3", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
+sevenButton.place(x=15, y=25)
 
 # Donatos Image
 path = "Saucer/donatoswhite.png"
@@ -442,22 +442,22 @@ logo = Label(screen, image = img, bg="gray20")
 logo.place(x=35, y=250)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red3", fg = "white", command = stopPumping, height = 1, width = 9)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "firebrick1", fg = "white", command = stopPumping, height = 1, width = 9)
 stopButton.place(x=190, y=230)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 1, width = 4)
 moreButton.place(x=600, y=230)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray20", fg = "white", command = clean, height = 2, width = 10)
-cleanButton.place(x=25, y=380)
+cleanButton.place(x=15, y=380)
 
 primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 10)
 primeButton.place(x=575, y=380)
 
 extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
-extra.place(x=250, y=380)
+extra.place(x=260, y=380)
 
 light  = Button(screen, text = "LIGHT\nSAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
-light.place(x=375, y=380)
+light.place(x=410, y=380)
 
 mainloop()
