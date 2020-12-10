@@ -69,32 +69,32 @@ def spinFunc(speed, steps):
     if spinning == False:
       break
     else:
-      os.system("STEPPER_START,TURNTABLE,FORWARD,1000,1'\n'")
+      os.system("$STEPPER_START,TURNTABLE,FORWARD,1000,1'\n'")
       steps = steps - 1
 
 def stopSpinning():
   global spinning
   spinning = False
-  os.system("STEPPER_STOP,TURNTABLE'\n'")
+  os.system("$STEPPER_STOP,TURNTABLE'\n'")
 
 #Functions for starting and stopping sauce
 def pumpProgram(size):
     # Start pumping infinitely based on size
-    os.system("STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'")
+    os.system("$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'")
     if size >= 10:
-        os.system("STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'")
+        os.system("$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'")
     if size >= 12:
-        os.system("STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'")
+        os.system("$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'")
     if size >= 14:
-        os.system("STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'")
+        os.system("$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'")
 
 def stopPumping():
   global pumping
   pumping = False
-  os.system("STEPPER_STOP,PUMP1'\n'")
-  os.system("STEPPER_STOP,PUMP2'\n'")
-  os.system("STEPPER_STOP,PUMP3'\n'")
-  os.system("STEPPER_STOP,PUMP4'\n'")
+  os.system("$STEPPER_STOP,PUMP1'\n'")
+  os.system("$STEPPER_STOP,PUMP2'\n'")
+  os.system("$STEPPER_STOP,PUMP3'\n'")
+  os.system("$STEPPER_STOP,PUMP4'\n'")
 
 #**************************************SETTINGS WINDOW**************************************
 
