@@ -216,7 +216,7 @@ def setAmount(amt):
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
-    elif amt == ext:
+    elif amt == lt:
         amount = lt
         setColor("orange")
     elif amt == ext:
