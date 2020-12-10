@@ -224,11 +224,13 @@ def setAmount(amt):
     elif amt == lt:
         amount = lt
         setColor("orange")
-        extra["bg"] = "orange"
+        light["bg"] = "orange"
+        extra["bg"] = "gray20"
     elif amt == ext:
         amount = ext
         setColor("DarkOrange2")
-        light["bg"] = "DarkOrange2"
+        extra["bg"] = "DarkOrange2"
+        light["bg"] = "gray20"
     setSpeed()
 
 #*****************************************HELP MENU*****************************************
