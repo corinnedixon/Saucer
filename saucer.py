@@ -54,11 +54,13 @@ s2_speed = med # Sauce stepper motor 2 speed
 s3_speed = med # Sauce stepper motor 3 speed
 s4_speed = med # Sauce stepper motor 4 speed
 
-# Size / Steps
+# Size / Steps / Sauce Amount
 global size
 size = -1 # No default size
 global sauce_spin_steps
 sauce_spin_steps = 1000
+global amount
+amount = med #normal amount at start
 
 # Double click
 global click
@@ -196,20 +198,31 @@ def prime():
 #**************************************SETTINGS WINDOW**************************************
 
 # Functions for setting pump speeds based on sauce amount
-def setSpeed(new_speed):
-    global s1_speed, s2_speed, s3_speed, s4_speed
-    s1_speed = new_speed
-    s2_speed = new_speed
-    s3_speed = new_speed
-    s4_speed = new_speed
+def setSpeed():
+    global s1_speed, s2_speed, s3_speed, s4_speed, amount
+    s1_speed = amount
+    s2_speed = amount
+    s3_speed = amount
+    s4_speed = amount
+
+def setColor(color):
+    fourteenButton["bg"] = color
+    twelveButton["bg"] = color
+    tenButton["bg"] = color
+    sevenButton["bg"] = color
 
 def setAmount(amt):
-    if amt == "light":
-        setSpeed(lt)
-    elif amt == "normal":
-        setSpeed(med)
+    global amount
+    if amt == amount or amt == "normal":
+        amount = med
+        setColor("lime green")
+    elif amt == "light":
+        amount = lt
+        setColor("orange")
     elif amt == "extra":
-        setSpeed(ext)
+        amount = ext
+        setColor("DarkOrange1")
+    setSpeed()
 
 # Function for actual settings window
 def settings():
