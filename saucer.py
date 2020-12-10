@@ -219,12 +219,16 @@ def setAmount(amt):
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
+        extra["bg"] = "gray20"
+        light["bg"] = "gray20"
     elif amt == lt:
         amount = lt
         setColor("orange")
+        extra["bg"] = "orange"
     elif amt == ext:
         amount = ext
         setColor("DarkOrange2")
+        light["bg"] = "DarkOrange2"
     setSpeed()
 
 #*****************************************HELP MENU*****************************************
@@ -357,10 +361,10 @@ def help():
     txt.insert(INSERT, "Welcome to the help menu!")
     txt.place(x=25,y=25)
     
-    # Action buttons
+    # Action buttons **FIX BACK HERE
     sosButton  = Button(top, text = "SOS", font = otherFont, bg = "gray20", fg = "white", command = sos, height = 2, width = 6)
     sosButton.place(x=100, y=320)
-    back  = Button(top, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = top.destroy, height = 2, width = 6)
+    back  = Button(top, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 6)
     back.place(x=510, y=320)
 
 #***********************************OTHER SCREEN SET UP*************************************
