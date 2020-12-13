@@ -2,7 +2,7 @@ import time
 import serial
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 9600)  # opens port with baud rate
+ser = serial.Serial("/dev/ttyAMA0", 9600)  # opens port with baud rate
 
 # Define speeds
 s1_speed = 50 # Sauce stepper motor 1 speed
