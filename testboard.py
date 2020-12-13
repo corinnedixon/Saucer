@@ -11,10 +11,10 @@ s3_speed = 50 # Sauce stepper motor 3 speed
 s4_speed = 50 # Sauce stepper motor 4 speed
 
 # Start sauce pumps for 2 seconds
-ser.write("$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'")
-ser.write("$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'")
-ser.write("$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'")
-ser.write("$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'")
+ser.write('$STEPPER_START,PUMP1,FORWARD,' + str(s1_speed) + ',0\n')
+ser.write('$STEPPER_START,PUMP2,FORWARD,' + str(s2_speed) + ',0\n')
+ser.write('$STEPPER_START,PUMP3,FORWARD,' + str(s3_speed) + ',0\n')
+ser.write('$STEPPER_START,PUMP4,FORWARD,' + str(s4_speed) + ',0\n')
 
 time.sleep(2)
 
