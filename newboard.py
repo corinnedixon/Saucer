@@ -5,9 +5,12 @@ import time
 import sys
 import datetime
 import threading
-import os
+import serial
 
 #***********************************VARIABLE DECLARATIONS***********************************
+
+# Open UART serial connection
+ser = serial.Serial("/dev/ttyAMA0", 9600)  # opens port with baud rate
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
@@ -69,32 +72,42 @@ def spinFunc(speed, steps):
     if spinning == False:
       break
     else:
-      os.system("$STEPPER_START,TURNTABLE,FORWARD,1000,1'\n'")
+      spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1'\n'"
+      ser.write(spin.encode())
       steps = steps - 1
 
 def stopSpinning():
   global spinning
   spinning = False
-  os.system("$STEPPER_STOP,TURNTABLE'\n'")
+  stop = "$STEPPER_STOP,TURNTABLE'\n'"
+  ser.write(stop.encode())
 
 #Functions for starting and stopping sauce
 def pumpProgram(size):
     # Start pumping infinitely based on size
-    os.system("$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'")
+    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'"
+    ser.write(start1.encode())
     if size >= 10:
-        os.system("$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'")
+        start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'"
+        ser.write(start2.encode())
     if size >= 12:
-        os.system("$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'")
+        start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'"
+        ser.write(start3.encode())
     if size >= 14:
-        os.system("$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'")
+        start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'"
+        ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
-  os.system("$STEPPER_STOP,PUMP1'\n'")
-  os.system("$STEPPER_STOP,PUMP2'\n'")
-  os.system("$STEPPER_STOP,PUMP3'\n'")
-  os.system("$STEPPER_STOP,PUMP4'\n'")
+  stop1 = "$STEPPER_STOP,PUMP1'\n'"
+  ser.write(stop1.encode())
+  stop2 = "$STEPPER_STOP,PUMP2'\n'"
+  ser.write(stop2.encode())
+  stop3 = "$STEPPER_STOP,PUMP3'\n'"
+  ser.write(stop3.encode())
+  stop4 = "$STEPPER_STOP,PUMP4'\n'"
+  ser.write(stop4.encode())
 
 #**************************************SETTINGS WINDOW**************************************
 
