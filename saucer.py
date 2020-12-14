@@ -346,29 +346,6 @@ def sos():
 
     print("SOS\n")
 
-# Function for help menu
-def help():
-    # Create window for help menu
-    top = Toplevel()
-    top.title("Saucer Help Menu")
-    top.geometry('800x480')
-    top.configure(bg="gray20")
-    top.overrideredirect(1)
-    
-    # Font
-    otherFont = font.Font(family='Helvetica', size=40, weight='normal')
-    
-    # Text
-    txt = Text(top, font = otherFont, height=1, width=22)
-    txt.insert(INSERT, "Welcome to the help menu!")
-    txt.place(x=25,y=25)
-    
-    # Action buttons **FIX BACK HERE
-    sosButton  = Button(top, text = "SOS", font = otherFont, bg = "gray20", fg = "white", command = sos, height = 2, width = 6)
-    sosButton.place(x=100, y=320)
-    back  = Button(top, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 6)
-    back.place(x=510, y=320)
-
 #***********************************OTHER SCREEN SET UP*************************************
 
 def moreScreen():
@@ -385,10 +362,14 @@ def moreScreen():
     headingFont = font.Font(family='Helvetica', size=20, weight='normal')
     
     # Other screen buttons
-    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = help, height = 1, width = 8)
+    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = sos, height = 1, width = 8)
     helpButton.place(x=460, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = "gray20", fg = "white", command = other.destroy, height = 2, width = 10)
     home.place(x=575, y=380)
+    
+    #TEMPORARY QUIT
+    quitButton  = Button(other, text = "QUIT", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 10)
+    quitButton.place(x=200, y=200)
     
     # Text on screen
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
