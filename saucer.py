@@ -382,13 +382,14 @@ def moreScreen():
     other.overrideredirect(1)
     
     # Fonts for screen
-    otherFont = font.Font(family='Helvetica', size=35, weight='normal')
+    stopFont = font.Font(family='Helvetica', size=50, weight='bold')
+    otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     
     # Other screen buttons
-    helpButton  = Button(other, text = "HELP", font = otherFont, bg = "gray20", fg = "white", command = help, height = 1, width = 8)
-    helpButton.place(x=280, y=350)
-    back  = Button(other, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = other.destroy, height = 1, width = 8)
-    back.place(x=550, y=350)
+    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = help, height = 1, width = 8)
+    helpButton.place(x=530, y=30)
+    home  = Button(other, text = "HOME", font = otherFont, bg = "gray20", fg = "white", command = other.destroy, height = 2, width = 8)
+    home.place(x=550, y=370)
 
 #**************************************TKINTER SET UP***************************************
 
