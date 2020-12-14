@@ -384,22 +384,22 @@ def moreScreen():
     # Fonts for screen
     stopFont = font.Font(family='Helvetica', size=50, weight='bold')
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
-    headingFont = font.Font(family='Helvetica', size=24, weight='bold')
+    headingFont = font.Font(family='Helvetica', size=20, weight='normal')
     
     # Other screen buttons
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = help, height = 1, width = 8)
-    helpButton.place(x=490, y=20)
+    helpButton.place(x=470, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = "gray20", fg = "white", command = other.destroy, height = 2, width = 10)
     home.place(x=575, y=380)
     
     # Text on screen
-    calib = Text(other, font = headingFont, height=1, width=20)
+    calib = Text(other, font = headingFont, bg = "gray20", fg = "white", height=1, width=20)
     calib.insert(INSERT, "SAUCE WEIGHT CALIBRATION")
     calib.place(x=10,y=10)
     
-    diag = Text(other, font = headingFont, height=1, width=17)
+    diag = Text(other, font = headingFont, bg = "gray20", fg = "white", height=1, width=17)
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
-    diag.place(x=490,y=100)
+    diag.place(x=470,y=120)
 
 #**************************************TKINTER SET UP***************************************
 
