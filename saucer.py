@@ -371,8 +371,6 @@ def help():
 
 #***********************************OTHER SCREEN SET UP*************************************
 
-# THIS NEEDS UPDATED
-
 def moreScreen():
     # Create window for more menu
     other = Toplevel()
@@ -397,9 +395,9 @@ def moreScreen():
     calib.insert(INSERT, "SAUCE WEIGHT CALIBRATION")
     calib.place(x=10,y=10)
     
-    diag = Text(other, font = headingFont, bg = "gray20", fg = "white", height=1, width=21)
+    diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
-    diag.place(x=460,y=120)
+    diag.place(x=460,y=125)
 
 #**************************************TKINTER SET UP***************************************
 
