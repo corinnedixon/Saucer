@@ -113,7 +113,7 @@ def setSize(new_size):
     else:
         click = 0
         size = new_size
-    if click == 1:
+    if click >= 1:
         runSaucer()
 
 #************************************SAUCER FUNCTIONS***************************************
