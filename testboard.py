@@ -3,7 +3,6 @@ import serial
 
 # Open UART serial connection
 ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
-ser.reset_output_buffer()
 
 # Define speeds
 s1_speed = 50 # Sauce stepper motor 1 speed
@@ -26,7 +25,6 @@ line4 ="$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\n"
 ser.write(line4.encode("ascii"))
 
 time.sleep(2)
-ser.reset_output_buffer()
 
 stop1 = "$STEPPER_STOP,PUMP1\n"
 
