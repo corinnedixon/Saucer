@@ -50,9 +50,9 @@ ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Light, normal, extra sauce speeds
-lt = 2500
-med = 5000
-ext = 7500
+lt = 40000
+med = 50000
+ext = 60000
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
@@ -65,7 +65,7 @@ s4_speed = med # Sauce stepper motor 4 speed
 global size
 size = -1 # No default size
 global sauce_spin_steps
-sauce_spin_steps = 5000
+sauce_spin_steps = 100
 global amount
 amount = med #normal amount at start
 
@@ -122,7 +122,7 @@ def setSize(new_size):
 def runSaucer():
     print("SPEED: " + str(s1_speed))
     print("SIZE: " + str(size))
-    print("RUNNING SAUCE'\n'")
+    print("RUNNING SAUCE'\r\n'")
 
     # Run corresponding saucer pumps
     pumpProgram(size)
@@ -146,41 +146,42 @@ def spinFunc(speed, steps):
     if spinning == False:
       break
     else:
-      spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1000'\n'"
+      spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,10'\r\n'"
       ser.write(spin.encode())
       steps = steps - 1
 
 def stopSpinning():
   global spinning
   spinning = False
-  stop = "$STEPPER_STOP,TURNTABLE'\n'"
+  stop = "$STEPPER_STOP,TURNTABLE'\r\n'"
   ser.write(stop.encode())
 
 #Functions for starting and stopping sauce
 def pumpProgram(size):
     # Start pumping infinitely based on size
-    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'"
+    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\r\n'"
+    ser.f
     ser.write(start1.encode())
     if size >= 10:
-        start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'"
+        start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\r\n'"
         ser.write(start2.encode())
     if size >= 12:
-        start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'"
+        start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\r\n'"
         ser.write(start3.encode())
     if size >= 14:
-        start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'"
+        start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\r\n'"
         ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
-  stop1 = "$STEPPER_STOP,PUMP1'\n'"
+  stop1 = "$STEPPER_STOP,PUMP1'\r\n'"
   ser.write(stop1.encode())
-  stop2 = "$STEPPER_STOP,PUMP2'\n'"
+  stop2 = "$STEPPER_STOP,PUMP2'\r\n'"
   ser.write(stop2.encode())
-  stop3 = "$STEPPER_STOP,PUMP3'\n'"
+  stop3 = "$STEPPER_STOP,PUMP3'\r\n'"
   ser.write(stop3.encode())
-  stop4 = "$STEPPER_STOP,PUMP4'\n'"
+  stop4 = "$STEPPER_STOP,PUMP4'\r\n'"
   ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
@@ -421,10 +422,10 @@ cleanButton.place(x=15, y=380)
 primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 10)
 primeButton.place(x=575, y=380)
 
-extra  = Button(screen, text = "EXTRA'\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
+extra  = Button(screen, text = "EXTRA'\r\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
 extra.place(x=260, y=380)
 
-light  = Button(screen, text = "LESS'\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
+light  = Button(screen, text = "LESS'\r\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
 light.place(x=420, y=380)
 
 mainloop()
