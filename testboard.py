@@ -5,10 +5,10 @@ import serial
 ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 # Define speeds
-s1_speed = 500 # Sauce stepper motor 1 speed
-s2_speed = 500 # Sauce stepper motor 2 speed
-s3_speed = 500 # Sauce stepper motor 3 speed
-s4_speed = 500 # Sauce stepper motor 4 speed
+s1_speed = 10000 # Sauce stepper motor 1 speed
+s2_speed = 10000 # Sauce stepper motor 2 speed
+s3_speed = 10000 # Sauce stepper motor 3 speed
+s4_speed = 10000 # Sauce stepper motor 4 speed
 
 # Start sauce pumps for 2 seconds
 
@@ -33,5 +33,5 @@ ser.write(stop1.encode())
 #ser.write(stop4.encode())
 #
 ## Spin turn table for 1000 steps at 1 ms per step
-spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,10000\r\n"
+spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,1000\r\n"
 ser.write(spin.encode())
