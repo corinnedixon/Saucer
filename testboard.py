@@ -21,7 +21,7 @@ ser.write(line1.encode())
 #line4 ="$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
 #ser.write(line4.encode())
 
-time.sleep(5)
+time.sleep(2)
 
 stop1 = "$STEPPER_STOP,PUMP1\r\n"
 ser.write(stop1.encode())
@@ -33,5 +33,5 @@ ser.write(stop1.encode())
 #ser.write(stop4.encode())
 #
 ## Spin turn table for 1000 steps at 1 ms per step
-#spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1\r\n"
-#ser.write(spin.encode())
+spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1000\r\n"
+ser.write(spin.encode())
