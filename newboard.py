@@ -65,7 +65,7 @@ s4_speed = med # Sauce stepper motor 4 speed
 global size
 size = -1 # No default size
 global sauce_spin_steps
-sauce_spin_steps = 100
+sauce_spin_steps = 1000
 global amount
 amount = med #normal amount at start
 
@@ -125,20 +125,16 @@ def runSaucer():
     print("RUNNING SAUCE")
 
     # Run corresponding saucer pumps
+    global sauce_spin_steps
     pumpProgram(size)
-    spinFunc(sauce_spin_steps)
+    spinFunc()
+    time.sleep(3)
     stopPumping()
     stopSpinning()
 
 #Functions for starting and stopping spin
-def spinProgram(steps):
-    # Create new thread
-    spin = threading.Thread(target=spinFunc, args=(steps,))
-    # Start new thread
-    spin.start()
-    
 def spinFunc(steps):
-  spin = "$STEPPER_START,TURNTABLE,FORWARD,30000," + str(steps) + "\r\n"
+  spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
   ser.write(spin.encode())
 
 def stopSpinning():
