@@ -17,7 +17,6 @@ line1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\n"
 
 ser.write(line1.encode())
 line2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\n"
-
 ser.write(line2.encode())
 line3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\n"
 
@@ -27,6 +26,7 @@ line4 ="$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\n"
 ser.write(line4.encode())
 
 time.sleep(2)
+ser.reset_output_buffer()
 
 stop1 = "$STEPPER_STOP,PUMP1\n"
 
