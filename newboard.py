@@ -160,7 +160,6 @@ def stopSpinning():
 def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\r\n'"
-    ser.f
     ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\r\n'"
@@ -422,10 +421,10 @@ cleanButton.place(x=15, y=380)
 primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 10)
 primeButton.place(x=575, y=380)
 
-extra  = Button(screen, text = "EXTRA'\r\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
+extra  = Button(screen, text = "EXTRA'\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
 extra.place(x=260, y=380)
 
-light  = Button(screen, text = "LESS'\r\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
+light  = Button(screen, text = "LESS'\n'SAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(lt), height = 2, width = 5)
 light.place(x=420, y=380)
 
 mainloop()
