@@ -15,7 +15,7 @@ import serial
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyAMA0", 115200)  # opens port with baud rate
+ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
