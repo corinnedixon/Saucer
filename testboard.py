@@ -12,9 +12,10 @@ s4_speed = 50 # Sauce stepper motor 4 speed
 
 # Start sauce pumps for 2 seconds
 
-#line1 = $STEPPER_START,PUMP1,FORWARD, + str(s1_speed) + ,0'\n'
+line1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0
+"
 
-ser.write($STEPPER_START,PUMP1,FORWARD, + str(s1_speed) + ,0'\n')
+ser.write(line1.encode("ascii"))
 line2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\n"
 ser.write(line2.encode("ascii"))
 line3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\n"
