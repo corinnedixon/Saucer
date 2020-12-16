@@ -15,44 +15,44 @@ import serial
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyAMA0", 9600)  # opens port with baud rate
+ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
 #Check for internet connection
-def checkInternet():
-  internet = True
-  try:
-    urllib.request.urlopen('https://smart-saucer.firebaseio.com/')
-  except:
-    internet = False
-  return internet
-
-time.sleep(1)
-hasInternet = checkInternet()
-
-#Set timezone
-os.environ['TZ'] = 'US/Eastern'
-time.tzset()
-
-#pyfire set up if internet is connected
-if(hasInternet):
-  config = {
-    "apiKey" : "AIzaSyBq-3aOFMlc-9IcSV-X2ZvrIceH5Uvz-U4",
-    "authDomain" : "smart-saucer.firebaseapp.com",
-    "databaseURL" : "https://smart-saucer.firebaseio.com/",
-    "storageBucket" : "smart-saucer.appspot.com"
-  }
-
-  firebase = pyfireconnect.initialize(config)
-  db = firebase.database()
+#def checkInternet():
+#  internet = True
+#  try:
+#    urllib.request.urlopen('https://smart-saucer.firebaseio.com/')
+#  except:
+#    internet = False
+#  return internet
+#
+#time.sleep(1)
+#hasInternet = checkInternet()
+#
+##Set timezone
+#os.environ['TZ'] = 'US/Eastern'
+#time.tzset()
+#
+##pyfire set up if internet is connected
+#if(hasInternet):
+#  config = {
+#    "apiKey" : "AIzaSyBq-3aOFMlc-9IcSV-X2ZvrIceH5Uvz-U4",
+#    "authDomain" : "smart-saucer.firebaseapp.com",
+#    "databaseURL" : "https://smart-saucer.firebaseio.com/",
+#    "storageBucket" : "smart-saucer.appspot.com"
+#  }
+#
+#  firebase = pyfireconnect.initialize(config)
+#  db = firebase.database()
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Light, normal, extra sauce speeds
-lt = 25
-med = 50
-ext = 75
+lt = 2500
+med = 5000
+ext = 7500
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
@@ -65,7 +65,7 @@ s4_speed = med # Sauce stepper motor 4 speed
 global size
 size = -1 # No default size
 global sauce_spin_steps
-sauce_spin_steps = 1000
+sauce_spin_steps = 5000
 global amount
 amount = med #normal amount at start
 
@@ -146,41 +146,41 @@ def spinFunc(speed, steps):
     if spinning == False:
       break
     else:
-      spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1'\n'"
+      spin = "$STEPPER_START,TURNTABLE,FORWARD,1000,1000\n"
       ser.write(spin.encode())
       steps = steps - 1
 
 def stopSpinning():
   global spinning
   spinning = False
-  stop = "$STEPPER_STOP,TURNTABLE'\n'"
+  stop = "$STEPPER_STOP,TURNTABLE\n"
   ser.write(stop.encode())
 
 #Functions for starting and stopping sauce
 def pumpProgram(size):
     # Start pumping infinitely based on size
-    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0'\n'"
+    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\n"
     ser.write(start1.encode())
     if size >= 10:
-        start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0'\n'"
+        start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\n"
         ser.write(start2.encode())
     if size >= 12:
-        start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0'\n'"
+        start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\n"
         ser.write(start3.encode())
     if size >= 14:
-        start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0'\n'"
+        start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\n"
         ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
-  stop1 = "$STEPPER_STOP,PUMP1'\n'"
+  stop1 = "$STEPPER_STOP,PUMP1\n"
   ser.write(stop1.encode())
-  stop2 = "$STEPPER_STOP,PUMP2'\n'"
+  stop2 = "$STEPPER_STOP,PUMP2\n"
   ser.write(stop2.encode())
-  stop3 = "$STEPPER_STOP,PUMP3'\n'"
+  stop3 = "$STEPPER_STOP,PUMP3\n"
   ser.write(stop3.encode())
-  stop4 = "$STEPPER_STOP,PUMP4'\n'"
+  stop4 = "$STEPPER_STOP,PUMP4\n"
   ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
