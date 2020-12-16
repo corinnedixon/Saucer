@@ -133,7 +133,7 @@ def runSaucer():
     stopSpinning()
 
 #Functions for starting and stopping spin
-def spinFunc(steps):
+def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
   ser.write(spin.encode())
 
