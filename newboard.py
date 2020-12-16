@@ -131,14 +131,14 @@ def runSaucer():
     stopSpinning()
 
 #Functions for starting and stopping spin
-def spinProgram(speed):
+def spinProgram(steps):
     # Create new thread
-    spin = threading.Thread(target=spinFunc)
+    spin = threading.Thread(target=spinFunc, args=(steps,))
     # Start new thread
     spin.start()
     
 def spinFunc(steps):
-  spin = "$STEPPER_START,TURNTABLE,FORWARD,30000," + steps + "\r\n"
+  spin = "$STEPPER_START,TURNTABLE,FORWARD,30000," + str(steps) + "\r\n"
   ser.write(spin.encode())
 
 def stopSpinning():
