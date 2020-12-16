@@ -126,33 +126,22 @@ def runSaucer():
 
     # Run corresponding saucer pumps
     pumpProgram(size)
-    spinFunc(25, sauce_spin_steps)
+    spinFunc(sauce_spin_steps)
     stopPumping()
     stopSpinning()
 
 #Functions for starting and stopping spin
 def spinProgram(speed):
     # Create new thread
-    spin = threading.Thread(target=spinFunc, args=(speed,1,))
+    spin = threading.Thread(target=spinFunc)
     # Start new thread
     spin.start()
     
-def spinFunc(speed, steps):
-  global spinning  #create global
-  spinning = True
-  
-  spin_delay = (100-speed)/50000
-  while spinning and steps > 0:
-    if spinning == False:
-      break
-    else:
-      spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,10\r\n"
-      ser.write(spin.encode())
-      steps = steps - 1
+def spinFunc(steps):
+  spin = "$STEPPER_START,TURNTABLE,FORWARD,30000," + steps + "\r\n"
+  ser.write(spin.encode())
 
 def stopSpinning():
-  global spinning
-  spinning = False
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
   ser.write(stop.encode())
 
