@@ -112,8 +112,10 @@ def setSize(new_size):
     else:
         click = 0
         size = new_size
-    if click == 1:
+    if click >= 1:
+        click = 0
         runSaucer()
+        size = -1
 
 #************************************SAUCER FUNCTIONS***************************************
 
@@ -354,9 +356,9 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray20", fg = "white", command = lambda: send(answers), height = 2, width = 4)
+    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray20", fg = "white", command = lambda: send(answers), height = 2, width = 5)
     done.place(x=500, y=350)
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = sosMenu.destroy, height = 2, width = 4)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
 
     print("SOS\n")
@@ -405,47 +407,47 @@ def moreScreen():
     text14.place(x=10,y=80)
     text12 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
     text12.insert(INSERT, "12\"")
-    text12.place(x=10,y=160)
+    text12.place(x=10,y=170)
     text10 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
     text10.insert(INSERT, "10\"")
-    text10.place(x=10,y=240)
+    text10.place(x=10,y=260)
     text7 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
     text7.insert(INSERT, "7\"")
-    text7.place(x=10,y=320)
+    text7.place(x=10,y=350)
     
     speed14Var = DoubleVar()
     speed14Var.set(speed[14])
-    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = "gray45", fg="white", bd = -2, height=2, width=10)
-    speed14.place(x=110,y=80)
+    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
+    speed14.place(x=130,y=80)
     speed12Var = DoubleVar()
     speed12Var.set(speed[12])
-    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = "gray45", fg="white", bd = -2, height=2, width=10)
-    speed12.place(x=110,y=160)
+    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
+    speed12.place(x=130,y=170)
     speed10Var = DoubleVar()
     speed10Var.set(speed[10])
-    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = "gray45", fg="white", bd = -2, height=2, width=10)
-    speed10.place(x=110,y=240)
+    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
+    speed10.place(x=130,y=260)
     speed7Var = DoubleVar()
     speed7Var.set(speed[7])
-    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = "gray45", fg="white", bd = -2, height=2, width=10)
-    speed7.place(x=110,y=320)
+    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
+    speed7.place(x=130,y=350)
     
-    sub14 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(14, speed14Var), height = 2, width = 2)
-    sub14.place(x=60,y=80)
-    add14 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(14, speed14Var), height = 2, width = 2)
-    add14.place(x=270,y=80)
-    sub12 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(12, speed12Var), height = 2, width = 2)
-    sub12.place(x=60,y=160)
-    add12 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(12, speed12Var), height = 2, width = 2)
-    add12.place(x=270,y=160)
-    sub10 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(10, speed10Var), height = 2, width = 2)
-    sub10.place(x=60,y=240)
-    add10 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(10, speed10Var), height = 2, width = 2)
-    add10.place(x=270,y=240)
-    sub7 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(7, speed7Var), height = 2, width = 2)
-    sub7.place(x=60,y=320)
-    add7 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(7, speed7Var), height = 2, width = 2)
-    add7.place(x=270,y=320)
+    sub14 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(14, speed14Var), height = 1, width = 2)
+    sub14.place(x=80,y=80)
+    add14 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(14, speed14Var), height = 1, width = 2)
+    add14.place(x=300,y=80)
+    sub12 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(12, speed12Var), height = 1, width = 2)
+    sub12.place(x=80,y=170)
+    add12 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(12, speed12Var), height = 1, width = 2)
+    add12.place(x=300,y=170)
+    sub10 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(10, speed10Var), height = 1, width = 2)
+    sub10.place(x=80,y=260)
+    add10 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(10, speed10Var), height = 1, width = 2)
+    add10.place(x=300,y=260)
+    sub7 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(7, speed7Var), height = 1, width = 2)
+    sub7.place(x=80,y=350)
+    add7 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(7, speed7Var), height = 1, width = 2)
+    add7.place(x=300,y=350)
 
 #**************************************TKINTER SET UP***************************************
 
