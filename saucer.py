@@ -66,7 +66,7 @@ size = -1 # No default size
 global sauce_spin_steps
 sauce_spin_steps = 1000
 global amount
-amount = default # default amount at start
+amount = med # default amount at start is medium
 
 # Double click
 global click
@@ -402,52 +402,52 @@ def moreScreen():
     calib.insert(INSERT, "SAUCE WEIGHT CALIBRATION")
     calib.place(x=10,y=10)
     
-    text14 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
+    text14 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
     text14.insert(INSERT, "14\"")
     text14.place(x=10,y=80)
-    text12 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
+    text12 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
     text12.insert(INSERT, "12\"")
     text12.place(x=10,y=170)
-    text10 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
+    text10 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
     text10.insert(INSERT, "10\"")
     text10.place(x=10,y=260)
-    text7 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=2)
+    text7 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
     text7.insert(INSERT, "7\"")
     text7.place(x=10,y=350)
     
     speed14Var = DoubleVar()
     speed14Var.set(speed[14])
-    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
-    speed14.place(x=130,y=80)
+    speed14 = Label(other, font=otherFont, textvariable=speed14Var, bg = "gray50", fg="white", bd = -2, height=2, width=7)
+    speed14.place(x=130,y=75)
     speed12Var = DoubleVar()
     speed12Var.set(speed[12])
-    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
-    speed12.place(x=130,y=170)
+    speed12 = Label(other, font=otherFont, textvariable=speed12Var, bg = "gray50", fg="white", bd = -2, height=2, width=7)
+    speed12.place(x=130,y=165)
     speed10Var = DoubleVar()
     speed10Var.set(speed[10])
-    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
-    speed10.place(x=130,y=260)
+    speed10 = Label(other, font=otherFont, textvariable=speed10Var, bg = "gray50", fg="white", bd = -2, height=2, width=7)
+    speed10.place(x=130,y=255)
     speed7Var = DoubleVar()
     speed7Var.set(speed[7])
-    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = "gray45", fg="white", bd = -2, height=1, width=9)
-    speed7.place(x=130,y=350)
+    speed7 = Label(other, font=otherFont, textvariable=speed7Var, bg = "gray50", fg="white", bd = -2, height=2, width=7)
+    speed7.place(x=130,y=345)
     
     sub14 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(14, speed14Var), height = 1, width = 2)
-    sub14.place(x=80,y=80)
+    sub14.place(x=80,y=75)
     add14 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(14, speed14Var), height = 1, width = 2)
-    add14.place(x=300,y=80)
+    add14.place(x=300,y=75)
     sub12 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(12, speed12Var), height = 1, width = 2)
-    sub12.place(x=80,y=170)
+    sub12.place(x=80,y=165)
     add12 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(12, speed12Var), height = 1, width = 2)
-    add12.place(x=300,y=170)
+    add12.place(x=300,y=165)
     sub10 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(10, speed10Var), height = 1, width = 2)
-    sub10.place(x=80,y=260)
+    sub10.place(x=80,y=255)
     add10 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(10, speed10Var), height = 1, width = 2)
-    add10.place(x=300,y=260)
+    add10.place(x=300,y=255)
     sub7 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(7, speed7Var), height = 1, width = 2)
-    sub7.place(x=80,y=350)
+    sub7.place(x=80,y=345)
     add7 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(7, speed7Var), height = 1, width = 2)
-    add7.place(x=300,y=350)
+    add7.place(x=300,y=345)
 
 #**************************************TKINTER SET UP***************************************
 
