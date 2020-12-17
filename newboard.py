@@ -50,16 +50,29 @@ ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Light, normal, extra sauce speeds
-lt = 40000
-med = 50000
-ext = 60000
+lt = 0.75
+med = 1
+ext = 1.25
+
+# Default motor speed
+global default
+default = 50
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
-s1_speed = med # Sauce stepper motor 1 speed (default to normal / medium)
-s2_speed = med # Sauce stepper motor 2 speed
-s3_speed = med # Sauce stepper motor 3 speed
-s4_speed = med # Sauce stepper motor 4 speed
+s1_speed = med*default*500 # Sauce stepper motor 1 speed (norm amount times 500)
+s2_speed = med*default*500 # Sauce stepper motor 2 speed
+s3_speed = med*default*500 # Sauce stepper motor 3 speed
+s4_speed = med*default*500 # Sauce stepper motor 4 speed
+
+# Size speeds
+global speed
+speed = {
+    7 : default,
+    10 : default,
+    12 : default,
+    14 : default
+}
 
 # Size / Steps / Sauce Amount
 global size
@@ -72,36 +85,6 @@ amount = med #normal amount at start
 # Double click
 global click
 click = 0
-
-#***************************************MOTOR SET UP****************************************
-
-# Sauce stepper motor set up (pumps)
-S1_DIR = 36   # Direction GPIO Pin
-S1_STEP = 38  # Step GPIO Pin
-S2_DIR = 31   # Direction GPIO Pin
-S2_STEP = 33  # Step GPIO Pin
-S3_DIR = 29   # Direction GPIO Pin
-S3_STEP = 32  # Step GPIO Pin
-S4_DIR = 21   # Direction GPIO Pin
-S4_STEP = 23  # Step GPIO Pin
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(S1_DIR, GPIO.OUT)
-GPIO.setup(S1_STEP, GPIO.OUT)
-GPIO.setup(S2_DIR, GPIO.OUT)
-GPIO.setup(S2_STEP, GPIO.OUT)
-GPIO.setup(S3_DIR, GPIO.OUT)
-GPIO.setup(S3_STEP, GPIO.OUT)
-GPIO.setup(S4_DIR, GPIO.OUT)
-GPIO.setup(S4_STEP, GPIO.OUT)
-
-# Big stepper motor set up (spins)
-T6_DIR = 13   # Direction GPIO Pin
-T6_STEP = 15  # Step GPIO Pin
-
-GPIO.setup(T6_DIR, GPIO.OUT)
-GPIO.setup(T6_STEP, GPIO.OUT)
 
 #*************************************BUTTON FUNCTIONS**************************************
 
@@ -122,9 +105,13 @@ def setSize(new_size):
 
 #Function for running saucer
 def runSaucer():
+    # Set speeds using size and amount
+    setSpeeds(size, amount)
+
     print("SPEED: " + str(s1_speed))
     print("SIZE: " + str(size))
     print("RUNNING SAUCE")
+    
 
     # Run corresponding saucer pumps
     global sauce_spin_steps
@@ -182,13 +169,13 @@ def prime():
 
 #*************************************CHANGE SAUCE AMT**************************************
 
-# Functions for setting pump speeds based on sauce amount
-def setSpeed():
-    global s1_speed, s2_speed, s3_speed, s4_speed, amount
-    s1_speed = amount
-    s2_speed = amount
-    s3_speed = amount
-    s4_speed = amount
+# Functions for setting pump amount as percentage of speeds and colors of buttons
+def setSpeeds(sz, amt):
+    global s1_speed, s2_speed, s3_speed, s4_speed
+    s1_speed = amt*speed[sz]*500 # Sauce stepper motor 1 speed (norm amount times 500)
+    s2_speed = amt*speed[sz]*500 # Sauce stepper motor 2 speed
+    s3_speed = amt*speed[sz]*500 # Sauce stepper motor 3 speed
+    s4_speed = amt*speed[sz]*500 # Sauce stepper motor 4 speed
 
 def setColor(color):
     fourteenButton["bg"] = color
@@ -197,7 +184,7 @@ def setColor(color):
     sevenButton["bg"] = color
 
 def setAmount(amt):
-    global amount
+    global amount, speed
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
@@ -213,15 +200,29 @@ def setAmount(amt):
         setColor("DarkOrange2")
         extra["bg"] = "DarkOrange2"
         light["bg"] = "gray20"
-    setSpeed()
+
+#***************************************CALIBRATION*****************************************
+
+# Functions for adding and subtracting from saucer pump speed during calibration
+def add(size, speedVar):
+    if(speed[size] < 100):
+        speed[size] = speed[size] + 5
+        speedVar.set(speed[size])
+
+def subtract(size, speedVar):
+    if(speed[size] > 0):
+        speed[size] = speed[size] - 5
+        speedVar.set(speed[size])
 
 #*****************************************HELP MENU*****************************************
 
 # Function for changing button text based on answer
 def change(button):
     if button['text'] == "NO":
+        button['bg'] = "PaleGreen1"
         button['text'] = "YES"
     else:
+        button['bg'] = "IndianRed2"
         button['text'] = "NO"
 
 # Function for sending sos menu data to Firebase
@@ -244,93 +245,96 @@ def sos():
     sosMenu.overrideredirect(1)
     
     # Fonts
-    otherFont = font.Font(family='Helvetica', size=35, weight='normal')
+    otherFont = font.Font(family='Helvetica', size=30, weight='normal')
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
-    q1 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q1 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
-    b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b1), height = 1, width = 2)
+    b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b1), height = 1, width = 2)
     b1.place(x=400, y=20)
     
-    q2 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q2 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
     q2.place(x=25, y=60)
     
-    b2  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b2), height = 1, width = 2)
+    b2  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b2), height = 1, width = 2)
     b2.place(x=400, y=60)
     
-    q3 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q3 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q3.insert(INSERT, "Is it saucing the 10 Inch Pizza?")
     q3.place(x=25, y=100)
     
-    b3 = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b3), height = 1, width = 2)
+    b3 = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b3), height = 1, width = 2)
     b3.place(x=400, y=100)
     
-    q4 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q4 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q4.insert(INSERT, "Is it saucing the 7 Inch Pizza?")
     q4.place(x=25, y=140)
     
-    b4  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b4), height = 1, width = 2)
+    b4  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b4), height = 1, width = 2)
     b4.place(x=400, y=140)
     
-    q5 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q5 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q5.insert(INSERT, "Do intake tubes have air bubbles?")
     q5.place(x=25, y=180)
     
-    b5  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b5), height = 1, width = 2)
+    b5  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b5), height = 1, width = 2)
     b5.place(x=400, y=180)
     
-    q6 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q6 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q6.insert(INSERT, "Is the turntable motor shaft spinning?")
     q6.place(x=25, y=220)
     
-    b6  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b6), height = 1, width = 2)
+    b6  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b6), height = 1, width = 2)
     b6.place(x=400, y=220)
     
-    q7 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q7 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q7.insert(INSERT, "Is the screen functioning properly?")
     q7.place(x=25, y=260)
     
-    b7  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b7), height = 1, width = 2)
+    b7  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b7), height = 1, width = 2)
     b7.place(x=400, y=260)
     
-    q8 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q8 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q8.insert(INSERT, "Can you hear any grinding noise?")
     q8.place(x=25, y=300)
     
-    b8  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b8), height = 1, width = 2)
+    b8  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b8), height = 1, width = 2)
     b8.place(x=400, y=300)
     
-    q9 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q9 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q9.insert(INSERT, "Can you hear any high pitched noise?")
     q9.place(x=25, y=340)
     
-    b9  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b9), height = 1, width = 2)
+    b9  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b9), height = 1, width = 2)
     b9.place(x=400, y=340)
     
-    q10 = Text(sosMenu, font=questionFont, height=1, width=35)
+    q10 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
     q10.insert(INSERT, "Did this problem just start?")
     q10.place(x=25, y=380)
     
-    b10  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "white", command = lambda: change(b10), height = 1, width = 2)
+    b10  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b10), height = 1, width = 2)
     b10.place(x=400, y=380)
     
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray20", fg = "white", command = lambda: send(answers), height = 2, width = 4)
+    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray20", fg = "white", command = lambda: send(answers), height = 2, width = 5)
     done.place(x=500, y=350)
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = sosMenu.destroy, height = 2, width = 4)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
 
     print("SOS\n")
 
 #***********************************OTHER SCREEN SET UP*************************************
 
+# Function setting up ... screen with various helpful features
 def moreScreen():
+    global speed
+    
     # Create window for more menu
     other = Toplevel()
     other.title("More Buttons")
@@ -342,6 +346,7 @@ def moreScreen():
     stopFont = font.Font(family='Helvetica', size=50, weight='bold')
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     headingFont = font.Font(family='Helvetica', size=20, weight='normal')
+    calibFont = font.Font(family='Helvetica', size=30, weight='normal')
     
     # Other screen buttons
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = sos, height = 1, width = 8)
@@ -351,16 +356,64 @@ def moreScreen():
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "QUIT", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 10)
-    quitButton.place(x=200, y=200)
+    quitButton.place(x=575, y=250)
     
-    # Text on screen
+    # Machine diagnostics
+    diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
+    diag.insert(INSERT, "MACHINE DIAGNOSTICS")
+    diag.place(x=460,y=125)
+    
+    # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
     calib.insert(INSERT, "SAUCE WEIGHT CALIBRATION")
     calib.place(x=10,y=10)
     
-    diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
-    diag.insert(INSERT, "MACHINE DIAGNOSTICS")
-    diag.place(x=460,y=125)
+    text14 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text14.insert(INSERT, "14\"")
+    text14.place(x=10,y=80)
+    text12 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text12.insert(INSERT, "12\"")
+    text12.place(x=10,y=170)
+    text10 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text10.insert(INSERT, "10\"")
+    text10.place(x=10,y=260)
+    text7 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text7.insert(INSERT, "7\"")
+    text7.place(x=10,y=350)
+    
+    speed14Var = DoubleVar()
+    speed14Var.set(speed[14])
+    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed14.place(x=160,y=82)
+    speed12Var = DoubleVar()
+    speed12Var.set(speed[12])
+    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed12.place(x=160,y=172)
+    speed10Var = DoubleVar()
+    speed10Var.set(speed[10])
+    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed10.place(x=160,y=262)
+    speed7Var = DoubleVar()
+    speed7Var.set(speed[7])
+    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed7.place(x=160,y=352)
+    
+    sub14 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(14, speed14Var), height = 1, width = 2)
+    sub14.place(x=80,y=75)
+    add14 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(14, speed14Var), height = 1, width = 2)
+    add14.place(x=325,y=75)
+    sub12 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(12, speed12Var), height = 1, width = 2)
+    sub12.place(x=80,y=165)
+    add12 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(12, speed12Var), height = 1, width = 2)
+    add12.place(x=325,y=165)
+    sub10 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(10, speed10Var), height = 1, width = 2)
+    sub10.place(x=80,y=255)
+    add10 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(10, speed10Var), height = 1, width = 2)
+    add10.place(x=325,y=255)
+    sub7 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(7, speed7Var), height = 1, width = 2)
+    sub7.place(x=80,y=345)
+    add7 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(7, speed7Var), height = 1, width = 2)
+    add7.place(x=325,y=345)
 
 #**************************************TKINTER SET UP***************************************
 
