@@ -54,9 +54,9 @@ default = 50
 
 global speed
 speed = {
-    7 : default
-    10 : default
-    12 : default
+    7 : default,
+    10 : default,
+    12 : default,
     14 : default
 }
 
