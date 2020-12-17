@@ -145,7 +145,7 @@ def spinFunc(speed, steps):
   global spinning  #create global
   spinning = True
   
-  spin_delay = (151-speed)/50000
+  spin_delay = (100-speed)/50000
   while spinning and steps > 0:
     if spinning == False:
       break
@@ -188,7 +188,7 @@ def pumpFunc(motor_pin, speed):
     if pumping == False:
       break
     else:
-      delay = (100-speed)/40000
+      delay = (151-speed)/40000
       GPIO.output(motor_pin, GPIO.HIGH)
       time.sleep(delay)
       GPIO.output(motor_pin, GPIO.LOW)
@@ -435,19 +435,19 @@ def moreScreen():
     sub14 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(14, speed14Var), height = 1, width = 2)
     sub14.place(x=80,y=75)
     add14 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(14, speed14Var), height = 1, width = 2)
-    add14.place(x=320,y=75)
+    add14.place(x=325,y=75)
     sub12 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(12, speed12Var), height = 1, width = 2)
     sub12.place(x=80,y=165)
     add12 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(12, speed12Var), height = 1, width = 2)
-    add12.place(x=320,y=165)
+    add12.place(x=325,y=165)
     sub10 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(10, speed10Var), height = 1, width = 2)
     sub10.place(x=80,y=255)
     add10 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(10, speed10Var), height = 1, width = 2)
-    add10.place(x=320,y=255)
+    add10.place(x=325,y=255)
     sub7 = Button(other, text = "-", font = calibFont, bg = "gray20", fg = "white", command = lambda: subtract(7, speed7Var), height = 1, width = 2)
     sub7.place(x=80,y=345)
     add7 = Button(other, text = "+", font = calibFont, bg = "gray20", fg = "white", command = lambda: add(7, speed7Var), height = 1, width = 2)
-    add7.place(x=320,y=345)
+    add7.place(x=325,y=345)
 
 #**************************************TKINTER SET UP***************************************
 
