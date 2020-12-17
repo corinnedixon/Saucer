@@ -44,9 +44,9 @@ if(hasInternet):
 
 # Light, normal, extra sauce speeds
 global lt, med, ext
-lt = 0.5
+lt = 0.75
 med = 1
-ext = 1.5
+ext = 1.25
 
 # Motor speeds set to default
 global default
@@ -188,7 +188,7 @@ def pumpFunc(motor_pin, speed):
     if pumping == False:
       break
     else:
-      delay = (151-speed)/40000
+      delay = (126-speed)/40000
       GPIO.output(motor_pin, GPIO.HIGH)
       time.sleep(delay)
       GPIO.output(motor_pin, GPIO.LOW)
