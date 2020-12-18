@@ -72,6 +72,10 @@ amount = med # default amount at start is medium
 global click
 click = 0
 
+# Variable for total machine time
+global totalTime
+totalTime = time.time()
+
 #***************************************MOTOR SET UP****************************************
 
 # Sauce stepper motor set up (pumps)
@@ -124,7 +128,9 @@ def runSaucer():
     print("SPEED: " + str(amount*speed[size]))
     print("SIZE: " + str(size))
     print("RUNNING SAUCE\n")
-
+    
+    pizzaTime = time.time()
+    
     # Run corresponding saucer pumps
     pumpProgram(size)
     spinFunc(25, sauce_spin_steps)
@@ -133,6 +139,10 @@ def runSaucer():
     
     # Set amount to default
     setAmount(med)
+    
+    # Update diagnostics
+    pizzaTime = time.time() - pizzaTime
+    updateDiagnostics(pizzaTime)
 
 #Functions for starting and stopping spin
 def spinProgram(speed):
@@ -235,7 +245,7 @@ def setAmount(amt):
         extra["bg"] = "DarkOrange2"
         light["bg"] = "gray20"
 
-#***************************************CALIBRATION*****************************************
+#********************************CALIBRATION / DIAGNOSTICS**********************************
 
 # Functions for adding and subtracting from saucer pump speed during calibration
 def add(size, speedVar):
@@ -247,6 +257,26 @@ def subtract(size, speedVar):
     if(speed[size] > 0):
         speed[size] = speed[size] - 5
         speedVar.set(speed[size])
+
+# Function for updating diagnostics
+def updateDiagnostics(pizzaTime):
+    # Get current data
+    with open('diagnostics.txt', 'w') as reader:
+        diags = reader.readLines()
+        
+    # Update data
+    global totalTime
+    diags[0] = str(int(diags[0]) + int((time.time() - totalTime)/360))
+    diags[1] = str(int(diags[1]) + 1)
+    if(int(diags[2]) == 0):
+        diags[2] = str(int(pizzaTime))
+    else:
+        diags[2] = str(int((int(diags[2]) + pizzaTime)/2))
+    
+    # Set data in file
+    with open('diagnostics.txt', 'w') as writer:
+        writer.writeLines(diags)
+        
 
 #*****************************************HELP MENU*****************************************
 
@@ -381,6 +411,7 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     headingFont = font.Font(family='Helvetica', size=20, weight='normal')
     calibFont = font.Font(family='Helvetica', size=30, weight='normal')
+    diagFont = font.Font(family='Helvetica', size=19, weight='normal')
     
     # Other screen buttons
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = sos, height = 1, width = 8)
@@ -396,6 +427,23 @@ def moreScreen():
     diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
     diag.place(x=460,y=125)
+    
+    # Read data from file
+    with open('diagnostics.txt', 'r') as reader:
+        diags = reader.readLines()
+    
+    hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    hours.insert(INSERT, "Total Machine Hours.............." + diags[0])
+    hours.place(x=460,y=160)
+    sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    sauced.insert(INSERT, "Total Pizzas Sauced............." + diags[1])
+    sauced.place(x=460,y=210)
+    time = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    time.insert(INSERT, "Average Pizza Time.........." + diags[2])
+    time.place(x=460,y=260)
+    health = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    health.insert(INSERT, "Machine Health................." + diags[3])
+    health.place(x=460,y=310)
     
     # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
