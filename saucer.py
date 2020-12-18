@@ -262,7 +262,7 @@ def subtract(size, speedVar):
 def updateDiagnostics(pizzaTime):
     # Get current data
     with open('Saucer/diagnostics.txt', 'w') as reader:
-        diags = reader.readLines()
+        diags = reader.read().splitlines()
         
     # Update data
     global totalTime
@@ -433,16 +433,16 @@ def moreScreen():
         diags = reader.read().splitlines()
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    hours.insert(INSERT, "Total Machine Hours.............." + diags[0])
+    hours.insert(INSERT, "Total Machine Hours..........." + diags[0])
     hours.place(x=460,y=160)
     sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    sauced.insert(INSERT, "Total Pizzas Sauced............." + diags[1])
+    sauced.insert(INSERT, "Total Pizzas Sauced..........." + diags[1])
     sauced.place(x=460,y=210)
     time = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    time.insert(INSERT, "Average Pizza Time.........." + diags[2])
+    time.insert(INSERT, "Average Pizza Time..........." + diags[2])
     time.place(x=460,y=260)
     health = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    health.insert(INSERT, "Machine Health................." + diags[3])
+    health.insert(INSERT, "Machine Health..........." + diags[3])
     health.place(x=460,y=310)
     
     # Calibration
