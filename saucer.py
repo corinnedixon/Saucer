@@ -430,7 +430,7 @@ def moreScreen():
     
     # Read data from file
     with open('Saucer/diagnostics.txt', 'r') as reader:
-        diags = reader.readLines()
+        diags = reader.read.splitLines()
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     hours.insert(INSERT, "Total Machine Hours.............." + diags[0])
