@@ -275,7 +275,8 @@ def updateDiagnostics(pizzaTime):
     
     # Set data in file
     with open('Saucer/diagnostics.txt', 'w') as writer:
-        writer.writeLines(diags)
+        for data in diags:
+            writer.write("%s\n" % data)
         
 
 #*****************************************HELP MENU*****************************************
@@ -434,16 +435,16 @@ def moreScreen():
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     hours.insert(INSERT, "Total Machine Hours..........." + diags[0])
-    hours.place(x=460,y=180)
+    hours.place(x=460,y=170)
     sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     sauced.insert(INSERT, "Total Pizzas Sauced..........." + diags[1])
-    sauced.place(x=460,y=230)
+    sauced.place(x=460,y=220)
     time = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    time.insert(INSERT, "Average Pizza Time..........." + diags[2])
-    time.place(x=460,y=280)
+    time.insert(INSERT, "Average Pizza Time............" + diags[2])
+    time.place(x=460,y=270)
     health = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     health.insert(INSERT, "Machine Health..........." + diags[3])
-    health.place(x=460,y=330)
+    health.place(x=460,y=320)
     
     # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
