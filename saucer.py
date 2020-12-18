@@ -261,7 +261,7 @@ def subtract(size, speedVar):
 # Function for updating diagnostics
 def updateDiagnostics(pizzaTime):
     # Get current data
-    with open('diagnostics.txt', 'w') as reader:
+    with open('Saucer/diagnostics.txt', 'w') as reader:
         diags = reader.readLines()
         
     # Update data
@@ -274,7 +274,7 @@ def updateDiagnostics(pizzaTime):
         diags[2] = str(int((int(diags[2]) + pizzaTime)/2))
     
     # Set data in file
-    with open('diagnostics.txt', 'w') as writer:
+    with open('Saucer/diagnostics.txt', 'w') as writer:
         writer.writeLines(diags)
         
 
@@ -421,7 +421,7 @@ def moreScreen():
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "QUIT", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 10)
-    quitButton.place(x=575, y=250)
+    quitButton.place(x=300, y=10)
     
     # Machine diagnostics
     diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
@@ -429,7 +429,7 @@ def moreScreen():
     diag.place(x=460,y=125)
     
     # Read data from file
-    with open('diagnostics.txt', 'r') as reader:
+    with open('Saucer/diagnostics.txt', 'r') as reader:
         diags = reader.readLines()
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
