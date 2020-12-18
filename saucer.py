@@ -261,7 +261,7 @@ def subtract(size, speedVar):
 # Function for updating diagnostics
 def updateDiagnostics(pizzaTime):
     # Get current data
-    with open('Saucer/diagnostics.txt', 'w') as reader:
+    with open('Saucer/diagnostics.txt', 'r') as reader:
         diags = reader.read().splitlines()
         
     # Update data
@@ -434,16 +434,16 @@ def moreScreen():
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     hours.insert(INSERT, "Total Machine Hours..........." + diags[0])
-    hours.place(x=460,y=160)
+    hours.place(x=460,y=180)
     sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     sauced.insert(INSERT, "Total Pizzas Sauced..........." + diags[1])
-    sauced.place(x=460,y=210)
+    sauced.place(x=460,y=230)
     time = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     time.insert(INSERT, "Average Pizza Time..........." + diags[2])
-    time.place(x=460,y=260)
+    time.place(x=460,y=280)
     health = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     health.insert(INSERT, "Machine Health..........." + diags[3])
-    health.place(x=460,y=310)
+    health.place(x=460,y=330)
     
     # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
