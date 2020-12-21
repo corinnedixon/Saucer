@@ -266,7 +266,7 @@ def updateDiagnostics(pizzaTime):
         
     # Update data
     global totalTime
-    diags[0] = str(int(diags[0]) + int((time.time() - totalTime)/360))
+    diags[0] = str(int(diags[0]) + int((time.time() - totalTime)/60))
     diags[1] = str(int(diags[1]) + 1)
     if(int(diags[2]) == 0):
         diags[2] = str(int(pizzaTime))
@@ -434,7 +434,7 @@ def moreScreen():
         diags = reader.read().splitlines()
     
     hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
-    hours.insert(INSERT, "Total Machine Hours..........." + diags[0])
+    hours.insert(INSERT, "Total Machine Hours..........." + str(int(diags[0])/60))
     hours.place(x=460,y=170)
     sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
     sauced.insert(INSERT, "Total Pizzas Sauced..........." + diags[1])
