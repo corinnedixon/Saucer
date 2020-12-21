@@ -60,10 +60,12 @@ default = 50
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
-s1_speed = med*default*500 # Sauce stepper motor 1 speed (norm amount times 500)
-s2_speed = med*default*500 # Sauce stepper motor 2 speed
-s3_speed = med*default*500 # Sauce stepper motor 3 speed
-s4_speed = med*default*500 # Sauce stepper motor 4 speed
+s1_speed = med*default*500 # Sauce motor 1 speed (norm amount times 500)
+s2_speed = med*default*500 # Sauce motor 2 speed
+s3_speed = med*default*500 # Sauce motor 3 speed
+s4_speed = med*default*500 # Sauce motor 4 speed
+
+clean_prime_speed = 30000 # Sauce motor speed when cleaning and priming
 
 # Size speeds
 global speed
@@ -124,6 +126,9 @@ def runSaucer():
     time.sleep(3)
     stopPumping()
     stopSpinning()
+    
+    # Set amount to default
+    setAmount(med)
         
     # Update diagnostics
     pizzaTime = time.time() - pizzaTime
@@ -171,9 +176,33 @@ def stopPumping():
 def clean():
     print("Cleaning\n")
 
+    # Pump for 2 minutes
+    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start1.encode())
+    start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start2.encode())
+    start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start3.encode())
+    start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start4.encode())
+    time.sleep(120)
+    stopPumping()
+
 # Function to prime
 def prime():
-        print("Priming\n")
+    print("Priming\n")
+        
+    # Pump for 30 seconds
+    start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start1.encode())
+    start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start2.encode())
+    start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start3.encode())
+    start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
+    ser.write(start4.encode())
+    time.sleep(30)
+    stopPumping()
 
 #*************************************CHANGE SAUCE AMT**************************************
 
