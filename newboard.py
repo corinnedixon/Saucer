@@ -86,6 +86,10 @@ amount = med #normal amount at start
 global click
 click = 0
 
+# Variable for total machine time
+global totalTime
+totalTime = time.time()
+
 #*************************************BUTTON FUNCTIONS**************************************
 
 def setSize(new_size):
@@ -120,6 +124,10 @@ def runSaucer():
     time.sleep(3)
     stopPumping()
     stopSpinning()
+        
+    # Update diagnostics
+    pizzaTime = time.time() - pizzaTime
+    updateDiagnostics(pizzaTime)
 
 #Functions for starting and stopping spin
 def spinFunc():
@@ -201,7 +209,7 @@ def setAmount(amt):
         extra["bg"] = "DarkOrange2"
         light["bg"] = "gray20"
 
-#***************************************CALIBRATION*****************************************
+#********************************CALIBRATION / DIAGNOSTICS**********************************
 
 # Functions for adding and subtracting from saucer pump speed during calibration
 def add(size, speedVar):
@@ -214,6 +222,26 @@ def subtract(size, speedVar):
         speed[size] = speed[size] - 5
         speedVar.set(speed[size])
 
+# Function for updating diagnostics
+def updateDiagnostics(pizzaTime):
+    # Get current data
+    with open('Saucer/diagnostics.txt', 'r') as reader:
+        diags = reader.read().splitlines()
+        
+    # Update data
+    global totalTime
+    diags[0] = str(int(diags[0]) + int((time.time() - totalTime)/60))
+    diags[1] = str(int(diags[1]) + 1)
+    if(int(diags[2]) == 0):
+        diags[2] = str(int(pizzaTime))
+    else:
+        diags[2] = str(int((int(diags[2]) + pizzaTime)/2))
+    
+    # Set data in file
+    with open('Saucer/diagnostics.txt', 'w') as writer:
+        for data in diags:
+            writer.write("%s\n" % data)
+        
 #*****************************************HELP MENU*****************************************
 
 # Function for changing button text based on answer
@@ -356,12 +384,29 @@ def moreScreen():
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "QUIT", font = otherFont, bg = "gray20", fg = "white", command = screen.destroy, height = 2, width = 10)
-    quitButton.place(x=575, y=250)
+    quitButton.place(x=300, y=10)
     
     # Machine diagnostics
     diag = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=21)
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
     diag.place(x=460,y=125)
+    
+    # Read data from file
+    with open('Saucer/diagnostics.txt', 'r') as reader:
+        diags = reader.read().splitlines()
+    
+    hours = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    hours.insert(INSERT, "Total Machine Hours.........." + str(int(int(diags[0])/60)))
+    hours.place(x=460,y=170)
+    sauced = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    sauced.insert(INSERT, "Total Pizzas Sauced.........." + diags[1])
+    sauced.place(x=460,y=220)
+    time = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    time.insert(INSERT, "Average Pizza Time..........." + diags[2])
+    time.place(x=460,y=270)
+    health = Text(other, font = diagFont, bd = -2, bg = "gray20", fg = "white", height=1, width=37)
+    health.insert(INSERT, "Machine Health..........." + diags[3])
+    health.place(x=460,y=320)
     
     # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = "gray20", fg = "white", height=1, width=27)
