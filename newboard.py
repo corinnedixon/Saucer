@@ -210,11 +210,9 @@ def stopPumping():
   print(stop4)
   ###ser.write(stop4.encode())
 
-def stopAll():
+def emerygencyStop():
     global shutdown
     shutdown = True
-    stopSpinning()
-    stopPumping()
 
 #**************************************CLEAN AND PRIME**************************************
 
@@ -570,7 +568,7 @@ logo = Label(screen, image = img, bg="gray20")
 logo.place(x=45, y=275)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopAll, height = 1, width = 9)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = emerygencyStop, height = 1, width = 9)
 stopButton.place(x=215, y=255)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 1, width = 3)
