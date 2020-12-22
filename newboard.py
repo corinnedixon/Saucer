@@ -15,7 +15,7 @@ import serial
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
+###ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
@@ -92,6 +92,10 @@ click = 0
 global totalTime
 totalTime = time.time()
 
+# Variable for emergency stop
+global shutdown
+shutdown = False
+
 #*************************************BUTTON FUNCTIONS**************************************
 
 def setSize(new_size):
@@ -111,6 +115,10 @@ def setSize(new_size):
 
 #Function for running saucer
 def runSaucer():
+    # Set shutdown variable to false since we are running
+    global shutdown
+    shutdown = False
+    
     # Set speeds using size and amount
     setSpeeds(size, amount)
 
@@ -118,12 +126,16 @@ def runSaucer():
     print("SIZE: " + str(size))
     print("RUNNING SAUCE")
     
-
     # Run corresponding saucer pumps
     global sauce_spin_steps
     pumpProgram(size)
     spinFunc()
-    time.sleep(3)
+    start = time.time()
+    while((not shutdown) and (time.time()-start < 3)):
+        if(time.time()-start == 1):
+            print("1")
+        else if(time.time()-start == 2):
+            print("2")
     stopPumping()
     stopSpinning()
     
@@ -137,38 +149,54 @@ def runSaucer():
 #Functions for starting and stopping spin
 def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
-  ser.write(spin.encode())
+  ###ser.write(spin.encode())
+  print(spin)
 
 def stopSpinning():
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
-  ser.write(stop.encode())
+  ###ser.write(stop.encode())
+  print(stop)
 
 #Functions for starting and stopping sauce
 def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    print(start1)
+    ###ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\r\n"
-        ser.write(start2.encode())
+        print(start2)
+        ###ser.write(start2.encode())
     if size >= 12:
         start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\r\n"
-        ser.write(start3.encode())
+        print(start3)
+        ###ser.write(start3.encode())
     if size >= 14:
         start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
-        ser.write(start4.encode())
+        print(start4)
+        ###ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
   stop1 = "$STEPPER_STOP,PUMP1\r\n"
-  ser.write(stop1.encode())
+  print(stop1)
+  ###ser.write(stop1.encode())
   stop2 = "$STEPPER_STOP,PUMP2\r\n"
-  ser.write(stop2.encode())
+  print(stop2)
+  ###ser.write(stop2.encode())
   stop3 = "$STEPPER_STOP,PUMP3\r\n"
-  ser.write(stop3.encode())
+  print(stop3)
+  ###ser.write(stop3.encode())
   stop4 = "$STEPPER_STOP,PUMP4\r\n"
-  ser.write(stop4.encode())
+  print(stop4)
+  ###ser.write(stop4.encode())
+
+def stopAll():
+    global shutdown
+    shutdown = True
+    stopSpinning()
+    stopPumping()
 
 #**************************************CLEAN AND PRIME**************************************
 
@@ -178,15 +206,15 @@ def clean():
 
     # Pump for 2 minutes
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
-    time.sleep(120)
-    stopPumping()
+    ###ser.write(start4.encode())
+    ###time.sleep(120)
+    ###stopPumping()
 
 # Function to prime
 def prime():
@@ -194,15 +222,15 @@ def prime():
         
     # Pump for 30 seconds
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
-    time.sleep(30)
-    stopPumping()
+    ###ser.write(start4.encode())
+    ###time.sleep(30)
+    ###stopPumping()
 
 #*************************************CHANGE SAUCE AMT**************************************
 
@@ -523,7 +551,7 @@ logo = Label(screen, image = img, bg="gray20")
 logo.place(x=45, y=275)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 9)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopAll, height = 1, width = 9)
 stopButton.place(x=215, y=255)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 1, width = 3)
