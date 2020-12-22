@@ -134,7 +134,7 @@ def runSaucer():
     while((not shutdown) and (time.time()-start < 3)):
         if(time.time()-start == 1):
             print("1")
-        else if(time.time()-start == 2):
+        elif(time.time()-start == 2):
             print("2")
     stopPumping()
     stopSpinning()
