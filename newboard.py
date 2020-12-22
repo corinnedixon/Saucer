@@ -432,6 +432,7 @@ def moreScreen():
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     headingFont = font.Font(family='Helvetica', size=20, weight='normal')
     calibFont = font.Font(family='Helvetica', size=30, weight='normal')
+    diagFont = font.Font(family='Helvetica', size=19, weight='normal')
     
     # Other screen buttons
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "white", command = sos, height = 1, width = 8)
