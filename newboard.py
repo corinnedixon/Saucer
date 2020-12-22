@@ -92,9 +92,11 @@ click = 0
 global totalTime
 totalTime = time.time()
 
-# Variable for emergency stop
+# Variables for emergency stop
 global shutdown
 shutdown = False
+global running
+running = False
 
 #*************************************BUTTON FUNCTIONS**************************************
 
@@ -116,6 +118,7 @@ def setSize(new_size):
 #Function for running saucer
 def runSaucer():
     # Set shutdown variable to false since we are running
+    global running
     global shutdown
     shutdown = False
     
