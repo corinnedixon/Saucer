@@ -126,16 +126,13 @@ def runSaucer():
     print("SIZE: " + str(size))
     print("RUNNING SAUCE")
     
+    pizzaTime = time.time()
+    
     # Run corresponding saucer pumps
     global sauce_spin_steps
     pumpProgram(size)
     spinFunc()
-    start = time.time()
-    while((not shutdown) and (time.time()-start < 3)):
-        if(time.time()-start == 1):
-            print("1")
-        elif(time.time()-start == 2):
-            print("2")
+    time.sleep(3)
     stopPumping()
     stopSpinning()
     
