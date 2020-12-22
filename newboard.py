@@ -119,20 +119,35 @@ def runSaucer():
     global shutdown
     shutdown = False
     
-    # Set speeds using size and amount
-    setSpeeds(size, amount)
-
-    print("SPEED: " + str(s1_speed))
-    print("SIZE: " + str(size))
-    print("RUNNING SAUCE")
+    if(not running):
+        # Set speeds using size and amount
+        setSpeeds(size, amount)
+        
+        print("SPEED: " + str(s1_speed))
+        print("SIZE: " + str(size))
+        print("RUNNING SAUCE")
+        
+        # Start sauce program thread
+        sauce = threading.Thread(target=sauceProgram)
+        sauce.start()
     
+
+# Function for sauce thread
+def sauceProgram():
+    # Set running variable to true since we are running
+    global running
+    running = True
+    
+    global shutdown
     pizzaTime = time.time()
     
     # Run corresponding saucer pumps
     global sauce_spin_steps
     pumpProgram(size)
     spinFunc()
-    time.sleep(3)
+    while((not shutdown) and (time.time()-pizzaTime < 7)):
+        if(time.time()-pizzaTime == 4):
+            print("\nHALF\n")
     stopPumping()
     stopSpinning()
     
@@ -142,6 +157,9 @@ def runSaucer():
     # Update diagnostics
     pizzaTime = time.time() - pizzaTime
     updateDiagnostics(pizzaTime)
+    
+    # Update running - sauce is done
+    running = False
 
 #Functions for starting and stopping spin
 def spinFunc():
