@@ -100,7 +100,7 @@ running = False
 
 #*************************************BUTTON FUNCTIONS**************************************
 
-def setSize(new_size):
+def setSize(button, new_size):
     global click
     global size
     if size == new_size:
@@ -110,13 +110,13 @@ def setSize(new_size):
         size = new_size
     if click >= 1:
         click = 0
-        runSaucer()
+        runSaucer(button)
         size = -1
 
 #************************************SAUCER FUNCTIONS***************************************
 
 #Function for running saucer
-def runSaucer():
+def runSaucer(button):
     # Set shutdown variable to false since we are running
     global running
     global shutdown
@@ -131,15 +131,16 @@ def runSaucer():
         print("RUNNING SAUCE")
         
         # Start sauce program thread
-        sauce = threading.Thread(target=sauceProgram)
+        sauce = threading.Thread(target=sauceProgram, args = (button,))
         sauce.start()
     
 
 # Function for sauce thread
-def sauceProgram():
+def sauceProgram(button):
     # Set running variable to true since we are running
     global running
     running = True
+    button['bg'] = "light gray"
     
     global shutdown
     pizzaTime = time.time()
@@ -149,17 +150,17 @@ def sauceProgram():
     pumpProgram(size)
     spinFunc()
     while((not shutdown) and (time.time()-pizzaTime < 7)):
-        if(time.time()-pizzaTime == 4):
-            print("\nHALF\n")
+        pass
     stopPumping()
     stopSpinning()
     
     # Set amount to default
     setAmount(med)
         
-    # Update diagnostics
-    pizzaTime = time.time() - pizzaTime
-    updateDiagnostics(pizzaTime)
+    # Update diagnostics if emergency stop was not made
+    if(not shutdown):
+        pizzaTime = time.time() - pizzaTime
+        updateDiagnostics(pizzaTime)
     
     # Update running - sauce is done
     running = False
@@ -549,16 +550,16 @@ stopFont = font.Font(family='Helvetica', size=50, weight='bold')
 otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
-fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
+fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(fourteenButton, 14), height = 2 , width = 3)
 fourteenButton.place(x=615, y=25)
 
-twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
+twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(twelveButton, 12), height = 2 , width = 3)
 twelveButton.place(x=415, y=25)
 
-tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
+tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(tenButton, 10), height = 2 , width = 3)
 tenButton.place(x=215, y=25)
 
-sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
+sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(sevenButton, 7), height = 2 , width = 3)
 sevenButton.place(x=15, y=25)
 
 # Donatos Image
