@@ -54,27 +54,20 @@ lt = 0.75
 med = 1
 ext = 1.25
 
-# Default motor speed
-global default
-default = 50
+# Size calibrations (default is 50 - no adjustment)
+global calibration
+calibration = [50, 50, 50, 50]
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
-s1_speed = med*default*500 # Sauce motor 1 speed (norm amount times 500)
-s2_speed = med*default*500 # Sauce motor 2 speed
-s3_speed = med*default*500 # Sauce motor 3 speed
-s4_speed = med*default*500 # Sauce motor 4 speed
+global motor1speeds, motor2speeds, motor3speeds, motor4speeds
+
+motor1speeds = [30000, 40000, 50000, 60000] # Sauce motor 1 speed [7", 10", 12", 14"]
+motor2speeds = [0, 30000, 40000, 50000] # Sauce motor 2 speed
+motor3speeds = [0, 0, 30000, 40000] # Sauce motor 3 speed
+motor4speeds = [0, 0, 0, 30000] # Sauce motor 4 speed
 
 clean_prime_speed = 30000 # Sauce motor speed when cleaning and priming
-
-# Size speeds
-global speed
-speed = {
-    7 : default,
-    10 : default,
-    12 : default,
-    14 : default
-}
 
 # Size / Steps / Sauce Amount
 global size
@@ -100,6 +93,7 @@ running = False
 
 #*************************************BUTTON FUNCTIONS**************************************
 
+# Function used for size double click
 def setSize(button, new_size):
     global click
     global size
@@ -113,6 +107,11 @@ def setSize(button, new_size):
         runSaucer(button)
         size = -1
 
+# Function for stop button
+def emerygencyStop():
+    global shutdown
+    shutdown = True
+    
 #************************************SAUCER FUNCTIONS***************************************
 
 #Function for running saucer
@@ -126,7 +125,6 @@ def runSaucer(button):
         # Set speeds using size and amount
         setSpeeds(size, amount)
         
-        print("SPEED: " + str(s1_speed))
         print("SIZE: " + str(size))
         print("RUNNING SAUCE")
         
@@ -140,7 +138,7 @@ def sauceProgram(button):
     # Set running variable to true since we are running
     global running
     running = True
-    button['bg'] = "light gray"
+    button['bg'] = "gray60"
     
     global shutdown
     pizzaTime = time.time()
@@ -154,7 +152,7 @@ def sauceProgram(button):
     stopPumping()
     stopSpinning()
     
-    # Set amount to default
+    # Set amount to normal
     setAmount(med)
         
     # Update diagnostics if emergency stop was not made
@@ -211,10 +209,6 @@ def stopPumping():
   print(stop4)
   ###ser.write(stop4.encode())
 
-def emerygencyStop():
-    global shutdown
-    shutdown = True
-
 #**************************************CLEAN AND PRIME**************************************
 
 # Function to clean
@@ -253,11 +247,20 @@ def prime():
 
 # Functions for setting pump amount as percentage of speeds and colors of buttons
 def setSpeeds(sz, amt):
+    # Get index based on given size
+    i = sz/2 - 4
+    if(i < 0):
+        i = 0
+        
+    # Calculate calibration constant
+    cal = (calibration[i] + 50)/100
+        
+    # Assign speeds to each motor (corresponding speed x calibration percent x extra/normal/less)
     global s1_speed, s2_speed, s3_speed, s4_speed
-    s1_speed = amt*speed[sz]*500 # Sauce stepper motor 1 speed (norm amount times 500)
-    s2_speed = amt*speed[sz]*500 # Sauce stepper motor 2 speed
-    s3_speed = amt*speed[sz]*500 # Sauce stepper motor 3 speed
-    s4_speed = amt*speed[sz]*500 # Sauce stepper motor 4 speed
+    s1_speed = motor1speeds[i]*cal*amt # Sauce stepper motor 1 speed
+    s2_speed = motor2speeds[i]*cal*amt # Sauce stepper motor 2 speed
+    s3_speed = motor3speeds[i]*cal*amt # Sauce stepper motor 3 speed
+    s4_speed = motor4speeds[i]*cal*amt # Sauce stepper motor 4 speed
 
 def setColor(color):
     fourteenButton["bg"] = color
