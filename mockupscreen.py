@@ -393,7 +393,7 @@ def moreScreen():
     diagFont = font.Font(family='Helvetica', size=19, weight='normal')
     
     # Other screen buttons
-    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = main_fg, command = sos, height = 1, width = 8)
+    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "#FFFFFF", command = sos, height = 1, width = 8)
     helpButton.place(x=460, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 10)
     home.place(x=575, y=380)
@@ -403,7 +403,7 @@ def moreScreen():
     quitButton.place(x=300, y=10)
     
     # Machine diagnostics
-    diag = Text(other, font = headingFont, bd = -2, bg = button_color, fg = main_fg, height=1, width=21)
+    diag = Text(other, font = headingFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=21)
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
     diag.place(x=460,y=125)
     
@@ -429,16 +429,16 @@ def moreScreen():
     calib.insert(INSERT, "SAUCE WEIGHT CALIBRATION")
     calib.place(x=10,y=10)
     
-    text14 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text14 = Text(other, font=calibFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=3)
     text14.insert(INSERT, "14\"")
     text14.place(x=10,y=80)
-    text12 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text12 = Text(other, font=calibFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=3)
     text12.insert(INSERT, "12\"")
     text12.place(x=10,y=170)
-    text10 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text10 = Text(other, font=calibFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=3)
     text10.insert(INSERT, "10\"")
     text10.place(x=10,y=260)
-    text7 = Text(other, font=calibFont, bd = -2, bg = "gray20", fg = "white", height=1, width=3)
+    text7 = Text(other, font=calibFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=3)
     text7.insert(INSERT, "7\"")
     text7.place(x=10,y=350)
     
@@ -486,7 +486,7 @@ screen.configure(bg=main_bg)
 screen.title("Sm^rt Saucer")
 
 # Fonts for screen
-sizeFont = font.Font(family='Helvetica', size=60, weight='bold')
+sizeFont = font.Font(family='Helvetica', size=52, weight='bold')
 stopFont = font.Font(family='Helvetica', size=50, weight='bold')
 otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
