@@ -56,16 +56,16 @@ ext = 1.25
 
 # Size calibrations (default is 50 - no adjustment)
 global calibration
-calibration = [50, 50, 50, 50]
+calibration = {7:50, 10:50, 12:50, 14:50}
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
 global motor1speeds, motor2speeds, motor3speeds, motor4speeds
 
-motor1speeds = [30000, 40000, 50000, 60000] # Sauce motor 1 speed [7", 10", 12", 14"]
-motor2speeds = [0, 30000, 40000, 50000] # Sauce motor 2 speed
-motor3speeds = [0, 0, 30000, 40000] # Sauce motor 3 speed
-motor4speeds = [0, 0, 0, 30000] # Sauce motor 4 speed
+motor1speeds = {7:30000, 10:40000, 12:50000, 14:60000} # Sauce motor 1 speed
+motor2speeds = {7:0, 10:30000, 12:40000, 14:50000} # Sauce motor 2 speed
+motor3speeds = {7:0, 10:0, 12:30000, 14:40000} # Sauce motor 3 speed
+motor4speeds = {7:0, 10:0, 12:0, 14:30000} # Sauce motor 4 speed
 
 clean_prime_speed = 30000 # Sauce motor speed when cleaning and priming
 
@@ -247,20 +247,15 @@ def prime():
 
 # Functions for setting pump amount as percentage of speeds and colors of buttons
 def setSpeeds(sz, amt):
-    # Get index based on given size
-    i = sz/2 - 4
-    if(i < 0):
-        i = 0
-        
     # Calculate calibration constant
-    cal = (calibration[i] + 50)/100
+    cal = (calibration[sz] + 50)/100
         
     # Assign speeds to each motor (corresponding speed x calibration percent x extra/normal/less)
     global s1_speed, s2_speed, s3_speed, s4_speed
-    s1_speed = motor1speeds[i]*cal*amt # Sauce stepper motor 1 speed
-    s2_speed = motor2speeds[i]*cal*amt # Sauce stepper motor 2 speed
-    s3_speed = motor3speeds[i]*cal*amt # Sauce stepper motor 3 speed
-    s4_speed = motor4speeds[i]*cal*amt # Sauce stepper motor 4 speed
+    s1_speed = motor1speeds[sz]*cal*amt # Sauce stepper motor 1 speed
+    s2_speed = motor2speeds[sz]*cal*amt # Sauce stepper motor 2 speed
+    s3_speed = motor3speeds[sz]*cal*amt # Sauce stepper motor 3 speed
+    s4_speed = motor4speeds[sz]*cal*amt # Sauce stepper motor 4 speed
 
 def setColor(color):
     fourteenButton["bg"] = color
@@ -269,7 +264,7 @@ def setColor(color):
     sevenButton["bg"] = color
 
 def setAmount(amt):
-    global amount, speed
+    global amount
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
@@ -290,14 +285,14 @@ def setAmount(amt):
 
 # Functions for adding and subtracting from saucer pump speed during calibration
 def add(size, speedVar):
-    if(speed[size] < 100):
-        speed[size] = speed[size] + 5
-        speedVar.set(speed[size])
+    if(calibration[size] < 100):
+        calibration[size] = calibration[size] + 5
+        speedVar.set(calibration[size])
 
 def subtract(size, speedVar):
-    if(speed[size] > 0):
-        speed[size] = speed[size] - 5
-        speedVar.set(speed[size])
+    if(calibration[size] > 0):
+        calibration[size] = calibration[size] - 5
+        speedVar.set(calibration[size])
 
 # Function for updating diagnostics
 def updateDiagnostics(pizzaTime):
