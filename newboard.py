@@ -105,7 +105,6 @@ def setSize(button, new_size):
     if click >= 1:
         click = 0
         runSaucer(button)
-        size = -1
 
 # Function for stop button
 def emerygencyStop():
@@ -136,7 +135,7 @@ def runSaucer(button):
 # Function for sauce thread
 def sauceProgram(button):
     # Set running variable to true since we are running
-    global running
+    global running, size
     running = True
     button['bg'] = "gray60"
     
@@ -162,6 +161,7 @@ def sauceProgram(button):
     
     # Update running - sauce is done
     running = False
+    size = -1
 
 #Functions for starting and stopping spin
 def spinFunc():
