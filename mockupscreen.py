@@ -492,13 +492,13 @@ otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
-fourteenButton.place(x=645, y=15)
+fourteenButton.place(x=640, y=15)
 
 twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
-twelveButton.place(x=435, y=15)
+twelveButton.place(x=430, y=15)
 
 tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
-tenButton.place(x=225, y=15)
+tenButton.place(x=222, y=15)
 
 sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
 sevenButton.place(x=15, y=15)
@@ -510,10 +510,10 @@ logo.place(x=45, y=255)
 
 # Function button
 stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 9)
-stopButton.place(x=215, y=235)
+stopButton.place(x=225, y=235)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = button_color, fg = main_fg, command = moreScreen, height = 1, width = 3)
-moreButton.place(x=625, y=235)
+moreButton.place(x=640, y=235)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = button_color, fg = main_fg, command = clean, height = 2, width = 10)
 cleanButton.place(x=15, y=380)
