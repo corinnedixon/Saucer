@@ -492,13 +492,13 @@ otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
-fourteenButton.place(x=615, y=15)
+fourteenButton.place(x=645, y=15)
 
 twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
-twelveButton.place(x=415, y=15)
+twelveButton.place(x=435, y=15)
 
 tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
-tenButton.place(x=215, y=15)
+tenButton.place(x=225, y=15)
 
 sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
 sevenButton.place(x=15, y=15)
