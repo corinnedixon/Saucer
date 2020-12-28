@@ -506,11 +506,11 @@ sevenButton.place(x=15, y=15)
 # Donatos Image
 img = ImageTk.PhotoImage(Image.open(donatos_path).resize((114,38), Image.ANTIALIAS))
 logo = Label(screen, image = img, bg=main_bg)
-logo.place(x=45, y=255)
+logo.place(x=40, y=255)
 
 # Function button
 stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 9)
-stopButton.place(x=225, y=235)
+stopButton.place(x=220, y=235)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = button_color, fg = main_fg, command = moreScreen, height = 1, width = 3)
 moreButton.place(x=640, y=235)
