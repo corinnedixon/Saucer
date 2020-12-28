@@ -250,6 +250,7 @@ def cleanProgram(button):
     
     # Update running - cleaning is done
     running = False
+    button['bg'] = "gray20"
 
 # Function to prime
 def prime(button):
@@ -284,12 +285,13 @@ def primeProgram(button):
     ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
     ###ser.write(start4.encode())
-    while((not shutdown) and (time.time()-cleanTime < 30)):
+    while((not shutdown) and (time.time()-primeTime < 30)):
         pass
     ###stopPumping()
     
     # Update running - priming is done
     running = False
+    button['bg'] = "gray20"
 
 #*************************************CHANGE SAUCE AMT**************************************
 
