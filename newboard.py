@@ -212,7 +212,7 @@ def stopPumping():
 #**************************************CLEAN AND PRIME**************************************
 
 # Function to clean
-def clean():
+def clean(button):
     # Set shutdown variable to false since we are running
     global running
     global shutdown
