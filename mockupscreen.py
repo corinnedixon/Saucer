@@ -444,19 +444,19 @@ def moreScreen():
     
     speed14Var = DoubleVar()
     speed14Var.set(speed[14])
-    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed14.place(x=160,y=82)
     speed12Var = DoubleVar()
     speed12Var.set(speed[12])
-    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed12.place(x=160,y=172)
     speed10Var = DoubleVar()
     speed10Var.set(speed[10])
-    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed10.place(x=160,y=262)
     speed7Var = DoubleVar()
     speed7Var.set(speed[7])
-    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = "gray50", fg="white", bd = -2, height=1, width=7)
+    speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed7.place(x=160,y=352)
     
     sub14 = Button(other, text = "-", font = calibFont, bg = button_color, fg = main_fg, command = lambda: subtract(14, speed14Var), height = 1, width = 2)
@@ -486,21 +486,21 @@ screen.configure(bg=main_bg)
 screen.title("Sm^rt Saucer")
 
 # Fonts for screen
-sizeFont = font.Font(family='Helvetica', size=70, weight='bold')
+sizeFont = font.Font(family='Helvetica', size=52, weight='bold')
 stopFont = font.Font(family='Helvetica', size=50, weight='bold')
 otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
-fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 1 , width = 3)
+fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
 fourteenButton.place(x=615, y=15)
 
-twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 1 , width = 3)
+twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
 twelveButton.place(x=415, y=15)
 
-tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 1 , width = 3)
+tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
 tenButton.place(x=215, y=15)
 
-sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 1 , width = 3)
+sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
 sevenButton.place(x=15, y=15)
 
 # Donatos Image
