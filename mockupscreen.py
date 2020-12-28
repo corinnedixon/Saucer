@@ -486,22 +486,22 @@ screen.configure(bg=main_bg)
 screen.title("Sm^rt Saucer")
 
 # Fonts for screen
-sizeFont = font.Font(family='Helvetica', size=52, weight='bold')
+sizeFont = font.Font(family='Helvetica', size=70, weight='bold')
 stopFont = font.Font(family='Helvetica', size=50, weight='bold')
 otherFont = font.Font(family='Helvetica', size=24, weight='normal')
 
 # Size buttons
-fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 2 , width = 3)
-fourteenButton.place(x=615, y=25)
+fourteenButton  = Button(screen, text = "14\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(14), height = 1 , width = 3)
+fourteenButton.place(x=615, y=15)
 
-twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 2 , width = 3)
-twelveButton.place(x=415, y=25)
+twelveButton  = Button(screen, text = "12\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(12), height = 1 , width = 3)
+twelveButton.place(x=415, y=15)
 
-tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 2 , width = 3)
-tenButton.place(x=215, y=25)
+tenButton  = Button(screen, text = "10\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(10), height = 1 , width = 3)
+tenButton.place(x=215, y=15)
 
-sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 2 , width = 3)
-sevenButton.place(x=15, y=25)
+sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", fg = "white", command = lambda: setSize(7), height = 1 , width = 3)
+sevenButton.place(x=15, y=15)
 
 # Donatos Image
 img = ImageTk.PhotoImage(Image.open(donatos_path).resize((114,38), Image.ANTIALIAS))
