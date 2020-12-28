@@ -264,7 +264,7 @@ def prime(button):
         p.start()
         
 # Function used in prime thread
-def primeProgam(button):
+def primeProgram(button):
     print("Priming\n")
         
     # Set running variable to true since we are priming
