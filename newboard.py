@@ -15,7 +15,7 @@ import serial
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
+###ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
@@ -166,12 +166,12 @@ def sauceProgram(button):
 #Functions for starting and stopping spin
 def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
-  ser.write(spin.encode())
+  ###ser.write(spin.encode())
   print(spin)
 
 def stopSpinning():
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
-  ser.write(stop.encode())
+  ###ser.write(stop.encode())
   print(stop)
 
 #Functions for starting and stopping sauce
@@ -179,69 +179,117 @@ def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\r\n"
     print(start1)
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\r\n"
         print(start2)
-        ser.write(start2.encode())
+        ###ser.write(start2.encode())
     if size >= 12:
         start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\r\n"
         print(start3)
-        ser.write(start3.encode())
+        ###ser.write(start3.encode())
     if size >= 14:
         start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
         print(start4)
-        ser.write(start4.encode())
+        ###ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
   stop1 = "$STEPPER_STOP,PUMP1\r\n"
   print(stop1)
-  ser.write(stop1.encode())
+  ###ser.write(stop1.encode())
   stop2 = "$STEPPER_STOP,PUMP2\r\n"
   print(stop2)
-  ser.write(stop2.encode())
+  ###ser.write(stop2.encode())
   stop3 = "$STEPPER_STOP,PUMP3\r\n"
   print(stop3)
-  ser.write(stop3.encode())
+  ###ser.write(stop3.encode())
   stop4 = "$STEPPER_STOP,PUMP4\r\n"
   print(stop4)
-  ser.write(stop4.encode())
+  ###ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
 
 # Function to clean
 def clean():
+    # Set shutdown variable to false since we are running
+    global running
+    global shutdown
+    shutdown = False
+    
+    if(not running):
+        # Start clean program thread
+        c = threading.Thread(target=cleanProgram, args=(button,))
+        c.start()
+
+# Function used in clean thread
+def cleanProgram(button):
     print("Cleaning\n")
+    
+    # Set running variable to true since we are cleaning
+    global running
+    running = True
+    button['bg'] = "gray60"
+    
+    global shutdown, clean_prime_speed
+    cleanTime = time.time()
 
     # Pump for 2 minutes
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
-    time.sleep(120)
-    stopPumping()
+    ###ser.write(start4.encode())
+    while((not shutdown) and (time.time()-cleanTime < 120)):
+        pass
+    ###stopPumping()
+    
+    # Update running - cleaning is done
+    running = False
 
 # Function to prime
-def prime():
+def prime(button):
+    # Set shutdown variable to false since we are running
+    global running
+    global shutdown
+    shutdown = False
+    
+    if(not running):
+        # Start clean program thread
+        p = threading.Thread(target=primeProgram, args=(button,))
+        p.start()
+        
+# Function used in prime thread
+def primeProgam(button):
     print("Priming\n")
         
+    # Set running variable to true since we are priming
+    global running
+    running = True
+    button['bg'] = "gray60"
+    
+    global shutdown, clean_prime_speed
+    primeTime = time.time()
+
     # Pump for 30 seconds
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
-    time.sleep(30)
-    stopPumping()
+    ###ser.write(start4.encode())
+    while((not shutdown) and (time.time()-cleanTime < 30)):
+        pass
+    ###stopPumping()
+    
+    # Update running - priming is done
+    running = False
 
 #*************************************CHANGE SAUCE AMT**************************************
 
@@ -573,10 +621,10 @@ stopButton.place(x=215, y=255)
 moreButton  = Button(screen, text = "...", font = stopFont, bg = "gray20", fg = "white", command = moreScreen, height = 1, width = 3)
 moreButton.place(x=625, y=255)
 
-cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray20", fg = "white", command = clean, height = 2, width = 10)
+cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = "gray20", fg = "white", command = lambda: clean(cleanButton), height = 2, width = 10)
 cleanButton.place(x=15, y=380)
 
-primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = prime, height = 2, width = 10)
+primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = "gray20", fg = "white", command = lambda: prime(primeButton), height = 2, width = 10)
 primeButton.place(x=575, y=380)
 
 extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, bg = "gray20", fg = "white", command = lambda: setAmount(ext), height = 2, width = 5)
