@@ -292,70 +292,70 @@ def sos():
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
-    q1 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q1 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q1.insert(INSERT, "Is it saucing the 14 Inch Pizza?")
     q1.place(x=25, y=20)
     
     b1  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b1), height = 1, width = 2)
     b1.place(x=400, y=20)
     
-    q2 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q2 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q2.insert(INSERT, "Is it saucing the 12 Inch Pizza?")
     q2.place(x=25, y=60)
     
     b2  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b2), height = 1, width = 2)
     b2.place(x=400, y=60)
     
-    q3 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q3 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q3.insert(INSERT, "Is it saucing the 10 Inch Pizza?")
     q3.place(x=25, y=100)
     
     b3 = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b3), height = 1, width = 2)
     b3.place(x=400, y=100)
     
-    q4 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q4 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q4.insert(INSERT, "Is it saucing the 7 Inch Pizza?")
     q4.place(x=25, y=140)
     
     b4  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b4), height = 1, width = 2)
     b4.place(x=400, y=140)
     
-    q5 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q5 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q5.insert(INSERT, "Do intake tubes have air bubbles?")
     q5.place(x=25, y=180)
     
     b5  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b5), height = 1, width = 2)
     b5.place(x=400, y=180)
     
-    q6 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q6 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q6.insert(INSERT, "Is the turntable motor shaft spinning?")
     q6.place(x=25, y=220)
     
     b6  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b6), height = 1, width = 2)
     b6.place(x=400, y=220)
     
-    q7 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q7 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q7.insert(INSERT, "Is the screen functioning properly?")
     q7.place(x=25, y=260)
     
     b7  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b7), height = 1, width = 2)
     b7.place(x=400, y=260)
     
-    q8 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q8 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q8.insert(INSERT, "Can you hear any grinding noise?")
     q8.place(x=25, y=300)
     
     b8  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b8), height = 1, width = 2)
     b8.place(x=400, y=300)
     
-    q9 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q9 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q9.insert(INSERT, "Can you hear any high pitched noise?")
     q9.place(x=25, y=340)
     
     b9  = Button(sosMenu, text = "NO", font = questionFont, fg="black", bg = "IndianRed2", command = lambda: change(b9), height = 1, width = 2)
     b9.place(x=400, y=340)
     
-    q10 = Text(sosMenu, font=questionFont, bg = "gray20", fg = "white",  bd = -2, height=1, width=35)
+    q10 = Text(sosMenu, font=questionFont, bg = main_bg, fg = main_fg,  bd = -2, height=1, width=35)
     q10.insert(INSERT, "Did this problem just start?")
     q10.place(x=25, y=380)
     
@@ -365,9 +365,9 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = "gray20", fg = "white", command = lambda: send(answers), height = 2, width = 5)
+    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers), height = 2, width = 5)
     done.place(x=500, y=350)
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = "gray20", fg = "white", command = sosMenu.destroy, height = 2, width = 5)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
 
     print("SOS\n")
@@ -506,14 +506,14 @@ sevenButton.place(x=15, y=15)
 # Donatos Image
 img = ImageTk.PhotoImage(Image.open(donatos_path).resize((114,38), Image.ANTIALIAS))
 logo = Label(screen, image = img, bg=main_bg)
-logo.place(x=45, y=275)
+logo.place(x=45, y=255)
 
 # Function button
 stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 9)
-stopButton.place(x=215, y=255)
+stopButton.place(x=215, y=235)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = button_color, fg = main_fg, command = moreScreen, height = 1, width = 3)
-moreButton.place(x=625, y=255)
+moreButton.place(x=625, y=235)
 
 cleanButton  = Button(screen, text = "CLEAN", font = otherFont, bg = button_color, fg = main_fg, command = clean, height = 2, width = 10)
 cleanButton.place(x=15, y=380)
