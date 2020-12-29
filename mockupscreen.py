@@ -38,7 +38,7 @@ speed = {
 global size
 size = -1 # No default size
 global sauce_spin_steps
-sauce_spin_steps = 1000
+sauce_spin_steps = 200
 global amount
 amount = med # default amount at start is medium
 
