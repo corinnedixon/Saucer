@@ -521,7 +521,7 @@ cleanButton.place(x=15, y=380)
 primeButton  = Button(screen, text = "PRIME", font = otherFont, bg = button_color, fg = main_fg, command = prime, height = 2, width = 10)
 primeButton.place(x=575, y=380)
 
-light  = Button(screen, text = "LESS\nSAUCE", font = otherFont, bg = button_color, fg = main_fg, command = lambda: setAmount(lt), height = 2, width = 5)
+light  = Button(screen, text = "LESS\nSAUCE", font = otherFont, activebackground = "orange", bg = button_color, fg = main_fg, command = lambda: setAmount(lt), height = 2, width = 5)
 light.place(x=260, y=380)
 
 extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, bg = button_color, fg = main_fg, command = lambda: setAmount(ext), height = 2, width = 5)
