@@ -206,24 +206,12 @@ def setAmount(amt):
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
-        extra["bg"] = button_color
-        light["bg"] = button_color
-        extra["fg"] = main_fg
-        light["fg"] = main_fg
     elif amt == lt:
         amount = lt
         setColor("orange")
-        light["bg"] = "orange"
-        extra["bg"] = button_color
-        light["fg"] = "#FFFFFF"
-        extra["fg"] = main_fg
     elif amt == ext:
         amount = ext
         setColor("DarkOrange2")
-        extra["bg"] = "DarkOrange2"
-        light["bg"] = button_color
-        extra["fg"] = "#FFFFFF"
-        light["fg"] = main_fg
 
 #********************************CALIBRATION / DIAGNOSTICS**********************************
 
@@ -524,7 +512,7 @@ primeButton.place(x=575, y=380)
 light  = Button(screen, text = "LESS\nSAUCE", font = otherFont, activebackground = "orange", bg = button_color, fg = main_fg, command = lambda: setAmount(lt), height = 2, width = 5)
 light.place(x=260, y=380)
 
-extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, bg = button_color, fg = main_fg, command = lambda: setAmount(ext), height = 2, width = 5)
+extra  = Button(screen, text = "EXTRA\nSAUCE", font = otherFont, activebackground = "DarkOrange2", bg = button_color, fg = main_fg, command = lambda: setAmount(ext), height = 2, width = 5)
 extra.place(x=420, y=380)
 
 mainloop()
