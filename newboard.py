@@ -256,7 +256,7 @@ def cleanProgram(button):
     
     # Update running - cleaning is done
     running = False
-    button['bg'] = "gray20"
+    button['bg'] = button_color
 
 # Function to prime
 def prime(button):
@@ -297,7 +297,7 @@ def primeProgram(button):
     
     # Update running - priming is done
     running = False
-    button['bg'] = "gray20"
+    button['bg'] = button_color
 
 #*************************************CHANGE SAUCE AMT**************************************
 
@@ -616,7 +616,7 @@ logo = Label(screen, image = img, bg=main_bg)
 logo.place(x=40, y=255)
 
 # Function button
-stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = stopPumping, height = 1, width = 9)
+stopButton  = Button(screen, text = "STOP", font = stopFont, bg = "red2", fg = "white", command = emergencyStop, height = 1, width = 9)
 stopButton.place(x=220, y=235)
 
 moreButton  = Button(screen, text = "...", font = stopFont, bg = button_color, fg = main_fg, command = moreScreen, height = 1, width = 3)
