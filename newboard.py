@@ -1,16 +1,15 @@
+import datetime
+import os
+from PIL import Image, ImageTk
+import pyfireconnect
+import RPi.GPIO as GPIO
+import serial
+import sys
+import threading
+import time
 from tkinter import *
 import tkinter.font as font
-from PIL import Image, ImageTk
-import RPi.GPIO as GPIO
-import time
-import sys
-import datetime
-import threading
-import pyfireconnect
 import urllib.request
-import os
-
-import serial
 
 #*************************************START CONNECTION**************************************
 
@@ -550,19 +549,19 @@ def moreScreen():
     text7.place(x=10,y=350)
     
     speed14Var = DoubleVar()
-    speed14Var.set(speed[14])
+    speed14Var.set(calibration[14])
     speed14 = Label(other, font=calibFont, textvariable=speed14Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed14.place(x=160,y=82)
     speed12Var = DoubleVar()
-    speed12Var.set(speed[12])
+    speed12Var.set(calibration[12])
     speed12 = Label(other, font=calibFont, textvariable=speed12Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed12.place(x=160,y=172)
     speed10Var = DoubleVar()
-    speed10Var.set(speed[10])
+    speed10Var.set(calibration[10])
     speed10 = Label(other, font=calibFont, textvariable=speed10Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed10.place(x=160,y=262)
     speed7Var = DoubleVar()
-    speed7Var.set(speed[7])
+    speed7Var.set(calibration[7])
     speed7 = Label(other, font=calibFont, textvariable=speed7Var, bg = button_color, fg=main_fg, bd = -2, height=1, width=7)
     speed7.place(x=160,y=352)
     
