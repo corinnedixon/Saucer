@@ -1,6 +1,7 @@
 import datetime
 import os
-from PIL import Image, ImageTk
+import PIL.Image
+import PIL.ImageTk
 import pyfireconnect
 import RPi.GPIO as GPIO
 import serial
@@ -610,7 +611,7 @@ sevenButton  = Button(screen, text = "7\"", font = sizeFont, bg = "lime green", 
 sevenButton.place(x=15, y=15)
 
 # Donatos Image
-img = ImageTk.PhotoImage(Image.open(donatos_path).resize((114,38), Image.ANTIALIAS))
+img = PIL.ImageTk.PhotoImage(PIL.Image.open(donatos_path).resize((114,38), PIL.Image.ANTIALIAS))
 logo = Label(screen, image = img, bg=main_bg)
 logo.place(x=40, y=255)
 
