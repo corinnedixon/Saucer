@@ -113,7 +113,7 @@ def setSize(button, new_size):
         runSaucer(button)
 
 # Function for stop button
-def emerygencyStop():
+def emergencyStop():
     global shutdown
     shutdown = True
     
