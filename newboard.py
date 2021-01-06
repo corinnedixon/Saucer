@@ -10,6 +10,7 @@ import threading
 import time
 from tkinter import *
 import tkinter.font as font
+import tkinter.messagebox
 import urllib.request
 
 #*************************************START CONNECTION**************************************
@@ -51,7 +52,7 @@ ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 # Color variables for consistency
 main_bg = "#FFFFFF" #switched from gray20
-button_color = "#E6E7E8" #switched from gray20
+button_color = "#D9DADC" #switched from gray20
 donatos_path = "Saucer/donatos.png" #switched from white
 main_fg = "#000000" #switched from FFFFFF
 
@@ -60,20 +61,23 @@ lt = 0.75
 med = 1
 ext = 1.25
 
-# Size calibrations (default is 50 - no adjustment)
+# Size calibrations from file
+with open('Saucer/diagnostics.txt', 'r') as reader:
+        calibs = reader.read().splitlines()
+
 global calibration
-calibration = {7:50, 10:50, 12:50, 14:50}
+calibration = {7: int(calibs[7]), 10: int(calibs[8]), 12: int(calibs[9]), 14: int(calibs[10])}
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
 global motor1speeds, motor2speeds, motor3speeds, motor4speeds
 
-motor1speeds = {7:30000, 10:40000, 12:50000, 14:60000} # Sauce motor 1 speed
-motor2speeds = {7:0, 10:30000, 12:40000, 14:50000} # Sauce motor 2 speed
-motor3speeds = {7:0, 10:0, 12:30000, 14:40000} # Sauce motor 3 speed
-motor4speeds = {7:0, 10:0, 12:0, 14:30000} # Sauce motor 4 speed
+motor1speeds = {7:3500, 10:3500, 12:3500, 14:3600} # Sauce motor 1 speed
+motor2speeds = {7:0, 10:3200, 12:3200, 14:2500} # Sauce motor 2 speed
+motor3speeds = {7:0, 10:0, 12:1700, 14:1700} # Sauce motor 3 speed
+motor4speeds = {7:0, 10:0, 12:0, 14:1700} # Sauce motor 4 speed
 
-clean_prime_speed = 30000 # Sauce motor speed when cleaning and priming
+clean_prime_speed = 2000 # Sauce motor speed when cleaning and priming
 
 # Size / Steps / Sauce Amount
 global size
@@ -313,12 +317,18 @@ def setAmount(amt):
     if amt == amount or amt == med:
         amount = med
         setColor("lime green")
+        light["bg"] = button_color
+        extra["bg"] = button_color
     elif amt == lt:
         amount = lt
         setColor("orange")
+        light["bg"] = "orange"
+        extra["bg"] = button_color
     elif amt == ext:
         amount = ext
         setColor("DarkOrange2")
+        light["bg"] = button_color
+        extra["bg"] = "DarkOrange2"
 
 #********************************CALIBRATION / DIAGNOSTICS**********************************
 
@@ -327,11 +337,31 @@ def add(size, speedVar):
     if(calibration[size] < 100):
         calibration[size] = calibration[size] + 5
         speedVar.set(calibration[size])
+        updateCalibrationFile()
 
 def subtract(size, speedVar):
     if(calibration[size] > 0):
         calibration[size] = calibration[size] - 5
         speedVar.set(calibration[size])
+        updateCalibrationFile()
+
+# Function for saving current calibrations
+def updateCalibrationFile():
+    # Get current data
+    with open('Saucer/diagnostics.txt', 'r') as reader:
+        calibs = reader.read().splitlines()
+        
+    # Update data
+    global calibration
+    calibs[7] = str(calibration[0])
+    calibs[8] = str(calibration[1])
+    calibs[9] = str(calibration[2])
+    calibs[10] = str(calibration[3])
+    
+    # Set data in file
+    with open('Saucer/diagnostics.txt', 'w') as writer:
+        for data in calibs:
+            writer.write("%s\n" % data)
 
 # Function for updating diagnostics
 def updateDiagnostics(pizzaTime):
@@ -341,12 +371,12 @@ def updateDiagnostics(pizzaTime):
         
     # Update data
     global totalTime
-    diags[0] = str(int(diags[0]) + int((time.time() - totalTime)/60))
-    diags[1] = str(int(diags[1]) + 1)
-    if(int(diags[2]) == 0):
-        diags[2] = str(int(pizzaTime))
+    diags[1] = str(int(diags[1]) + int((time.time() - totalTime)/60))
+    diags[2] = str(int(diags[2]) + 1)
+    if(int(diags[3]) == 0):
+        diags[3] = str(int(pizzaTime))
     else:
-        diags[2] = str(int((int(diags[2]) + pizzaTime)/2))
+        diags[3] = str(int((int(diags[3]) + pizzaTime)/2))
     
     # Set data in file
     with open('Saucer/diagnostics.txt', 'w') as writer:
@@ -373,6 +403,7 @@ def send(answers):
       db.push(str)
     print(str)
     print("Sending data to Firebase")
+    tkinter.messagebox.showinfo(title="Help Submission Success", message="Your form was submitted.")
 
 # Function for sos menu
 def sos():
@@ -461,8 +492,8 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "DONE", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers), height = 2, width = 5)
-    done.place(x=500, y=350)
+    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers), height = 2, width = 11)
+    done.place(x=550, y=60)
     back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
 
@@ -508,16 +539,16 @@ def moreScreen():
         diags = reader.read().splitlines()
     
     hours = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    hours.insert(INSERT, "Total Machine Hours.........." + str(int(int(diags[0])/60)))
+    hours.insert(INSERT, "Total Machine Hours.........." + str(int(int(diags[1])/60)))
     hours.place(x=460,y=170)
     sauced = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    sauced.insert(INSERT, "Total Pizzas Sauced.........." + diags[1])
+    sauced.insert(INSERT, "Total Pizzas Sauced.........." + diags[2])
     sauced.place(x=460,y=220)
     time = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    time.insert(INSERT, "Average Pizza Time..........." + diags[2])
+    time.insert(INSERT, "Average Pizza Time..........." + diags[3])
     time.place(x=460,y=270)
     health = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    health.insert(INSERT, "Machine Health..........." + diags[3])
+    health.insert(INSERT, "Machine Health..........." + diags[4])
     health.place(x=460,y=320)
     
     # Calibration
