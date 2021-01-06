@@ -21,6 +21,8 @@ import urllib.request
 #**************************************FIREBASE SET UP**************************************
 
 #Check for internet connection
+hasInternet = False
+
 #def checkInternet():
 #  internet = True
 #  try:
@@ -52,7 +54,7 @@ import urllib.request
 
 # Color variables for consistency
 main_bg = "#FFFFFF" #switched from gray20
-button_color = "#D9DADC" #switched from gray20
+button_color = "#CCCDD0" #switched from gray20
 donatos_path = "Saucer/donatos.png" #switched from white
 main_fg = "#000000" #switched from FFFFFF
 
@@ -353,10 +355,10 @@ def updateCalibrationFile():
         
     # Update data
     global calibration
-    calibs[7] = str(calibration[0])
-    calibs[8] = str(calibration[1])
-    calibs[9] = str(calibration[2])
-    calibs[10] = str(calibration[3])
+    calibs[7] = str(calibration[7])
+    calibs[8] = str(calibration[10])
+    calibs[9] = str(calibration[12])
+    calibs[10] = str(calibration[14])
     
     # Set data in file
     with open('Saucer/diagnostics.txt', 'w') as writer:
