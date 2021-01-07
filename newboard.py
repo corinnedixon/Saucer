@@ -396,6 +396,15 @@ def change(button):
         button['bg'] = "IndianRed2"
         button['text'] = "NO"
 
+# Function for success pop up window
+def popUp():
+    pop = Toplevel()
+    pop.geometry('400x200')
+    #pop.overrideredirect(1)
+    pop.withdraw()
+    tkinter.messagebox.showinfo(title="Success Message", message="Your form was submitted.", parent=pop)
+    pop.destroy()
+
 # Function for sending sos menu data to Firebase
 def send(answers, menu):
     str = "Answers:"
@@ -405,7 +414,7 @@ def send(answers, menu):
       db.push(str)
     print(str)
     print("Sending data to Firebase")
-    tkinter.messagebox.showinfo(title="Success Message", message="Your form was submitted.", parent=menu)
+    popUp()
     menu.destroy()
 
 # Function for sos menu
@@ -495,8 +504,8 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 11)
-    done.place(x=550, y=60)
+    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 12)
+    done.place(x=500, y=60)
     back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
 
