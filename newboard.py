@@ -16,7 +16,7 @@ import urllib.request
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
+###ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
@@ -167,12 +167,12 @@ def sauceProgram(button):
 #Functions for starting and stopping spin
 def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
-  ser.write(spin.encode())
+  ###ser.write(spin.encode())
   print(spin)
 
 def stopSpinning():
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
-  ser.write(stop.encode())
+  ###ser.write(stop.encode())
   print(stop)
 
 #Functions for starting and stopping sauce
@@ -180,35 +180,35 @@ def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\r\n"
     print(start1)
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\r\n"
         print(start2)
-        ser.write(start2.encode())
+        ###ser.write(start2.encode())
     if size >= 12:
         start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\r\n"
         print(start3)
-        ser.write(start3.encode())
+        ###ser.write(start3.encode())
     if size >= 14:
         start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
         print(start4)
-        ser.write(start4.encode())
+        ###ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
   stop1 = "$STEPPER_STOP,PUMP1\r\n"
   print(stop1)
-  ser.write(stop1.encode())
+  ###ser.write(stop1.encode())
   stop2 = "$STEPPER_STOP,PUMP2\r\n"
   print(stop2)
-  ser.write(stop2.encode())
+  ###ser.write(stop2.encode())
   stop3 = "$STEPPER_STOP,PUMP3\r\n"
   print(stop3)
-  ser.write(stop3.encode())
+  ###ser.write(stop3.encode())
   stop4 = "$STEPPER_STOP,PUMP4\r\n"
   print(stop4)
-  ser.write(stop4.encode())
+  ###ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
 
@@ -238,20 +238,21 @@ def cleanProgram(button):
 
     # Pump for 2 minutes
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-cleanTime < 120)):
-        pass
-    stopPumping()
+        button['text'] = int(120-(time.time()-cleanTime))
+    ###stopPumping()
     
     # Update running - cleaning is done
     running = False
     button['bg'] = button_color
+    button['text'] = "CLEAN"
 
 # Function to prime
 def prime(button):
@@ -279,20 +280,21 @@ def primeProgram(button):
 
     # Pump for 30 seconds
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-primeTime < 30)):
-        pass
-    stopPumping()
+        button['text'] = int(30-(time.time()-primeTime))
+    ###stopPumping()
     
     # Update running - priming is done
     running = False
     button['bg'] = button_color
+    button['text'] = "PRIME"
 
 #*************************************CHANGE SAUCE AMT**************************************
 
@@ -396,18 +398,9 @@ def change(button):
         button['bg'] = "IndianRed2"
         button['text'] = "NO"
 
-# Function for success pop up window
-def popUp():
-    pop = Toplevel()
-    pop.geometry('400x200')
-    pop.title("Success")
-    txt = Text(pop, height=1, width=20)
-    txt.insert(INSERT, "Form submitted.")
-    time.sleep(1)
-    pop.destroy()
-
 # Function for sending sos menu data to Firebase
 def send(answers, menu):
+    # Send to Firebase
     str = "Answers:"
     for button in answers:
         str = str + " " + button['text']
@@ -415,7 +408,14 @@ def send(answers, menu):
       db.push(str)
     print(str)
     print("Sending data to Firebase")
-    #popUp()
+    
+    # Pop up then exit
+    msg = StringVar()
+    msg.set("Form submitted.\nIn an emergency, please call 614-226-4421.")
+    smallFont = font.Font(family='Helvetica', size=10, weight='normal')
+    text = Label(other, font=smallFont, textvariable=msg, bg = "light green", fg="black", bd = -2, height=1, width=7)
+    text.place(x=200, y=150)
+    time.sleep(1)
     menu.destroy()
 
 # Function for sos menu
