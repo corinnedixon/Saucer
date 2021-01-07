@@ -406,6 +406,7 @@ def send(answers, menu):
     print(str)
     print("Sending data to Firebase")
     tkinter.messagebox.showinfo(title="Success Message", message="Your form was submitted.", parent=menu)
+    menu.withdraw()
 
 # Function for sos menu
 def sos():
