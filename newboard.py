@@ -412,11 +412,11 @@ def send(answers, menu):
     # Pop up then exit
     msg = StringVar()
     msg.set("Form submitted.\nIn an emergency, please call 614-226-4421.")
-    smallFont = font.Font(family='Helvetica', size=10, weight='normal')
-    text = Label(menu, font=smallFont, textvariable=msg, bg = "light green", fg="black", bd = -2, height=1, width=7)
+    smallFont = font.Font(family='Helvetica', size=20, weight='normal')
+    text = Label(menu, font=smallFont, textvariable=msg, bg = "light green", fg="black", height=20, width=70)
     text.place(x=200, y=150)
     menu.update()
-    time.sleep(1)
+    time.sleep(2)
     menu.destroy()
 
 # Function for sos menu
