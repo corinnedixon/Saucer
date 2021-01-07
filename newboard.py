@@ -1,4 +1,5 @@
 import datetime
+import math.sqrt
 import os
 import PIL.Image
 import PIL.ImageTk
@@ -10,7 +11,6 @@ import threading
 import time
 from tkinter import *
 import tkinter.font as font
-import tkinter.messagebox
 import urllib.request
 
 #*************************************START CONNECTION**************************************
@@ -299,7 +299,7 @@ def primeProgram(button):
 # Functions for setting pump amount as percentage of speeds and colors of buttons
 def setSpeeds(sz, amt):
     # Calculate calibration constant
-    cal = sqrt((150 - calibration[sz])/100)
+    cal = math.sqrt((150 - calibration[sz])/100)
         
     # Assign speeds to each motor (corresponding speed x calibration percent x extra/normal/less)
     global s1_speed, s2_speed, s3_speed, s4_speed
