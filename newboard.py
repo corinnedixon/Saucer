@@ -417,7 +417,7 @@ def send(answers, menu):
     text.place(x=130, y=120)
     menu.update()
     ok = Button(menu, text = "OK", font = smallFont, fg= main_fg, bg = button_color, command = menu.destroy)
-    ok.place(x=350, y=275)
+    ok.place(x=365, y=278)
 
 # Function for sos menu
 def sos():
