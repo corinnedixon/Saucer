@@ -397,7 +397,7 @@ def change(button):
         button['text'] = "NO"
 
 # Function for sending sos menu data to Firebase
-def send(answers):
+def send(answers, menu):
     str = "Answers:"
     for button in answers:
         str = str + " " + button['text']
@@ -405,7 +405,7 @@ def send(answers):
       db.push(str)
     print(str)
     print("Sending data to Firebase")
-    tkinter.messagebox.showinfo(title="Help Submission Success", message="Your form was submitted.")
+    tkinter.messagebox.showinfo(title="Success Message", message="Your form was submitted.", parent=menu)
 
 # Function for sos menu
 def sos():
@@ -414,6 +414,7 @@ def sos():
     sosMenu.title("Saucer Help Menu")
     sosMenu.geometry('800x480')
     sosMenu.configure(bg=main_bg)
+    sosMenu.overrideredirect(1)
     
     # Fonts
     otherFont = font.Font(family='Helvetica', size=30, weight='normal')
@@ -493,7 +494,7 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers), height = 2, width = 11)
+    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 11)
     done.place(x=550, y=60)
     back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 5)
     back.place(x=650, y=350)
@@ -511,6 +512,7 @@ def moreScreen():
     other.title("Saucer Other Screen")
     other.geometry('800x480')
     other.configure(bg=main_bg)
+    other.overrideredirect(1)
     
     # Fonts for screen
     stopFont = font.Font(family='Helvetica', size=50, weight='bold')
@@ -607,6 +609,7 @@ def moreScreen():
 
 # TK screen set up
 screen = Tk()
+screen.overrideredirect(1)
 screen.geometry('800x480')
 screen.configure(bg=main_bg)
 screen.title("Sm^rt Saucer")
