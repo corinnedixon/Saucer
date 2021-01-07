@@ -59,9 +59,9 @@ donatos_path = "Saucer/donatos.png" #switched from white
 main_fg = "#000000" #switched from FFFFFF
 
 # Light, normal, extra sauce speeds
-lt = 0.75
+lt = 1.25
 med = 1
-ext = 1.25
+ext = 0.75
 
 # Size calibrations from file
 with open('Saucer/diagnostics.txt', 'r') as reader:
@@ -299,14 +299,14 @@ def primeProgram(button):
 # Functions for setting pump amount as percentage of speeds and colors of buttons
 def setSpeeds(sz, amt):
     # Calculate calibration constant
-    cal = (calibration[sz] + 50)/100
+    cal = sqrt((150 - calibration[sz])/100)
         
     # Assign speeds to each motor (corresponding speed x calibration percent x extra/normal/less)
     global s1_speed, s2_speed, s3_speed, s4_speed
-    s1_speed = motor1speeds[sz]*cal*amt # Sauce stepper motor 1 speed
-    s2_speed = motor2speeds[sz]*cal*amt # Sauce stepper motor 2 speed
-    s3_speed = motor3speeds[sz]*cal*amt # Sauce stepper motor 3 speed
-    s4_speed = motor4speeds[sz]*cal*amt # Sauce stepper motor 4 speed
+    s1_speed = int(motor1speeds[sz]*cal*amt) # Sauce stepper motor 1 speed
+    s2_speed = int(motor2speeds[sz]*cal*amt) # Sauce stepper motor 2 speed
+    s3_speed = int(motor3speeds[sz]*cal*amt) # Sauce stepper motor 3 speed
+    s4_speed = int(motor4speeds[sz]*cal*amt) # Sauce stepper motor 4 speed
 
 def setColor(color):
     fourteenButton["bg"] = color
@@ -415,7 +415,7 @@ def send(answers, menu):
       db.push(str)
     print(str)
     print("Sending data to Firebase")
-    popUp()
+    #popUp()
     menu.destroy()
 
 # Function for sos menu
