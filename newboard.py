@@ -1,5 +1,4 @@
 import datetime
-import math.sqrt
 import os
 import PIL.Image
 import PIL.ImageTk
