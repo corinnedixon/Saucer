@@ -507,7 +507,7 @@ def sos():
     
     # Back button
     done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 12)
-    done.place(x=600, y=40)
+    done.place(x=570, y=20)
     back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 6)
     back.place(x=650, y=380)
 
