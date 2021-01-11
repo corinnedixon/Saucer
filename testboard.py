@@ -429,7 +429,7 @@ def sos():
     sosMenu.overrideredirect(1)
     
     # Fonts
-    otherFont = font.Font(family='Helvetica', size=30, weight='normal')
+    otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     questionFont = font.Font(family='Helvetica', size=14, weight='normal')
     
     # Questions
@@ -506,9 +506,9 @@ def sos():
     answers = [b1,b2,b3,b4,b5,b6,b7,b8,b9,b10]
     
     # Back button
-    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 12)
-    done.place(x=480, y=40)
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 5)
+    done  = Button(sosMenu, text = "SUBMIT FORM", font = otherFont, bg = button_color, fg = main_fg, command = lambda: send(answers, sosMenu), height = 2, width = 10)
+    done.place(x=520, y=40)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 6)
     back.place(x=650, y=350)
 
     print("SOS\n")
