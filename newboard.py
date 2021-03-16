@@ -391,10 +391,10 @@ def updateDiagnostics(pizzaTime):
 # Function for sending sos menu data to Firebase
 def updateFirebase(timeString, size):
     # Send pizza made to Firebase
-    str = str(size) + "\" Pizza made at " + timeString
+    fbString = str(size) + "\" Pizza made at " + timeString
     if(hasInternet):
-      db.push(str)
-    print(str)
+      db.push(fbString)
+    print(fbString)
     print("Sending data to Firebase")
 
 #*****************************************HELP MENU*****************************************
