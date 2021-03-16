@@ -23,32 +23,32 @@ import urllib.request
 #Check for internet connection
 hasInternet = False
 
-#def checkInternet():
-#  internet = True
-#  try:
-#    urllib.request.urlopen('https://smart-saucer.firebaseio.com/')
-#  except:
-#    internet = False
-#  return internet
-#
-#time.sleep(1)
-#hasInternet = checkInternet()
-#
-##Set timezone
-#os.environ['TZ'] = 'US/Eastern'
-#time.tzset()
-#
-##pyfire set up if internet is connected
-#if(hasInternet):
-#  config = {
-#    "apiKey" : "AIzaSyBq-3aOFMlc-9IcSV-X2ZvrIceH5Uvz-U4",
-#    "authDomain" : "smart-saucer.firebaseapp.com",
-#    "databaseURL" : "https://smart-saucer.firebaseio.com/",
-#    "storageBucket" : "smart-saucer.appspot.com"
-#  }
-#
-#  firebase = pyfireconnect.initialize(config)
-#  db = firebase.database()
+def checkInternet():
+  internet = True
+  try:
+    urllib.request.urlopen('https://smart-saucer.firebaseio.com/')
+  except:
+    internet = False
+  return internet
+
+time.sleep(1)
+hasInternet = checkInternet()
+
+#Set timezone
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
+
+#pyfire set up if internet is connected
+if(hasInternet):
+  config = {
+    "apiKey" : "AIzaSyBq-3aOFMlc-9IcSV-X2ZvrIceH5Uvz-U4",
+    "authDomain" : "smart-saucer.firebaseapp.com",
+    "databaseURL" : "https://smart-saucer.firebaseio.com/",
+    "storageBucket" : "smart-saucer.appspot.com"
+  }
+
+  firebase = pyfireconnect.initialize(config)
+  db = firebase.database()
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
