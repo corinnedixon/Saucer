@@ -159,7 +159,7 @@ def sauceProgram(button):
     if(not shutdown):
         pizzaTime = time.time() - pizzaTime
         updateDiagnostics(pizzaTime)
-        #updateFirebase(time.strftime("%H:%M:%S"),size)
+        updateFirebase(time.strftime("%H:%M:%S"),size)
     
     # Update running - sauce is done
     running = False
