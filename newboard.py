@@ -55,8 +55,6 @@ if(hasInternet):
   db.child("Pizza Throughput").child("10").set({"COUNT":0, "WEIGHT":0})
   db.child("Pizza Throughput").child("12").set({"COUNT":0, "WEIGHT":0})
   db.child("Pizza Throughput").child("14").set({"COUNT":0, "WEIGHT":0})
-  
-  db.child("Pizzas")
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
