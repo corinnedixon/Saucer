@@ -16,7 +16,7 @@ import urllib.request
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
+###ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
@@ -49,6 +49,12 @@ if(hasInternet):
 
   firebase = pyfireconnect.initialize(config)
   db = firebase.database()
+
+  # Set up size and weight amounts to 0
+  db.child("Pizza Throughput").child("7").set({"COUNT":0, "WEIGHT":0})
+  db.child("Pizza Throughput").child("10").set({"COUNT":0, "WEIGHT":0})
+  db.child("Pizza Throughput").child("12").set({"COUNT":0, "WEIGHT":0})
+  db.child("Pizza Throughput").child("14").set({"COUNT":0, "WEIGHT":0})
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -168,12 +174,12 @@ def sauceProgram(button):
 #Functions for starting and stopping spin
 def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
-  ser.write(spin.encode())
+  ###ser.write(spin.encode())
   print(spin)
 
 def stopSpinning():
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
-  ser.write(stop.encode())
+  ###ser.write(stop.encode())
   print(stop)
 
 #Functions for starting and stopping sauce
@@ -181,35 +187,35 @@ def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\r\n"
     print(start1)
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\r\n"
         print(start2)
-        ser.write(start2.encode())
+        ###ser.write(start2.encode())
     if size >= 12:
         start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\r\n"
         print(start3)
-        ser.write(start3.encode())
+        ###ser.write(start3.encode())
     if size >= 14:
         start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
         print(start4)
-        ser.write(start4.encode())
+        ###ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
   stop1 = "$STEPPER_STOP,PUMP1\r\n"
   print(stop1)
-  ser.write(stop1.encode())
+  ###ser.write(stop1.encode())
   stop2 = "$STEPPER_STOP,PUMP2\r\n"
   print(stop2)
-  ser.write(stop2.encode())
+  ###ser.write(stop2.encode())
   stop3 = "$STEPPER_STOP,PUMP3\r\n"
   print(stop3)
-  ser.write(stop3.encode())
+  ###ser.write(stop3.encode())
   stop4 = "$STEPPER_STOP,PUMP4\r\n"
   print(stop4)
-  ser.write(stop4.encode())
+  ###ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
 
@@ -239,16 +245,16 @@ def cleanProgram(button):
 
     # Pump for 2 minutes
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-cleanTime < 120)):
         button['text'] = int(120-(time.time()-cleanTime))
-    stopPumping()
+    ###stopPumping()
     
     # Update running - cleaning is done
     running = False
@@ -281,16 +287,16 @@ def primeProgram(button):
 
     # Pump for 30 seconds
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-primeTime < 30)):
         button['text'] = int(30-(time.time()-primeTime))
-    stopPumping()
+    ###stopPumping()
     
     # Update running - priming is done
     running = False
@@ -391,11 +397,22 @@ def updateDiagnostics(pizzaTime):
 # Function for sending sos menu data to Firebase
 def updateFirebase(timeString, size):
     # Send pizza made to Firebase
-    fbString = str(size) + '" Pizza made at ' + timeString
+    fbString = str(size) + ' inch pizza made at ' + timeString
+    
     if(hasInternet):
-      db.push(fbString)
-    print(fbString)
-    print("Sending data to Firebase")
+      count = db.child("Pizza Throughput").child(str(size)).get().val()["COUNT"]
+      weight = db.child("Pizza Throughput").child(str(size)).get().val()["WEIGHT"]
+
+      count += 1
+      weight += weights[size]
+
+      db.child("Pizza Throughput").child(str(size)).update({"COUNT":count})
+      db.child("Pizza Throughput").child(str(size)).update({"WEIGHT":weight})
+      
+      db.child("Pizzas").push(fbString)
+      
+      print(fbString)
+      print("Sending data to Firebase")
 
 #*****************************************HELP MENU*****************************************
 
@@ -415,7 +432,7 @@ def send(answers, menu):
     for button in answers:
         str = str + " " + button['text']
     if(hasInternet):
-      db.push(str)
+      db.child("Help requests").push(str)
     print(str)
     print("Sending data to Firebase")
     
@@ -523,6 +540,84 @@ def sos():
 
     print("SOS\n")
 
+#***************************************DATA SCREEN*****************************************
+
+# Function setting up screen with Firebase data
+def dataScreen():
+    # Create window for data screen
+    data = Toplevel()
+    data.title("Saucer Data Screen")
+    data.geometry('800x480')
+    data.configure(bg=main_bg)
+    data.overrideredirect(1)
+    
+    # Fonts for screen
+    sizeFont = font.Font(family='Helvetica', size=30, weight='normal')
+    otherFont = font.Font(family='Helvetica', size=24, weight='normal')
+    descriptionFont = font.Font(family='Helvetica', size=20, weight='normal')
+    
+    # Data screen buttons
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 6)
+    back.place(x=650, y=380)
+    
+    # Read data from Firebase if internet, else show error text
+    if(hasInternet):
+        # Gather data from database
+        count7 = db.child("Pizza Throughput").child(str(7)).get().val()["COUNT"]
+        weight7 = db.child("Pizza Throughput").child(str(7)).get().val()["WEIGHT"]
+        count10 = db.child("Pizza Throughput").child(str(10)).get().val()["COUNT"]
+        weight10 = db.child("Pizza Throughput").child(str(10)).get().val()["WEIGHT"]
+        count12 = db.child("Pizza Throughput").child(str(12)).get().val()["COUNT"]
+        weight12 = db.child("Pizza Throughput").child(str(12)).get().val()["WEIGHT"]
+        count14 = db.child("Pizza Throughput").child(str(14)).get().val()["COUNT"]
+        weight14 = db.child("Pizza Throughput").child(str(14)).get().val()["WEIGHT"]
+        
+        pizzas = []
+        index = 0
+        fbdata = db.child("Pizzas").get()
+        for p in fbdata.each():
+            pizzas[index] = p.val()
+            index += 1
+            if(index == 5): break
+            
+        
+        # Output data to screen
+        title = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        title.insert(INSERT, "Recent Pizza Data..........")
+        title.place(x=50,y=50)
+        one = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        one.insert(INSERT, pizzas[0])
+        one.place(x=50,y=100)
+        two = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        two.insert(INSERT, pizzas[1])
+        two.place(x=50,y=100)
+        three = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        three.insert(INSERT, pizzas[2])
+        three.place(x=50,y=100)
+        four = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        four.insert(INSERT, pizzas[3])
+        four.place(x=50,y=100)
+        five = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        five.insert(INSERT, pizzas[4])
+        five.place(x=50,y=100)
+        
+        size7 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size7.insert(INSERT, str(count7) + " 7\" pizzas | " + str(weight7) + " lbs")
+        size7.place(x=50,y=400)
+        size10 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size10.insert(INSERT, str(count10) + " 10\" pizzas | " + str(weight10) + " lbs")
+        size10.place(x=200,y=400)
+        size12 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size12.insert(INSERT, str(count12) + " 12\" pizzas | " + str(weight12) + " lbs")
+        size12.place(x=350,y=400)
+        size14 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size14.insert(INSERT, str(count14) + " 14\" pizzas | " + str(weight14) + " lbs")
+        size14.place(x=500,y=400)
+    else:
+        error = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        error.insert(INSERT, "ERROR: NO INTERNET CONNECTION")
+        error.place(x=460,y=170)
+    
 #***********************************OTHER SCREEN SET UP*************************************
 
 # Function setting up ... screen with various helpful features
