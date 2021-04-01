@@ -55,6 +55,8 @@ if(hasInternet):
   db.child("Pizza Throughput").child("10").set({"COUNT":0, "WEIGHT":0})
   db.child("Pizza Throughput").child("12").set({"COUNT":0, "WEIGHT":0})
   db.child("Pizza Throughput").child("14").set({"COUNT":0, "WEIGHT":0})
+  
+  db.child("Pizzas")
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -86,6 +88,9 @@ motor3speeds = {7:0, 10:0, 12:1700, 14:1700} # Sauce motor 3 speed
 motor4speeds = {7:0, 10:0, 12:0, 14:1700} # Sauce motor 4 speed
 
 clean_prime_speed = 2000 # Sauce motor speed when cleaning and priming
+
+# Weights for recording data
+weights = {7:0.11, 10:0.25, 12:0.36, 14:0.5}
 
 # Size / Steps / Sauce Amount
 global size
@@ -557,7 +562,7 @@ def dataScreen():
     descriptionFont = font.Font(family='Helvetica', size=20, weight='normal')
     
     # Data screen buttons
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = sosMenu.destroy, height = 2, width = 6)
+    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 6)
     back.place(x=650, y=380)
     
     # Read data from Firebase if internet, else show error text
@@ -641,8 +646,10 @@ def moreScreen():
     # Other screen buttons
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "#FFFFFF", command = sos, height = 1, width = 8)
     helpButton.place(x=460, y=20)
-    home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 10)
+    home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 8)
     home.place(x=575, y=380)
+    data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = dataScreen, height = 2, width = 8)
+    data.place(x=525, y=380)
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "Q", font = diagFont, bg = button_color, fg = main_fg, command = screen.destroy, height = 1, width = 1)
