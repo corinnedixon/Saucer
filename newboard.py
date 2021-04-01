@@ -560,7 +560,7 @@ def dataScreen():
     descriptionFont = font.Font(family='Helvetica', size=20, weight='normal')
     
     # Data screen buttons
-    back  = Button(sosMenu, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 6)
+    back  = Button(data, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 6)
     back.place(x=650, y=380)
     
     # Read data from Firebase if internet, else show error text
@@ -585,41 +585,41 @@ def dataScreen():
             
         
         # Output data to screen
-        title = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        title = Text(data, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         title.insert(INSERT, "Recent Pizza Data..........")
         title.place(x=50,y=50)
-        one = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        one = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         one.insert(INSERT, pizzas[0])
         one.place(x=50,y=100)
-        two = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        two = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         two.insert(INSERT, pizzas[1])
         two.place(x=50,y=100)
-        three = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        three = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         three.insert(INSERT, pizzas[2])
         three.place(x=50,y=100)
-        four = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        four = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         four.insert(INSERT, pizzas[3])
         four.place(x=50,y=100)
-        five = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        five = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         five.insert(INSERT, pizzas[4])
         five.place(x=50,y=100)
         
-        size7 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size7 = Text(data, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
         size7.insert(INSERT, str(count7) + " 7\" pizzas | " + str(weight7) + " lbs")
         size7.place(x=50,y=400)
-        size10 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size10 = Text(data, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
         size10.insert(INSERT, str(count10) + " 10\" pizzas | " + str(weight10) + " lbs")
         size10.place(x=200,y=400)
-        size12 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size12 = Text(data, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
         size12.insert(INSERT, str(count12) + " 12\" pizzas | " + str(weight12) + " lbs")
         size12.place(x=350,y=400)
-        size14 = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size14 = Text(data, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
         size14.insert(INSERT, str(count14) + " 14\" pizzas | " + str(weight14) + " lbs")
         size14.place(x=500,y=400)
     else:
-        error = Text(other, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        error = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         error.insert(INSERT, "ERROR: NO INTERNET CONNECTION")
-        error.place(x=460,y=170)
+        error.place(x=360,y=170)
     
 #***********************************OTHER SCREEN SET UP*************************************
 
@@ -645,9 +645,9 @@ def moreScreen():
     helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "#FFFFFF", command = sos, height = 1, width = 8)
     helpButton.place(x=460, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 8)
-    home.place(x=575, y=380)
+    home.place(x=605, y=380)
     data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = dataScreen, height = 2, width = 8)
-    data.place(x=525, y=380)
+    data.place(x=485, y=380)
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "Q", font = diagFont, bg = button_color, fg = main_fg, command = screen.destroy, height = 1, width = 1)
