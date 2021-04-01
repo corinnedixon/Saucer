@@ -579,7 +579,7 @@ def dataScreen():
         title = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         title.insert(INSERT, "Recent Pizza Data...............")
         title.place(x=25,y=25)
-        yPos = 100
+        yPos = 75
         fbdata = db.child("Pizzas").get()
         for p in fbdata.each():
             txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
@@ -587,37 +587,20 @@ def dataScreen():
             txt.place(x=25,y=yPos)
             yPos += 50
             if(yPos > 450): break
-            
         
-        # Output data to screen
-#        one = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-#        one.insert(INSERT, pizzas[0])
-#        one.place(x=25,y=150)
-#        two = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-#        two.insert(INSERT, pizzas[1])
-#        two.place(x=25,y=200)
-#        three = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-#        three.insert(INSERT, pizzas[2])
-#        three.place(x=25,y=250)
-#        four = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-#        four.insert(INSERT, pizzas[3])
-#        four.place(x=25,y=300)
-#        five = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-#        five.insert(INSERT, pizzas[4])
-#        five.place(x=25,y=350)
-        
-        size7 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        # Output count / weight data
+        size7 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=2, width=20)
         size7.insert(INSERT, str(count7) + " 7\" pizzas\n" + str(weight7) + " lbs")
-        size7.place(x=50,y=400)
-        size10 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size7.place(x=600,y=50)
+        size10 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=2, width=20)
         size10.insert(INSERT, str(count10) + " 10\" pizzas\n" + str(weight10) + " lbs")
-        size10.place(x=200,y=400)
-        size12 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size10.place(x=600,y=150)
+        size12 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=2, width=20)
         size12.insert(INSERT, str(count12) + " 12\" pizzas\n" + str(weight12) + " lbs")
-        size12.place(x=350,y=400)
-        size14 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=20)
+        size12.place(x=600,y=50)
+        size14 = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=2, width=20)
         size14.insert(INSERT, str(count14) + " 14\" pizzas\n" + str(weight14) + " lbs")
-        size14.place(x=500,y=400)
+        size14.place(x=600,y=350)
     else:
         error = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         error.insert(INSERT, "ERROR: NO INTERNET CONNECTION")
