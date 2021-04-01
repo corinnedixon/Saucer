@@ -555,7 +555,7 @@ def dataScreen():
     data.overrideredirect(1)
     
     # Fonts for screen
-    sizeFont = font.Font(family='Helvetica', size=30, weight='normal')
+    sizeFont = font.Font(family='Helvetica', size=25, weight='normal')
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     descriptionFont = font.Font(family='Helvetica', size=20, weight='normal')
     
@@ -589,18 +589,18 @@ def dataScreen():
             if(yPos > 450): break
         
         # Output count / weight data
-        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
-        size7.insert(INSERT, " 7\" Count: " + str(count7) + "\n\tWeight: " + str(weight7) + " lbs")
-        size7.place(x=550,y=25)
-        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
-        size10.insert(INSERT, " 10\" Count: " + str(count10) + "\n\tWeight: " + str(weight10) + " lbs")
-        size10.place(x=550,y=100)
-        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
-        size12.insert(INSERT, " 12\" Count: " + str(count12) + "\n\tWeight: " + str(weight12) + " lbs")
-        size12.place(x=550,y=175)
-        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
-        size14.insert(INSERT, " 14\" Count: " + str(count14) + "\n\tWeight: " + str(weight14) + " lbs")
-        size14.place(x=550,y=250)
+        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size7.insert(INSERT, " 7\" Count: " + str(count7) + "\n   Weight: " + str(weight7) + " lbs")
+        size7.place(x=550,y=30)
+        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size10.insert(INSERT, " 10\" Count: " + str(count10) + "\n   Weight: " + str(weight10) + " lbs")
+        size10.place(x=550,y=110)
+        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size12.insert(INSERT, " 12\" Count: " + str(count12) + "\n   Weight: " + str(weight12) + " lbs")
+        size12.place(x=550,y=190)
+        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size14.insert(INSERT, " 14\" Count: " + str(count14) + "\n   Weight: " + str(weight14) + " lbs")
+        size14.place(x=550,y=270)
     else:
         error = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         error.insert(INSERT, "ERROR: NO INTERNET CONNECTION")
