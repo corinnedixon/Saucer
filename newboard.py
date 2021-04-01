@@ -589,17 +589,17 @@ def dataScreen():
             if(yPos > 450): break
         
         # Output count / weight data
-        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=20)
-        size7.insert(INSERT, str(count7) + " 7\" made | " + str(weight7) + " lbs")
+        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
+        size7.insert(INSERT, " 7\" Count: " + str(count7) + "\n\tWeight: " + str(weight7) + " lbs")
         size7.place(x=550,y=25)
-        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=20)
-        size10.insert(INSERT, str(count10) + " 10\" made | " + str(weight10) + " lbs")
+        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
+        size10.insert(INSERT, " 10\" Count: " + str(count10) + "\n\tWeight: " + str(weight10) + " lbs")
         size10.place(x=550,y=100)
-        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=20)
-        size12.insert(INSERT, str(count12) + " 12\" made | " + str(weight12) + " lbs")
+        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
+        size12.insert(INSERT, " 12\" Count: " + str(count12) + "\n\tWeight: " + str(weight12) + " lbs")
         size12.place(x=550,y=175)
-        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=20)
-        size14.insert(INSERT, str(count14) + " 14\" made | " + str(weight14) + " lbs")
+        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=15)
+        size14.insert(INSERT, " 14\" Count: " + str(count14) + "\n\tWeight: " + str(weight14) + " lbs")
         size14.place(x=550,y=250)
     else:
         error = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
