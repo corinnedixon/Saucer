@@ -435,7 +435,7 @@ def send(answers, menu):
     for button in answers:
         str = str + " " + button['text']
     if(hasInternet):
-      db.child("Help requests").push(str)
+      db.child("Help Requests").push(str)
     print(str)
     print("Sending data to Firebase")
     
@@ -576,12 +576,12 @@ def dataScreen():
         weight14 = db.child("Pizza Throughput").child(str(14)).get().val()["WEIGHT"]
         
         pizzas = []
-        index = 0
+        count = 0
         fbdata = db.child("Pizzas").get()
         for p in fbdata.each():
-            pizzas[index] = p.val()
-            index += 1
-            if(index == 5): break
+            pizzas.append(p.val())
+            count += 1
+            if(count == 5): break
             
         
         # Output data to screen
@@ -642,12 +642,12 @@ def moreScreen():
     diagFont = font.Font(family='Helvetica', size=19, weight='normal')
     
     # Other screen buttons
-    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "#FFFFFF", command = sos, height = 1, width = 8)
+    helpButton  = Button(other, text = "HELP", font = stopFont, bg = "red2", fg = "#FFFFFF", command = sos, height = 1, width = 7)
     helpButton.place(x=460, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 8)
-    home.place(x=605, y=380)
-    data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = dataScreen, height = 2, width = 8)
-    data.place(x=485, y=380)
+    home.place(x=615, y=380)
+    data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = dataScreen, height = 2, width = 7)
+    data.place(x=465, y=380)
     
     #TEMPORARY QUIT
     quitButton  = Button(other, text = "Q", font = diagFont, bg = button_color, fg = main_fg, command = screen.destroy, height = 1, width = 1)
