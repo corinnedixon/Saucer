@@ -120,6 +120,11 @@ def setSize(button, new_size):
 def emergencyStop():
     global shutdown
     shutdown = True
+   
+# Function to destroy two screens instead of just 1
+def killTwoScreens(screen1, screen2):
+    screen2.destroy()
+    screen1.destroy()
     
 #************************************SAUCER FUNCTIONS***************************************
 
@@ -544,9 +549,6 @@ def sos():
     print("SOS\n")
 
 #***************************************DATA SCREEN*****************************************
-def killboth(screen1, screen2):
-    screen2.destroy()
-    screen1.destroy()
     
 # Function setting up screen with Firebase data
 def dataScreen(more):
@@ -564,7 +566,7 @@ def dataScreen(more):
     titleFont = font.Font(family='Helvetica', size=20, weight='bold')
     
     # Data screen buttons
-    home  = Button(data, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = lambda : killboth(data, more), height = 2, width = 7) # will this work?? !!!!
+    home  = Button(data, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = lambda : killTwoScreens(data, more), height = 2, width = 7) # will this work?? !!!!
     home.place(x=625, y=380)
     back  = Button(data, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 7)
     back.place(x=445, y=380)
@@ -587,8 +589,9 @@ def dataScreen(more):
         title.place(x=25,y=25)
         yPos = 75
         fbdata = db.child("Pizzas").get()
-        print(type(fbdata.each()))
-        for p in fbdata.each(): # fix order !!!!!
+        fb_list = fbdata.each()
+        fb_list.reverse()
+        for p in frb)list: # fix order !!!!!
             txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=30)
             txt.insert(INSERT,p.val())
             txt.place(x=25,y=yPos)
