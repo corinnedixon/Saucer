@@ -412,7 +412,7 @@ def updateFirebase(timeString, size):
       count += 1
       if(amt == lt):
         weight += lt_weights[size]
-      else if(amt == med):
+      elif(amt == med):
         weight += med_weights[size]
       else:
         weight += ext_weights[size]
