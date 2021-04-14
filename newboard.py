@@ -88,7 +88,10 @@ motor4speeds = {7:0, 10:0, 12:0, 14:1700} # Sauce motor 4 speed
 clean_prime_speed = 2000 # Sauce motor speed when cleaning and priming
 
 # Weights for recording data
-weights = {7:0.11, 10:0.25, 12:0.36, 14:0.5}
+
+lt_weights = {7:0.06, 10:0.11, 12:0.18, 14:0.25}
+med_weights = {7:0.11, 10:0.25, 12:0.36, 14:0.5}
+ext_weights = {7:0.17, 10:0.36, 12:0.54, 14:0.75}
 
 # Size / Steps / Sauce Amount
 global size
@@ -165,15 +168,15 @@ def sauceProgram(button):
         pass
     stopPumping()
     stopSpinning()
-    
-    # Set amount to normal
-    setAmount(med)
         
     # Update diagnostics and firebase if emergency stop was not made
     if(not shutdown):
         pizzaTime = time.time() - pizzaTime
         updateDiagnostics(pizzaTime)
         updateFirebase(time.strftime("%H:%M:%S"),size)
+    
+    # Set amount to normal
+    setAmount(med)
     
     # Update running - sauce is done
     running = False
@@ -372,10 +375,10 @@ def updateCalibrationFile():
         
     # Update data
     global calibration
-    calibs[7] = str(calibration[7])
-    calibs[8] = str(calibration[10])
-    calibs[9] = str(calibration[12])
-    calibs[10] = str(calibration[14])
+    calibs[4] = str(calibration[7])
+    calibs[5] = str(calibration[10])
+    calibs[6] = str(calibration[12])
+    calibs[7] = str(calibration[14])
     
     # Set data in file
     with open('Saucer/diagnostics.txt', 'w') as writer:
@@ -388,14 +391,9 @@ def updateDiagnostics(pizzaTime):
     with open('Saucer/diagnostics.txt', 'r') as reader:
         diags = reader.read().splitlines()
         
-    # Update data
+    # Update total time
     global totalTime
     diags[1] = str(int(diags[1]) + int((time.time() - totalTime)/60))
-    diags[2] = str(int(diags[2]) + 1)
-    if(int(diags[3]) == 0):
-        diags[3] = str(int(pizzaTime))
-    else:
-        diags[3] = str(int((int(diags[3]) + pizzaTime)/2))
     
     # Set data in file
     with open('Saucer/diagnostics.txt', 'w') as writer:
@@ -412,7 +410,12 @@ def updateFirebase(timeString, size):
       weight = db.child("Pizza Throughput").child(str(size)).get().val()["WEIGHT"]
 
       count += 1
-      weight += weights[size]
+      if(amt == lt):
+        weight += lt_weights[size]
+      else if(amt == med):
+        weight += med_weights[size]
+      else:
+        weight += ext_weights[size]
 
       db.child("Pizza Throughput").child(str(size)).update({"COUNT":count})
       db.child("Pizza Throughput").child(str(size)).update({"WEIGHT":weight})
@@ -587,12 +590,13 @@ def dataScreen(more):
         title = Text(data, font = titleFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         title.insert(INSERT, "DATA: RECENT PIZZAS")
         title.place(x=25,y=25)
+        
         yPos = 75
         fbdata = db.child("Pizzas").get()
         fb_list = fbdata.each()
         fb_list.reverse()
-        for p in fb_list: # fix order !!!!!
-            txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=30)
+        for p in fb_list:
+            txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=25)
             txt.insert(INSERT,p.val())
             txt.place(x=25,y=yPos)
             yPos += 50
