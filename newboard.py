@@ -561,9 +561,9 @@ def dataScreen(more):
     titleFont = font.Font(family='Helvetica', size=20, weight='bold')
     
     # Data screen buttons
-    home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = more.destroy, height = 2, width = 7) # will this work?? !!!!
+    home  = Button(data, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = more.destroy, height = 2, width = 7) # will this work?? !!!!
     home.place(x=625, y=380)
-    back  = Button(other, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 7)
+    back  = Button(data, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 7)
     back.place(x=445, y=380)
     
     # Read data from Firebase if internet, else show error text
