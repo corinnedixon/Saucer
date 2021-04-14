@@ -74,7 +74,7 @@ with open('Saucer/diagnostics.txt', 'r') as reader:
         calibs = reader.read().splitlines()
 
 global calibration
-calibration = {7: int(calibs[7]), 10: int(calibs[8]), 12: int(calibs[9]), 14: int(calibs[10])}
+calibration = {7: int(calibs[4]), 10: int(calibs[5]), 12: int(calibs[6]), 14: int(calibs[7])}
 
 # Motor speed
 global s1_speed, s2_speed, s3_speed, s4_speed
