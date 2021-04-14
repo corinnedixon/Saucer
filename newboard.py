@@ -410,9 +410,9 @@ def updateFirebase(timeString, size):
       weight = db.child("Pizza Throughput").child(str(size)).get().val()["WEIGHT"]
 
       count += 1
-      if(amt == lt):
+      if(amount == lt):
         weight += lt_weights[size]
-      elif(amt == med):
+      elif(amount == med):
         weight += med_weights[size]
       else:
         weight += ext_weights[size]
