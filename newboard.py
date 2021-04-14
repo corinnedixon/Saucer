@@ -544,7 +544,10 @@ def sos():
     print("SOS\n")
 
 #***************************************DATA SCREEN*****************************************
-
+def killboth(screen1, screen2):
+    screen2.destroy
+    screen1.destroy
+    
 # Function setting up screen with Firebase data
 def dataScreen(more):
     # Create window for data screen
@@ -561,7 +564,7 @@ def dataScreen(more):
     titleFont = font.Font(family='Helvetica', size=20, weight='bold')
     
     # Data screen buttons
-    home  = Button(data, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = more.destroy, height = 2, width = 7) # will this work?? !!!!
+    home  = Button(data, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = lambda : killboth(data, more), height = 2, width = 7) # will this work?? !!!!
     home.place(x=625, y=380)
     back  = Button(data, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 7)
     back.place(x=445, y=380)
@@ -670,7 +673,7 @@ def moreScreen():
     sauced.insert(INSERT, "Total Pizzas Sauced.........." + str(count))
     sauced.place(x=460,y=220)
     lbs = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    lbs.insert(INSERT, "Total Sauce Weight......" + str(weight))  #fix diagnostic file !!!!
+    lbs.insert(INSERT, "Total Sauce Weight........" + str(weight))  #fix diagnostic file !!!!
     lbs.place(x=460,y=270)
     
     # Calibration
