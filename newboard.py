@@ -545,8 +545,8 @@ def sos():
 
 #***************************************DATA SCREEN*****************************************
 def killboth(screen1, screen2):
-    screen2.destroy
-    screen1.destroy
+    screen2.destroy()
+    screen1.destroy()
     
 # Function setting up screen with Firebase data
 def dataScreen(more):
@@ -587,6 +587,7 @@ def dataScreen(more):
         title.place(x=25,y=25)
         yPos = 75
         fbdata = db.child("Pizzas").get()
+        print(type(fbdata.each()))
         for p in fbdata.each(): # fix order !!!!!
             txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=30)
             txt.insert(INSERT,p.val())
