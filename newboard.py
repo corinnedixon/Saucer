@@ -591,7 +591,7 @@ def dataScreen(more):
         fbdata = db.child("Pizzas").get()
         fb_list = fbdata.each()
         fb_list.reverse()
-        for p in frb)list: # fix order !!!!!
+        for p in fb_list: # fix order !!!!!
             txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=30)
             txt.insert(INSERT,p.val())
             txt.place(x=25,y=yPos)
