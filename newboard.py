@@ -400,7 +400,7 @@ def updateDiagnostics(pizzaTime):
 # Function for sending sos menu data to Firebase
 def updateFirebase(timeString, size):
     # Send pizza made to Firebase
-    fbString = str(size) + ' " pizza made at ' + timeString
+    fbString = str(size) + '" pizza made at ' + timeString
     
     if(hasInternet):
       count = db.child("Pizza Throughput").child(str(size)).get().val()["COUNT"]
@@ -585,7 +585,7 @@ def dataScreen(more):
         yPos = 75
         fbdata = db.child("Pizzas").get()
         for p in fbdata.each(): # fix order !!!!!
-            txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+            txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=30)
             txt.insert(INSERT,p.val())
             txt.place(x=25,y=yPos)
             yPos += 50
@@ -670,7 +670,7 @@ def moreScreen():
     sauced.insert(INSERT, "Total Pizzas Sauced.........." + str(count))
     sauced.place(x=460,y=220)
     lbs = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    lbs.insert(INSERT, "Total Sauce Weight.........." + str(weight))  #fix diagnostic file !!!!
+    lbs.insert(INSERT, "Total Sauce Weight......" + str(weight))  #fix diagnostic file !!!!
     lbs.place(x=460,y=270)
     
     # Calibration
