@@ -16,7 +16,7 @@ import urllib.request
 #*************************************START CONNECTION**************************************
 
 # Open UART serial connection
-ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
+###ser = serial.Serial("/dev/ttyS0", 115200)  # opens port with baud rate
 
 #**************************************FIREBASE SET UP**************************************
 
@@ -177,12 +177,12 @@ def sauceProgram(button):
 #Functions for starting and stopping spin
 def spinFunc():
   spin = "$STEPPER_START,TURNTABLE,FORWARD,30000,0\r\n"
-  ser.write(spin.encode())
+  ###ser.write(spin.encode())
   print(spin)
 
 def stopSpinning():
   stop = "$STEPPER_STOP,TURNTABLE\r\n"
-  ser.write(stop.encode())
+  ###ser.write(stop.encode())
   print(stop)
 
 #Functions for starting and stopping sauce
@@ -190,35 +190,35 @@ def pumpProgram(size):
     # Start pumping infinitely based on size
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(s1_speed) + ",0\r\n"
     print(start1)
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     if size >= 10:
         start2 = "$STEPPER_START,PUMP2,FORWARD," + str(s2_speed) + ",0\r\n"
         print(start2)
-        ser.write(start2.encode())
+        ###ser.write(start2.encode())
     if size >= 12:
         start3 = "$STEPPER_START,PUMP3,FORWARD," + str(s3_speed) + ",0\r\n"
         print(start3)
-        ser.write(start3.encode())
+        ###ser.write(start3.encode())
     if size >= 14:
         start4 = "$STEPPER_START,PUMP4,FORWARD," + str(s4_speed) + ",0\r\n"
         print(start4)
-        ser.write(start4.encode())
+        ###ser.write(start4.encode())
 
 def stopPumping():
   global pumping
   pumping = False
   stop1 = "$STEPPER_STOP,PUMP1\r\n"
   print(stop1)
-  ser.write(stop1.encode())
+  ###ser.write(stop1.encode())
   stop2 = "$STEPPER_STOP,PUMP2\r\n"
   print(stop2)
-  ser.write(stop2.encode())
+  ###ser.write(stop2.encode())
   stop3 = "$STEPPER_STOP,PUMP3\r\n"
   print(stop3)
-  ser.write(stop3.encode())
+  ###ser.write(stop3.encode())
   stop4 = "$STEPPER_STOP,PUMP4\r\n"
   print(stop4)
-  ser.write(stop4.encode())
+  ###ser.write(stop4.encode())
 
 #**************************************CLEAN AND PRIME**************************************
 
@@ -248,16 +248,16 @@ def cleanProgram(button):
 
     # Pump for 2 minutes
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-cleanTime < 120)):
         button['text'] = int(120-(time.time()-cleanTime))
-    stopPumping()
+    ###stopPumping()
     
     # Update running - cleaning is done
     running = False
@@ -290,16 +290,16 @@ def primeProgram(button):
 
     # Pump for 30 seconds
     start1 = "$STEPPER_START,PUMP1,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start1.encode())
+    ###ser.write(start1.encode())
     start2 = "$STEPPER_START,PUMP2,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start2.encode())
+    ###ser.write(start2.encode())
     start3 = "$STEPPER_START,PUMP3,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start3.encode())
+    ###ser.write(start3.encode())
     start4 = "$STEPPER_START,PUMP4,FORWARD," + str(clean_prime_speed) + ",0\r\n"
-    ser.write(start4.encode())
+    ###ser.write(start4.encode())
     while((not shutdown) and (time.time()-primeTime < 30)):
         button['text'] = int(30-(time.time()-primeTime))
-    stopPumping()
+    ###stopPumping()
     
     # Update running - priming is done
     running = False
@@ -400,7 +400,7 @@ def updateDiagnostics(pizzaTime):
 # Function for sending sos menu data to Firebase
 def updateFirebase(timeString, size):
     # Send pizza made to Firebase
-    fbString = str(size) + ' inch pizza made at ' + timeString
+    fbString = str(size) + ' " pizza made at ' + timeString
     
     if(hasInternet):
       count = db.child("Pizza Throughput").child(str(size)).get().val()["COUNT"]
@@ -546,7 +546,7 @@ def sos():
 #***************************************DATA SCREEN*****************************************
 
 # Function setting up screen with Firebase data
-def dataScreen():
+def dataScreen(more):
     # Create window for data screen
     data = Toplevel()
     data.title("Saucer Data Screen")
@@ -558,10 +558,13 @@ def dataScreen():
     sizeFont = font.Font(family='Helvetica', size=25, weight='normal')
     otherFont = font.Font(family='Helvetica', size=24, weight='normal')
     descriptionFont = font.Font(family='Helvetica', size=20, weight='normal')
+    titleFont = font.Font(family='Helvetica', size=20, weight='bold')
     
     # Data screen buttons
-    back  = Button(data, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 6)
-    back.place(x=650, y=380)
+    home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = more.destroy, height = 2, width = 7) # will this work?? !!!!
+    home.place(x=625, y=380)
+    back  = Button(other, text = "BACK", font = otherFont, bg = button_color, fg = main_fg, command = data.destroy, height = 2, width = 7)
+    back.place(x=445, y=380)
     
     # Read data from Firebase if internet, else show error text
     if(hasInternet):
@@ -576,12 +579,12 @@ def dataScreen():
         weight14 = db.child("Pizza Throughput").child(str(14)).get().val()["WEIGHT"]
         
         # Output recent pizzas, as many as possible
-        title = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
-        title.insert(INSERT, "Recent Pizza Data...............")
+        title = Text(data, font = titleFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
+        title.insert(INSERT, "DATA: RECENT PIZZAS")
         title.place(x=25,y=25)
         yPos = 75
         fbdata = db.child("Pizzas").get()
-        for p in fbdata.each(): # fix order !
+        for p in fbdata.each(): # fix order !!!!!
             txt = Text(data, font = descriptionFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
             txt.insert(INSERT,p.val())
             txt.place(x=25,y=yPos)
@@ -589,18 +592,18 @@ def dataScreen():
             if(yPos > 450): break
         
         # Output count / weight data (maybe fix format)
-        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size7 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=14)
         size7.insert(INSERT, " 7\" Count: " + str(count7) + "\n    Weight: " + str(weight7) + " lbs")
-        size7.place(x=530,y=20)
-        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size7.place(x=510,y=20)
+        size10 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=14)
         size10.insert(INSERT, " 10\" Count: " + str(count10) + "\n    Weight: " + str(weight10) + " lbs")
-        size10.place(x=530,y=107)
-        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size10.place(x=510,y=107)
+        size12 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=14)
         size12.insert(INSERT, " 12\" Count: " + str(count12) + "\n    Weight: " + str(weight12) + " lbs")
-        size12.place(x=530,y=194)
-        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=13)
+        size12.place(x=510,y=194)
+        size14 = Text(data, font = sizeFont, bd = -2, bg = button_color, fg = main_fg, height=2, width=14)
         size14.insert(INSERT, " 14\" Count: " + str(count14) + "\n    Weight: " + str(weight14) + " lbs")
-        size14.place(x=530,y=280)
+        size14.place(x=510,y=280)
     else:
         error = Text(data, font = sizeFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=40)
         error.insert(INSERT, "ERROR: NO INTERNET CONNECTION")
@@ -631,7 +634,7 @@ def moreScreen():
     helpButton.place(x=460, y=20)
     home  = Button(other, text = "HOME", font = otherFont, bg = button_color, fg = main_fg, command = other.destroy, height = 2, width = 7)
     home.place(x=625, y=380)
-    data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = dataScreen, height = 2, width = 7)
+    data  = Button(other, text = "DATA", font = otherFont, bg = button_color, fg = main_fg, command = lambda: dataScreen(other), height = 2, width = 7)
     data.place(x=445, y=380)
     
     #TEMPORARY QUIT
@@ -643,6 +646,19 @@ def moreScreen():
     diag.insert(INSERT, "MACHINE DIAGNOSTICS")
     diag.place(x=460,y=125)
     
+    # Get data from firebase if it has internet
+    count = 0
+    weight = 0
+    if(hasInternet):
+        count += db.child("Pizza Throughput").child(str(7)).get().val()["COUNT"]
+        weight += db.child("Pizza Throughput").child(str(7)).get().val()["WEIGHT"]
+        count += db.child("Pizza Throughput").child(str(10)).get().val()["COUNT"]
+        weight += db.child("Pizza Throughput").child(str(10)).get().val()["WEIGHT"]
+        count += db.child("Pizza Throughput").child(str(12)).get().val()["COUNT"]
+        weight += db.child("Pizza Throughput").child(str(12)).get().val()["WEIGHT"]
+        count += db.child("Pizza Throughput").child(str(14)).get().val()["COUNT"]
+        weight += db.child("Pizza Throughput").child(str(14)).get().val()["WEIGHT"]
+    
     # Read data from file
     with open('Saucer/diagnostics.txt', 'r') as reader:
         diags = reader.read().splitlines()
@@ -651,14 +667,11 @@ def moreScreen():
     hours.insert(INSERT, "Total Machine Hours.........." + str(int(int(diags[1])/60)))
     hours.place(x=460,y=170)
     sauced = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    sauced.insert(INSERT, "Total Pizzas Sauced.........." + diags[2])
+    sauced.insert(INSERT, "Total Pizzas Sauced.........." + str(count))
     sauced.place(x=460,y=220)
-    time = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    time.insert(INSERT, "Average Pizza Time..........." + diags[3])
-    time.place(x=460,y=270)
-    health = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
-    health.insert(INSERT, "Machine Health..........." + diags[4])
-    health.place(x=460,y=320)
+    lbs = Text(other, font = diagFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=37)
+    lbs.insert(INSERT, "Total Sauce Weight.........." + str(weight))  #fix diagnostic file !!!!
+    lbs.place(x=460,y=270)
     
     # Calibration
     calib = Text(other, font = headingFont, bd = -2, bg = main_bg, fg = main_fg, height=1, width=27)
